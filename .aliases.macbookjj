@@ -1,0 +1,4 @@
+alias python='python3'
+alias pip='python -m pip'
+
+alias upgrade='tmux new-session "brew update -v && brew upgrade" \; split-window -h "ssh pi@pi yay -Syu && sleep 2"'
