@@ -1,0 +1,171 @@
+# docker
+alias docker='sudo docker'
+alias docker-compose='sudo docker-compose'
+alias ddstoprunning='docker ps -q | xargs sudo docker stop'
+alias ddrmcontainers='docker ps -aq | xargs sudo docker rm'
+alias ddrmdangling='docker images -f "dangling=true" -q | xargs sudo docker rmi'
+alias ddrit='docker run --rm -it'
+
+alias pm=podman
+alias pmstoprunning='podman ps -q | xargs podman stop'
+alias pmrmcontainers='podman ps -aq | xargs podman rm'
+alias pmrmdangling='podman images -f "dangling=true" -q | xargs podman rmi'
+alias pmrit='podman run --rm -it'
+
+# pacman
+alias pacman='sudo pacman'
+
+# kitty
+alias scat='rsvg-convert | kitty icat'
+alias idot='dot -Tsvg | scat'
+alias ssh='TERM=xterm-color kitty +kitten ssh'
+
+# ssh
+alias pi='ssh -o LogLevel=QUIET pi@pi'
+
+# shell
+alias pathp='printf "%s\n" ${(@s/:/)PATH}'
+alias pwdtopath='export PATH="$(pwd):$PATH"'
+alias reloadaliases='source $HOME/.aliases'
+alias escapenewline="awk 1 ORS='\\\\n'"
+alias uuidbytes="python3 -c 'import uuid; print(list(uuid.uuid4().bytes))'"
+alias randomu64='shuf -i 1-18446744073709551615 -n 1'
+
+swap() {
+	local TMPFILE=tmp.$$
+	mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
+}
+
+# ls
+command -v exa >/dev/null && alias ls='exa'
+alias la='ls -a'
+alias ll='ls -la'
+alias l='ls -l'
+alias lt='exa --tree'
+alias lta='exa --tree -a'
+alias sl='ls'
+
+# rofi
+alias choose='rofi -dmenu -p "" -theme DarkBlue'
+
+# commands
+alias vim='nvim'
+alias gdb='gdb -q'
+
+curljq() { curl "$1" -s | jq }
+jcode() { j "$1"; code . }
+
+# utils
+alias ytdownload='youtube-dl -x --audio-format mp3'
+command -v fdfind >/dev/null && alias fd='fdfind'
+command -v batcat >/dev/null && alias bat='batcat'
+command -v bat >/dev/null && alias cat='bat'
+
+# development
+
+## python
+alias activate='source 2>/dev/null .venv/bin/activate || echo no or .venv found'
+
+## rust
+alias cargofind='cargo tree -e no-dev -i'
+alias cargodup='cargo tree -e no-dev -d'
+alias watchdocs='cargo doc --no-deps --open && cargo watch -x "doc --no-deps"'
+alias watchthis='cargo watch -s "!!"'
+alias cargodebinstall='sudo dpkg -i $(cargo deb)'
+alias targetclean='find . -type d -name target -prune -exec rm -rf {} +'
+alias CARGOPRINTBIN='CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUNNER=echo'
+cargorunwith() {
+	local TARGET=X86_64_UNKNOWN_LINUX_GNU
+	local BIN=$1
+	shift
+	env "CARGO_TARGET_${TARGET}_RUNNER=${BIN}" cargo run "$@"
+}
+cargodeps() { cargo depgraph "$@" | idot; }
+craterepo() { curl -q "https://crates.io/api/v1/crates/$1" 2>/dev/null | jq .crate.repository -r; }
+crateclone() { clone $(craterepo "$1"); }
+cratedeps() {
+	dir=$(mktemp -d)
+	pushd "$dir" >/dev/null
+	git clone --depth 1 $(craterepo "$1") "$1"
+	(cd "$1" && cargodeps)
+	rm -rf "$dir"
+	popd >/dev/null
+}
+bevyclippy() { cargo clippy "$@" -- -D warnings -A clippy::type_complexity }
+
+# git
+alias gdm='git diff main'
+alias gitrebaseroot='git rebase -i --root'
+alias gs='git status'
+
+## git diff last
+gdl() {
+	n=${1:-1}; # first argument ($1) or default to 1 ${var:-default}
+	git diff "HEAD~$n" HEAD~$((n-1))
+}
+gitrebase() {
+	n=${1:-5};
+	git rebase -i "HEAD~$n"
+}
+git-http-to-ssh() {
+	echo "$1" | sed 's|https://|git@|' | sed 's|/|:|'
+}
+git-remote-to-ssh() {
+	remote="origin"
+	https_url=$(git remote get-url "$remote")
+
+	if [[ "$https_url" != "https://"* ]]; then
+		echo "URL doesn't start with 'https://'"
+		return
+	fi
+
+	git_url=$(echo "$https_url" | sed 's|https://|git@|' | sed 's|/|:|')
+	git remote set-url "$remote" "$git_url"
+	echo "Set url to '$git_url'"
+}
+clone() {
+	url=$(echo "$1" | cut -f 1-5 -d '/')
+	git clone $(git-http-to-ssh "$url")
+}
+alias gsquashall='git reset $(git commit-tree HEAD^{tree} -m "initial commit")'
+
+alias dg='git --git-dir "$HOME/.dotfiles" --work-tree "$HOME"'
+alias dga='dg add -f'
+alias dgc='dg commit -m'
+alias dgd='dg diff'
+alias dgs='dg status -s'
+alias dgp='dg push'
+alias dgl='dg pull --autostash'
+alias dgam='dg commit -am'
+
+# gnome
+alias restartgnome="busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s 'Meta.restart(\"Restarting…\")'"
+
+# os stuff
+alias open='xdg-open'
+alias copy='xclip -i -selection clipboard'
+alias paste='xclip -o -selection clipboard'
+alias pastepng='xclip -selection clipboard -t image/png -o'
+alias tracefiles='strace -e open,openat'
+
+showclip() {
+	file=$(mktemp --suffix=.png)
+	pastepng > "$file"
+	open "$file"
+}
+
+
+# widgets
+
+find_matching() {
+	sk --interactive --cmd 'rg --files-with-matches --ignore-case "{}"' --cmd-prompt '> ' --preview 'cat {}'
+}
+__widget_find_matching() {
+  LBUFFER="${LBUFFER}$(find_matching)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
+}
+
+zle -N __widget_find_matching
+bindkey "^Q" __widget_find_matching

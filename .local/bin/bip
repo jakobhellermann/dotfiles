@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+set -euo pipefail
+
+package=$(sk -c "cat <(brew search --formulae) <(brew search --casks | sed 's/^/Cask: /')") # --preview '[[ {} == "Cask: "* ]] && { package={}; brew cask info "${package:6}" } || brew info {}')
+
+if [[ $package == "Cask: "* ]]; then
+	brew cask install ${package##Cask: }
+else
+	brew install $package
+fi

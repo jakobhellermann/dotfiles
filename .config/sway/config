@@ -1,0 +1,161 @@
+# inputs/outputs
+
+input * {
+	xkb_layout "de"
+	xkb_options "ctrl:nocaps"
+
+    repeat_delay 200
+    repeat_rate 30
+}
+
+set $laptop eDP-1
+set $external HDMI-A-1
+
+include colors.ayu-dark
+
+# bindswitch lid:on output $laptop disable
+# bindswitch lid:off output $laptop enable
+output $laptop disable
+
+output $external scale 1
+
+output * bg $HOME/Pictures/Wallpapers/lonely_river.jpg fill
+
+# vars
+set $mod Mod4
+set $term kitty
+set $browser firefox
+set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
+
+# start applications
+bindsym $mod+Return exec $term
+bindsym $mod+t exec $term
+
+bindsym $mod+Shift+Return exec $browser
+bindsym $mod+space exec $menu
+
+# sway + power control
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+s exec systemctl suspend
+
+# window controls
+bindsym $mod+Shift+q kill
+floating_modifier $mod normal
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# layout
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+BackSpace split toggle
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+f floating toggle
+
+bindsym $mod+a focus parent
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# modes
+mode "resize" {
+    bindsym h resize shrink width 10px
+    bindsym j resize grow height 10px
+    bindsym k resize shrink height 10px
+    bindsym l resize grow width 10px
+
+	# change gaps interactively
+	bindsym minus gaps inner current minus 6
+	bindsym plus gaps inner current plus 6
+
+	bindsym $mod+r mode "default"
+	bindsym $mod+Return mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+set $bg #282c34
+
+# ui
+bar {
+    position bottom
+    status_command while date +'%d.%m.%Y %H:%M:%S'; do sleep 1; done
+
+	font pango:Fira Sans Mono 10
+
+	colors {
+		 background #0a0e1400
+		 focused_workspace #819199 #304357 #ffffff
+	}
+
+	mode hide
+}
+
+gaps inner 10
+smart_gaps on
+
+default_border none
+hide_edge_borders smart
+
+# for_window [class="^.*"] border pixel 0
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+# exec_always {
+# 	gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-dark'
+# 	gsettings set org.gnome.desktop.wm.preferences theme 'Adwaita-dark'
+# 	gsettings set org.gnome.desktop.interface icon-theme 'ubuntu-mono-dark'
+# }
