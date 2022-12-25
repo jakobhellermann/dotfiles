@@ -16,3 +16,4 @@ else
 fi
 
 git --git-dir "$GIT_DIR" --work-tree "$WORK_TREE" config status.showUntrackedFiles no
+git --git-dir "$GIT_DIR" --work-tree "$WORK_TREE" remote set-url origin git@github.com:jakobhellermann/dotfiles.git
