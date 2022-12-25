@@ -2,9 +2,6 @@
   "additional-repositories": ["multilib"],
   "archinstall-language": "English",
   "audio": "pipewire",
-  "custom-commands": [
-    "curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/jakobhellermann/dotfiles/main/.setup/dotfiles.sh | bash"
-  ],
   "config_version": "2.5.1",
   "debug": false,
   "gfx_driver": "All open-source (default)",
