@@ -1,0 +1,28 @@
+{
+  "additional-repositories": ["multilib"],
+  "archinstall-language": "English",
+  "audio": "pipewire",
+  "custom-commands": [
+    "curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/jakobhellermann/dotfiles/main/.setup/dotfiles.sh | bash"
+  ],
+  "config_version": "2.5.1",
+  "debug": false,
+  "gfx_driver": "All open-source (default)",
+  "hostname": "jj",
+  "kernels": ["linux"],
+  "keyboard-layout": "de",
+  "mirror-region": "Germany",
+  "nic": {
+    "dhcp": true,
+    "type": "nm"
+  },
+  "no_pkg_lookups": false,
+  "offline": false,
+  "packages": ["git", "neovim", "curl"],
+  "parallel downloads": 4,
+  "profile": "gnome",
+  "script": "guided",
+  "silent": false,
+  "timezone": "Europe/Berlin",
+  "version": "2.5.1"
+}
