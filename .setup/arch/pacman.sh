@@ -11,5 +11,5 @@ sudo pacman -S --needed git neovim curl zsh which \
 
 gui=$(test "$#" -gt 0 && test "$1" = "--gui")
 
-$gui && sudo pacman -S --needed kitty gnome-tweaks ttf-jetbrains-mono obsidian \
+$gui && sudo pacman -S --needed kitty gnome-tweaks ttf-jetbrains-mono obsidian discord \
 	vulkan-radeon lib32-vulkan-radeon steam
