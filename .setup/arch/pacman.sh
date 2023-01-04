@@ -4,7 +4,7 @@ set -euo pipefail
 
 sudo pacman -Syu
 sudo pacman -S --needed git neovim curl zsh which \
-	ripgrep fd jq tmux htop exa bat ripgrep fzf wget xclip skim github-cli \
+	ripgrep fd jq sd tmux htop exa bat ripgrep fzf wget xclip skim github-cli \
 	graphviz imagemagick \
 	base-devel mold clang shellcheck rustup
 
