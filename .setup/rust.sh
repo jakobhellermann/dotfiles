@@ -8,4 +8,4 @@ test -f "$HOME/.cargo/env" && source "$HOME/.cargo/env"
 
 cargo install \
 	skim exa sd du-dust topgrade skim topgrade \
-	cargo-watch cargo-outdated cargo-expand cargo-whatfeatures cargo-asm cargo-llvm-lines
+	cargo-watch cargo-outdated cargo-expand cargo-whatfeatures cargo-asm cargo-llvm-lines cargo-nextest
