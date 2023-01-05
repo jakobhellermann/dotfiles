@@ -13,8 +13,9 @@ gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
 gsettings set org.gnome.desktop.peripherals.keyboard delay 250
 
 # shortcuts
-gsettings set org.gnome.desktop.wm.keybindings close "['<Super>Q']"
+gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>f']"
+gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super><Shift>s']"
 
 # audio
 gsettings set org.gnome.desktop.wm.preferences audible-bell false
