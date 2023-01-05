@@ -10,5 +10,5 @@ sudo pacman -S --needed git neovim curl zsh which \
 
 gui=$(test "$#" -gt 0 && test "$1" = "--gui")
 
-$gui && sudo pacman -S --needed noto-fonts firefox kitty gnome-tweaks ttf-jetbrains-mono obsidian discord \
+$gui && sudo pacman -S --needed noto-fonts firefox kitty gnome-tweaks ttf-jetbrains-mono obsidian discord signal-desktop \
 	vulkan-radeon lib32-vulkan-radeon steam
