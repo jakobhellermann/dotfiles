@@ -2,4 +2,4 @@
 
 rmdir "$HOME"/{Music,Public,Templates}
 
-mkdir -p "$HOME/dev"
+mkdir -p "$HOME"/{dev,.tmp}
