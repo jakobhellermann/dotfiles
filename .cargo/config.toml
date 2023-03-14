@@ -29,3 +29,6 @@ runner = "wasm-server-runner"
 
 [target.wasm32-wasi]
 runner = "wasm-wasmtime-runner"
+
+[registries.crates-io]
+protocol = "sparse"
