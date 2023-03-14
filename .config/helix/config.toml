@@ -1,0 +1,21 @@
+theme = "emacs"
+
+# https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
+[keys.insert]
+"C-c" = "normal_mode"
+
+[keys.normal]
+"A-h" = "jump_backward"
+"A-left" = "jump_backward"
+"A-l" = "jump_forward"
+"A-right" = "jump_forward"
+
+# vim compatibility
+"0" = "goto_line_start"
+"C-r" = "redo"
+
+# vscode compatibility
+"C-space" = "command_palette"
+
+"#" = "collapse_selection" # default ,
+"," = { w = ":w", q = ":wq", r = ":config-reload", "c" = ":config-open" }
