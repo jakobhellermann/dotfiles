@@ -31,4 +31,6 @@ for s in $scripts; do
 	[[ -f "$s" ]] && source "$s"
 done
 
+command -v zoxide>/dev/null && eval "$(zoxide init zsh)"
+
 true
