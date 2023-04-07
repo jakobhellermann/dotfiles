@@ -140,6 +140,7 @@ alias dgs='dg status -s'
 alias dgp='dg push'
 alias dgl='dg pull --autostash'
 alias dgam='dg commit -am'
+alias dgr='dg rebase -i HEAD~5'
 
 # gnome
 alias restartgnome="busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s 'Meta.restart(\"Restarting…\")'"
