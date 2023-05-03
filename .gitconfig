@@ -14,7 +14,7 @@
 	command = /bin/true
 
 [core]
-	excludesfile = /home/jakob/.gitignore
+	excludesfile = ~/.gitignore
 	quotepath = false
 
 [init]
