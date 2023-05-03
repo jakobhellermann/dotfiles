@@ -54,6 +54,7 @@ alias gdb='gdb -q'
 
 curljq() { curl "$1" -s | jq }
 jcode() { j "$1"; code . }
+alias code.='code .'
 
 # utils
 alias ytdownload='youtube-dl -x --audio-format mp3'
