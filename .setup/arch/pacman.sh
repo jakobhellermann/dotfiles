@@ -10,5 +10,5 @@ sudo pacman -S --needed git neovim curl zsh which \
 gui=$(test "$#" -gt 0 && test "$1" = "--gui")
 $gui && sudo pacman -S --needed wl-clipboard noto-fonts firefox kitty ttf-jetbrains-mono obsidian discord signal-desktop
 
-multilib=$(test "$#" -gt 0 && test "$1" = "--multilib")
+multilib=$(test "$#" -gt 0 && test "$2" = "--multilib")
 $multilib && sudo pacman -S --needed vulkan-radeon lib32-vulkan-radeon steam
