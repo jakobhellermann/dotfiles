@@ -37,19 +37,9 @@ set $term kitty
 set $menu dmenu_path | wmenu | xargs swaymsg exec --
 
 ## General
-    # Start a terminal
-    bindsym $mod+Return exec $term
-    bindsym $mod+t exec $term
-    bindsym Mod4+t exec $term
-    bindsym $mod+f exec firefox
-
     # Kill focused window
     bindsym $mod+Shift+q kill
     bindsym $mod+q kill
-
-    # Start your launcher
-    bindsym $mod+d exec $menu
-	bindsym Mod4 exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -175,6 +165,17 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Start Apsp
+bindsym $mod+Return exec $term
+bindsym Mod4+t exec $term
+bindsym $mod+f exec firefox
+bindsym $mod+d exec rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+bindsym $mod+c exec fd --prune '^.git$' dev -utd -x echo {//} | sort | rofi -monitor 1 -dmenu -i | xargs ~/.local/bin/zed
+# bindsym $mod+d exec $menu
+bindsym Mod4 exec $menu
+
+
 
 # UI
 bar {
