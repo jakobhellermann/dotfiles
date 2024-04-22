@@ -132,6 +132,8 @@ clone() {
 }
 alias gsquashall='git reset $(git commit-tree HEAD^{tree} -m "initial commit")'
 
+alias aurgit='git -c init.defaultbranch=master -c "core.sshCommand=ssh -i ~/.ssh/aur.pub"'
+
 alias dg='git --git-dir "$HOME/.dotfiles" --work-tree "$HOME"'
 alias dga='dg add -f'
 alias dgc='dg commit -p'
@@ -162,15 +164,15 @@ showclip() {
 
 # widgets
 
-find_matching() {
-	sk --interactive --cmd 'rg --files-with-matches --ignore-case "{}"' --cmd-prompt '> ' --preview 'cat {}'
-}
-__widget_find_matching() {
-  LBUFFER="${LBUFFER}$(find_matching)"
-  local ret=$?
-  zle reset-prompt
-  return $ret
-}
+#find_matching() {
+#	sk --interactive --cmd 'rg --files-with-matches --ignore-case "{}"' --cmd-prompt '> ' --preview 'cat {}'
+#}
+#__widget_find_matching() {
+#  LBUFFER="${LBUFFER}$(find_matching)"
+#  local ret=$?
+#  zle reset-prompt
+#  return $ret
+#}
 
-zle -N __widget_find_matching
-bindkey "^Q" __widget_find_matching
+# zle -N __widget_find_matching
+# bindkey "^Q" __widget_find_matching
