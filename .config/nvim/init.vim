@@ -15,6 +15,7 @@ autocmd Filetype rust set signcolumn=yes
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 autocmd BufNewFile,BufRead *.conf set filetype=texmf
+autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
 
 " behaviour
 set updatetime=400
@@ -74,5 +75,3 @@ nmap <Leader>g :GFiles<CR>
 nmap <Leader>b :Buffers<CR>
 
 set nowrap
-
-" so $HOME/.config/nvim/autocomplete.vim

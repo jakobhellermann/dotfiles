@@ -16,9 +16,15 @@
 [core]
 	excludesfile = ~/.gitignore
 	quotepath = false
+	autocrlf = input
 
 [init]
 	defaultBranch = main
 
 [push]
 	autoSetupRemote = true
+
+[url "https://invent.kde.org/"]
+	insteadOf = kde:
+[url "ssh://git@invent.kde.org/"]
+	pushInsteadOf = kde:
