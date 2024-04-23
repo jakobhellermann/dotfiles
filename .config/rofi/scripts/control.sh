@@ -2,6 +2,7 @@
 
 if [ $# -ne 0 ]; then
 	notify-send "$ROFI_INFO"
+	$ROFI_INFO
 	exit 0
 fi
 
