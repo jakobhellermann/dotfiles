@@ -161,6 +161,9 @@ showclip() {
 	open "$file"
 }
 
+alias paste=wl-paste
+alias copy=wl-copy
+
 
 # widgets
 
