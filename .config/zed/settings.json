@@ -1,11 +1,25 @@
 {
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false,
+  },
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "always",
   },
+  "autosave": "on_focus_change",
   "cursor_blink": false,
   "gutter": {
     "code_actions": false,
     "folds": false,
+  },
+  "auto_update": false,
+  "collaboration_panel": {
+    "button": false,
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
   },
 }

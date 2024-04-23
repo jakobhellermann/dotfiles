@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ $# -ne 0 ]; then
-	zed "$@"
+	coproc (Zed "$@" >/dev/null 2>&1)
 	exit 0
 fi
 
