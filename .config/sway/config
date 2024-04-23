@@ -12,9 +12,18 @@ include ~/.config/sway/outputs
 include ~/.config/sway/workspaces
 output * bg /home/jakob/Pictures/wallpapers/sway fill
 
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+exec mkfifo /tmp/wobpipe
+exec tail -f /tmp/wobpipe | wob
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ no && pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | rg --pcre2 -o '(?<=\s)(\d+)(?=%)' | head -1 > /tmp/wobpipe
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | rg --pcre2 -o '(?<=\s)(\d+)(?=%)' | head -1 > /tmp/wobpipe
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && (pactl get-sink-mute @DEFAULT_SINK@ | rg -q yes && echo 0 > $wobsock) || pactl get-sink-volume @DEFAULT_SINK@ | rg --pcre2 -o '(?<=\s)(\d+)(?=%)' | head -1 > /tmp/wobpipe
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # Config
 
@@ -34,7 +43,6 @@ set $up k
 set $right l
 
 set $term kitty
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
 
 ## General
     # Kill focused window
@@ -49,7 +57,7 @@ set $menu dmenu_path | wmenu | xargs swaymsg exec --
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/control.sh'
 
 ## Moving around:
 
@@ -106,6 +114,8 @@ set $menu dmenu_path | wmenu | xargs swaymsg exec --
 
 	bindsym $mod+tab workspace back_and_forth
 	bindsym $mod+Shift+tab workspace back_and_forth
+	# bindsym $mod+tab exec ~/.local/bin/alttab
+	# bindsym $mod+Shift+tab exec ~/.local/bin/alttab
 
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
@@ -166,16 +176,12 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Start Apsp
+# Start Apps
 bindsym $mod+Return exec $term
 bindsym Mod4+t exec $term
 bindsym $mod+f exec firefox
 bindsym $mod+d exec rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
-bindsym $mod+c exec fd --prune '^.git$' dev -utd -x echo {//} | sort | rofi -monitor 1 -dmenu -i | xargs ~/.local/bin/zed
-# bindsym $mod+d exec $menu
-bindsym Mod4 exec $menu
-
-
+bindsym $mod+c exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/projects.sh'
 
 # UI
 bar {
@@ -187,6 +193,6 @@ default_border pixel 2
 focus_follows_mouse no
 gaps inner 8
 smart_gaps on
-for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 
+include ~/.config/sway/overrides
 include /etc/sway/config.d/*
