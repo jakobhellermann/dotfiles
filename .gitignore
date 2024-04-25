@@ -7,3 +7,4 @@ pnpm-lock.yaml
 /target_web
 
 /testfiles
+.venv
