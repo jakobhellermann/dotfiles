@@ -37,12 +37,12 @@ swap() {
 }
 
 # ls
-command -v exa >/dev/null && alias ls='exa'
+command -v eza >/dev/null && alias ls='eza'
 alias la='ls -a'
 alias ll='ls -la'
 alias l='ls -l'
-alias lt='exa --tree'
-alias lta='exa --tree -a'
+alias lt='eza --tree'
+alias lta='eza --tree -a'
 alias sl='ls'
 
 # rofi
@@ -61,6 +61,8 @@ alias ytdownload='youtube-dl -x --audio-format mp3'
 command -v fdfind >/dev/null && alias fd='fdfind'
 command -v batcat >/dev/null && alias bat='batcat'
 command -v bat >/dev/null && alias cat='bat'
+
+alias pw='pwgen 16 1 | tr -d '\n' | copy'
 
 alias hx=helix
 
