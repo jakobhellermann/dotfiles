@@ -6,6 +6,6 @@ kwriteconfig5 --file "$HOME/.config/kwinrc" --group TabBox --key LayoutName comp
 kwriteconfig5 --file "$HOME/.config/kwinrc" --group TabBox --key HighlightWindows false
 
 kwriteconfig5 --file "$HOME/.config/kcminputrc" --group Keyboard --key RepeatRate 30
-kwriteconfig5 --file "$HOME/.config/kcminputrc" --group Keyboard --key RepeatDelay 250
+kwriteconfig5 --file "$HOME/.config/kcminputrc" --group Keyboard --key RepeatDelay 200
 
 kwriteconfig5 --file "$HOME/.config/krunnerrc" --group General --key FreeFloating true
