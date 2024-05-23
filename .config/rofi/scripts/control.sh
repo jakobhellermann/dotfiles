@@ -10,6 +10,7 @@ option() {
 	echo -en "$1\0info\x1f$2\n"
 }
 
-option Logout 'swaymsg exit'
 option Shutdown 'systemctl poweroff'
 option Reboot 'systemctl reboot'
+option Logout 'swaymsg exit'
+option Suspend 'systemctl suspend'

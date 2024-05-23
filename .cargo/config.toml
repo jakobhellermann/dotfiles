@@ -4,22 +4,13 @@ target-dir = ".cache/rust"
 
 [target.x86_64-unknown-linux-gnu]
 linker = "/usr/bin/clang"
-rustflags = [
-  "-Clink-arg=-fuse-ld=/usr/bin/mold",
-  "-Clink-arg=-Wl,--compress-debug-sections=zlib",
-  "-Zshare-generics=y",
-]
+rustflags = ["-Clink-arg=-fuse-ld=/usr/bin/mold", "-Clink-arg=-Wl,--compress-debug-sections=zlib"]
 
 [target.x86_64-apple-darwin]
-rustflags = [
-  "-Clink-arg=-fuse-ld=/usr/local/bin/zld",
-  "-Zshare-generics=y",
-  "-Zsplit-debuginfo=unpacked",
-]
+rustflags = ["-Clink-arg=-fuse-ld=/usr/local/bin/zld"]
 
 [target.x86_64-pc-windows-msvc]
 linker = "rust-lld.exe"
-rustflags = ["-Zshare-generics=y"]
 
 [target.armv7-unknown-linux-gnueabihf]
 linker = "arm-linux-gnueabihf-gcc"
@@ -29,3 +20,6 @@ runner = "wasm-server-runner"
 
 [target.wasm32-wasi]
 runner = "wasm-wasmtime-runner"
+
+[profile.rust-analyzer]
+inherits = "dev"
