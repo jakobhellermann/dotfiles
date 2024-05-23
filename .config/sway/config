@@ -44,7 +44,7 @@ set $up k
 set $right l
 
 set $term kitty
-set $menu rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 
 ## General
     # Kill focused window
@@ -204,7 +204,7 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 # blur_radius 5
 # layer_effects "waybar" shadows enable;
 # shadows enable
-corner_radius 8
+# corner_radius 8
 # default_dim_inactive 0.1
 
 include ~/.config/sway/overrides

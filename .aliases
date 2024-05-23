@@ -153,9 +153,12 @@ alias restartgnome="busctl --user call org.gnome.Shell /org/gnome/Shell org.gnom
 
 # os stuff
 alias open='xdg-open'
-alias copy='xclip -i -selection clipboard'
-alias paste='xclip -o -selection clipboard'
-alias pastepng='xclip -selection clipboard -t image/png -o'
+# alias copy='xclip -i -selection clipboard'
+# alias paste='xclip -o -selection clipboard'
+# alias pastepng='xclip -selection clipboard -t image/png -o'
+alias paste=wl-paste
+alias copy=wl-copy
+alias pastepng=wl-paste
 alias tracefiles='strace -e open,openat'
 
 showclip() {
@@ -164,8 +167,6 @@ showclip() {
 	open "$file"
 }
 
-alias paste=wl-paste
-alias copy=wl-copy
 
 
 # widgets
