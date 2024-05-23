@@ -3,12 +3,22 @@
     "bindings": {
       "ctrl-b": "workspace::ToggleLeftDock",
       "ctrl-shift-enter": "workspace::NewTerminal",
+      "ctrl-f": "vim::Search",
+      "f1": "command_palette::Toggle",
+      "ctrl-shift-ö": "terminal_panel::ToggleFocus",
     },
   },
   {
     "context": "Editor",
     "bindings": {
       "ctrl-t": "project_symbols::Toggle",
+      "ctrl-shift-v": "markdown::OpenPreviewToTheSide",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "g I": "editor::GoToImplementation",
     },
   },
   {
