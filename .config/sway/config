@@ -2,7 +2,7 @@
 input * {
 	xkb_layout "de"
 	xkb_options "ctrl:nocaps"
-	xkb_variant "nodeadkeys"
+	# xkb_variant "nodeadkeys"
 
 	repeat_delay 200
 	repeat_rate 30
@@ -13,8 +13,7 @@ include ~/.config/sway/outputs
 include ~/.config/sway/workspaces
 output * bg /home/jakob/Pictures/wallpapers/sway fill
 
-exec mkfifo /tmp/wobpipe
-exec tail -f /tmp/wobpipe | wob
+exec mkfifo /tmp/wobpipe; tail -f /tmp/wobpipe | wob
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ no && pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | rg --pcre2 -o '(?<=\s)(\d+)(?=%)' | head -1 > /tmp/wobpipe
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | rg --pcre2 -o '(?<=\s)(\d+)(?=%)' | head -1 > /tmp/wobpipe
@@ -33,6 +32,7 @@ exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
+bindsym Mod4+l swaylock -f c 000000
 
 # Keybindings
 

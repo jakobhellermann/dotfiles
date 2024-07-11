@@ -7,13 +7,14 @@
       "ctrl-f": "vim::Search",
       "f1": "command_palette::Toggle",
       "ctrl-shift-ö": "terminal_panel::ToggleFocus",
+      "ctrl-ö": "terminal_panel::ToggleFocus",
       "ctrl-shift-`": "terminal_panel::ToggleFocus",
+      "ctrl-t": "project_symbols::Toggle",
     },
   },
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-t": "project_symbols::Toggle",
       "ctrl-shift-v": "markdown::OpenPreviewToTheSide",
     },
   },
