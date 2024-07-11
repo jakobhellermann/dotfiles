@@ -10,5 +10,5 @@ configuration {
   }
 }
 
-// @theme "squared-everforest"
-@theme "theme.rasi"
+@theme "squared-everforest"
+// @theme "theme.rasi"

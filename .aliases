@@ -134,6 +134,8 @@ clone() {
 }
 alias gsquashall='git reset $(git commit-tree HEAD^{tree} -m "initial commit")'
 
+alias lastcommit='git log --format="%H" -n 1 | copy'
+
 alias aurgit='git -c init.defaultbranch=master -c "core.sshCommand=ssh -i ~/.ssh/aur.pub"'
 
 alias dg='git --git-dir "$HOME/.dotfiles" --work-tree "$HOME"'
