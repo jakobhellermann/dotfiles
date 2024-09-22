@@ -52,7 +52,7 @@ alias choose='rofi -dmenu -p "" -theme DarkBlue'
 alias vim='nvim'
 alias gdb='gdb -q'
 
-curljq() { curl "$1" -s | jq }
+curljq() { curl "$@" -s | jq }
 jcode() { j "$1"; code . }
 alias code.='code .'
 
