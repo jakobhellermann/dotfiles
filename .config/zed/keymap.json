@@ -1,11 +1,13 @@
 [
   {
     "bindings": {
+      "ctrl-w ctrl-w": "pane::CloseActiveItem",
       "ctrl-b": "workspace::ToggleLeftDock",
       "ctrl-shift-enter": "workspace::NewTerminal",
       "ctrl-f": "vim::Search",
       "f1": "command_palette::Toggle",
       "ctrl-shift-ö": "terminal_panel::ToggleFocus",
+      "ctrl-shift-`": "terminal_panel::ToggleFocus",
     },
   },
   {
@@ -13,6 +15,17 @@
     "bindings": {
       "ctrl-t": "project_symbols::Toggle",
       "ctrl-shift-v": "markdown::OpenPreviewToTheSide",
+    },
+  },
+  {
+    "context": "Editor && (vim_mode==normal||vim_mode==visual) && !menu",
+    "bindings": {
+      "shift-space": "editor::SelectLargerSyntaxNode",
+      "space": "editor::SelectSmallerSyntaxNode",
+      "shift-h": "pane::GoBack",
+      "shift-l": "pane::GoForward",
+      "alt-h": "pane::GoBack",
+      "alt-l": "pane::GoForward",
     },
   },
   {
