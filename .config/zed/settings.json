@@ -1,10 +1,8 @@
 {
-  // general
   "theme": "Ayu Dark",
   "ui_font_family": "Recursive Sans Linear Static",
   "buffer_font_family": "Recursive Mono Linear Static",
 
-  // vim
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "always",
