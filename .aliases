@@ -169,6 +169,12 @@ showclip() {
 	open "$file"
 }
 
+lscount() {
+	ls $@ | wc -l
+}
+
+alias watchthis="watchexec !!"
+
 
 
 # widgets
