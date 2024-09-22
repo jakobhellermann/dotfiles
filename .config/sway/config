@@ -183,6 +183,7 @@ bindsym $mod+Return exec $term
 # bindsym Mod4+t exec $term
 bindsym $mod+f exec firefox
 bindsym $mod+d exec $menu
+bindsym --release Super_L exec $menu
 bindsym $mod+c exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/projects.sh'
 
 # UI

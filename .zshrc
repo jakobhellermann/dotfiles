@@ -13,13 +13,12 @@ ZSH="$HOME/.oh-my-zsh"
 DISABLE_AUTO_UPDATE=true
 DISABLE_AUTO_TITLE=true
 
-fpath+=~/.zfunc
-
 source "$ZSH/oh-my-zsh.sh"
 
 # user config
 configs=("$HOME/.env" "$HOME/.env.local" "$HOME/.aliases")
 scripts=("$HOME/.local/share/zsh/jjsimple.zsh-theme" "$HOME/.fzf/shell/key-bindings.zsh")
+evalcmds=("zoxide init zsh")
 
 hostname=${$(hostnamectl hostname):r}
 for c in $configs; do
@@ -31,6 +30,14 @@ for s in $scripts; do
 	[[ -f "$s" ]] && source "$s"
 done
 
-command -v zoxide>/dev/null && eval "$(zoxide init zsh)"
+for cmd in $evalcmds; do
+	if command -v "${cmd%% *}" >/dev/null; then
+		eval "$(eval $cmd)"
+	fi
+done
+
+test -d "$HOME/.zshrc.d" && for file in $(ls "$HOME/.zshrc.d"); do
+	echo "$file"
+done
 
 true
