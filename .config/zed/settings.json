@@ -1,34 +1,87 @@
 {
-  "theme": "Andromeda",
-  "telemetry": {
-    "metrics": false,
-    "diagnostics": false,
-  },
+  // general
+  "theme": "Ayu Dark",
+  "ui_font_family": "Recursive Sans Linear Static",
+  "buffer_font_family": "Recursive Mono Linear Static",
+
+  // vim
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "always",
   },
-  "autosave": "on_focus_change",
+  "relative_line_numbers": false,
+
+  // remove unwanted features
+  "auto_update": false,
+  "terminal": {
+    "button": false,
+  },
+  "chat_panel": {
+    "button": false,
+  },
+  "features": {
+    "inline_completion_provider": "none",
+  },
+  "assistant": {
+    "version": "2",
+    "enabled": false,
+    "button": false,
+  },
+  "collaboration_panel": {
+    "button": false,
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": true,
+  },
+
+  // UI
+  "indent_guides": {
+    "enabled": false,
+  },
   "cursor_blink": false,
   "gutter": {
     "code_actions": false,
     "folds": false,
-  },
-  "auto_update": false,
-  "collaboration_panel": {
-    "button": false,
   },
   "git": {
     "inline_blame": {
       "enabled": false,
     },
   },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.settings",
+    "**/.venv",
+  ],
+
+  // language config
+  "file_types": {
+    "JSON": [".prettierrc"],
+  },
   "languages": {
     "Markdown": {
       "format_on_save": "off",
     },
-  },
-  "prettier": {
-    "printWidth": 200,
+    "Python": {
+      "formatter": {
+        "external": {
+          "command": "ruff",
+          "arguments": ["format", "-"],
+        },
+      },
+    },
+    "JSONC": {
+      "show_inline_completions": true,
+      "formatter": "prettier",
+    },
+    "TypeScript": {
+      "formatter": "prettier",
+    },
   },
 }
