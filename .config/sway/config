@@ -2,7 +2,7 @@
 input * {
 	xkb_layout "de"
 	xkb_options "ctrl:nocaps"
-	# xkb_variant "nodeadkeys"
+	xkb_variant "nodeadkeys"
 
 	repeat_delay 200
 	repeat_rate 30
@@ -13,17 +13,25 @@ include ~/.config/sway/outputs
 include ~/.config/sway/workspaces
 output * bg /home/jakob/Pictures/wallpapers/sway fill
 
-exec mkfifo /tmp/wobpipe; tail -f /tmp/wobpipe | wob
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ no && pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | rg --pcre2 -o '(?<=\s)(\d+)(?=%)' | head -1 > /tmp/wobpipe
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | rg --pcre2 -o '(?<=\s)(\d+)(?=%)' | head -1 > /tmp/wobpipe
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && (pactl get-sink-mute @DEFAULT_SINK@ | rg -q yes && echo 0 > $wobsock) || pactl get-sink-volume @DEFAULT_SINK@ | rg --pcre2 -o '(?<=\s)(\d+)(?=%)' | head -1 > /tmp/wobpipe
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+# audio
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+# swayosd
+exec swayosd-server
+## audio
+bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
+bindsym XF86AudioLowerVolume exec  swayosd-client --output-volume lower
+bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
+bindsym XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
+## brightness
+bindsym XF86MonBrightnessUp exec swayosd-client --brightness raise
+bindsym XF86MonBrightnessDown exec swayosd-client --brightness lower
+
+# screenshots
+bindsym Mod1+shift+s exec 'grim -g "$(slurp)" | wl-copy'
 
 # Config
 
@@ -46,20 +54,20 @@ set $right l
 set $term kitty
 set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 
+bindsym $mod+shift+r layout default
+bindsym $mod+shift+t layout tabbed
+
 ## General
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+shift+q kill
     bindsym $mod+q kill
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
-    floating_modifier $mod normal
+    floating_modifier $mod
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/control.sh'
+    bindsym $mod+shift+c reload
 
 ## Moving around:
 
@@ -74,16 +82,16 @@ set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic 
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    # Move the focused window with the same, but add shift
+    bindsym $mod+shift+$left move left
+    bindsym $mod+shift+$down move down
+    bindsym $mod+shift+$up move up
+    bindsym $mod+shift+$right move right
     # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    bindsym $mod+shift+Left move left
+    bindsym $mod+shift+Down move down
+    bindsym $mod+shift+Up move up
+    bindsym $mod+shift+Right move right
 
 ## Workspaces:
 
@@ -99,25 +107,23 @@ set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic 
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+shift+1 move container to workspace number 1
+    bindsym $mod+shift+2 move container to workspace number 2
+    bindsym $mod+shift+3 move container to workspace number 3
+    bindsym $mod+shift+4 move container to workspace number 4
+    bindsym $mod+shift+5 move container to workspace number 5
+    bindsym $mod+shift+6 move container to workspace number 6
+    bindsym $mod+shift+7 move container to workspace number 7
+    bindsym $mod+shift+8 move container to workspace number 8
+    bindsym $mod+shift+9 move container to workspace number 9
+    bindsym $mod+shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 
 # Layout stuff:
 
 	bindsym $mod+tab workspace back_and_forth
-	bindsym $mod+Shift+tab workspace back_and_forth
-	# bindsym $mod+tab exec ~/.local/bin/alttab
-	# bindsym $mod+Shift+tab exec ~/.local/bin/alttab
+	bindsym $mod+shift+tab workspace back_and_forth
 
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
@@ -125,22 +131,18 @@ set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic 
     bindsym $mod+b splith
     bindsym $mod+v splitv
 
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+Shift+f fullscreen
+    bindsym $mod+shift+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
-    bindsym $mod+a focus parent
+    bindsym $mod+shift+a focus parent
 
 # Scratchpad:
 
@@ -148,7 +150,7 @@ set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic 
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
@@ -164,7 +166,7 @@ mode "resize" {
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $right resize grow width 10rx
 
     # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
@@ -179,34 +181,54 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Start Apps
-bindsym $mod+Return exec $term
-# bindsym Mod4+t exec $term
+bindsym $mod+return exec $term
+bindsym $mod+t exec $term
 bindsym $mod+f exec firefox
+
+bindsym $mod+g exec $term
+
 bindsym $mod+d exec $menu
+bindsym $mod+a exec $menu
 bindsym --release Super_L exec $menu
+
 bindsym $mod+c exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/projects.sh'
+bindsym $mod+shift+e exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/control.sh'
 
 # UI
 bar {
 	bar swaybar_command waybar
 }
 
-font pango:SF Mono 11
+font pango:Recursive Sans Linear Static 11
+titlebar_padding 1
+titlebar_border_thickness 0
+
 default_border pixel 2
+
 focus_follows_mouse no
 gaps inner 8
-smart_gaps on
 
-for_window [shell="xwayland"] title_format "[XWayland] %title"
+#smart_gaps on
+smart_borders on
 
-# blur enable
-# blur_xray enable
-# blur_passes 3
-# blur_radius 5
-# layer_effects "waybar" shadows enable;
-# shadows enable
-# corner_radius 8
-# default_dim_inactive 0.1
+
+
+
+
+# swayfx
+blur enable
+blur_xray disable
+blur_passes 1
+blur_radius 5
+blur_brightness 1
+
+corner_radius 6
+
+scratchpad_minimize enable
+
+#layer_effects "waybar" shadows enable;
+#shadows enable
+#default_dim_inactive 0.1
 
 include ~/.config/sway/overrides
 include /etc/sway/config.d/*

@@ -9,6 +9,8 @@ Plug 'lotabout/skim.vim'
 
 call plug#end()
 
+colorscheme lunaperche
+
 " autocmds
 autocmd BufNewFile,BufRead .aliases*,.env* set syntax=sh
 autocmd Filetype rust set signcolumn=yes
