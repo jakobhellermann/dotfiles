@@ -1,0 +1,16 @@
+set $term kitty
+set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+
+# Start Apps
+bindsym $mod+return exec $term
+bindsym $mod+t exec $term
+bindsym $mod+f exec firefox
+
+bindsym $mod+g exec $term
+
+bindsym $mod+d exec $menu
+bindsym $mod+a exec $menu
+bindsym --release Super_L exec $menu
+
+bindsym $mod+c exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/projects.sh'
+bindsym $mod+shift+e exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/control.sh'
