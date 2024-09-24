@@ -1,3 +1,4 @@
 #!/bin/sh
 
-sudo pacman -S --needed swayfx swaybg swayidle swaylock waybar dmenu wmenu rofi mako
+sudo paru -S --needed swayfx swayosd
+sudo pacman -S --needed swaybg swayidle swaylock waybar rofi mako
