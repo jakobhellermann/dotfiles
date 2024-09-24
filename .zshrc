@@ -40,4 +40,6 @@ test -d "$HOME/.zshrc.d" && for file in $(ls "$HOME/.zshrc.d"); do
 	echo "$file"
 done
 
+TRAPUSR1() { rehash }
+
 true
