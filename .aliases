@@ -52,8 +52,8 @@ alias choose='rofi -dmenu -p "" -theme DarkBlue'
 alias vim='nvim'
 alias gdb='gdb -q'
 
-curljq() { curl "$@" -s | jq }
-jcode() { j "$1"; code . }
+curljq() { curl "$@" -s | jq; }
+jcode() { j "$1"; code .; }
 alias code.='code .'
 
 # utils
@@ -96,7 +96,7 @@ cratedeps() {
 	rm -rf "$dir"
 	popd >/dev/null
 }
-bevyclippy() { cargo clippy "$@" -- -D warnings -A clippy::type_complexity }
+bevyclippy() { cargo clippy "$@" -- -D warnings -A clippy::type_complexity; }
 
 # git
 alias gdm='git diff main'
