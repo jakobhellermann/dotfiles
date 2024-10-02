@@ -1,36 +1,10 @@
 {
-  // "layer": "top", // Waybar at top layer
-  // "position": "bottom", // Waybar position (top|bottom|left|right)
   "height": 28, // Waybar height (to be removed for auto height)
   // "width": 1280, // Waybar width
   // "spacing": 4, // Gaps between modules (4px)
-  // Choose the order of the modules
-  "modules-left": [
-    "sway/workspaces",
-    "sway/mode",
-    "sway/scratchpad",
-    "custom/media",
-  ],
+  "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
   "modules-center": ["sway/window"],
-  //"modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "battery#bat2", "clock", "tray"],
   "modules-right": ["tray", "clock"],
-  // Modules configuration
-  // "sway/workspaces": {
-  //     "disable-scroll": true,
-  //     "all-outputs": true,
-  //     "warp-on-scroll": false,
-  //     "format": "{name}: {icon}",
-  //     "format-icons": {
-  //         "1": "",
-  //         "2": "",
-  //         "3": "",
-  //         "4": "",
-  //         "5": "",
-  //         "urgent": "",
-  //         "focused": "",
-  //         "default": ""
-  //     }
-  // },
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>",
   },
@@ -45,35 +19,15 @@
     "spacing": 10,
   },
   "clock": {
-    // "timezone": "America/New_York",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}",
   },
-  "memory": {
-    "format": " {}%",
-  },
-  "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
-    "format": "{icon} {volume}% {format_source}",
-    "format-bluetooth": " {icon} {volume}% {format_source}",
-    "format-bluetooth-muted": "  {icon} {format_source}",
-    "format-muted": "  {format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": "",
-    "format-icons": {
-      "default": ["", "", ""],
+  "mpris": {
+    "format": "{player_icon} {title}",
+    "player-icons": {
+      "default": " ",
     },
-    "on-click": "kcmshell6 kcm_pulseaudio",
-  },
-  "custom/media": {
-    "format": "{icon} {}",
-    "return-type": "json",
-    "max-length": 40,
-    "format-icons": {
-      "spotify": "",
-      "default": "🎜",
-    },
-    "escape": true,
-    "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null", // Filter player based on name
+    "title-len": 30,
+    "ignored-players": ["firefox"],
   },
 }
