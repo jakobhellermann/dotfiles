@@ -163,6 +163,19 @@ alias copy=wl-copy
 alias pastepng=wl-paste
 alias tracefiles='strace -e open,openat'
 
+mvold() {
+	for file in $(ls | grep -v '\.old$'); do
+		echo mv "$file" "$file.old"
+		mv "$file" "$file.old"
+	done
+}
+mvoldback() {
+	for file in $(ls | grep '\.old$'); do
+		echo mv "$file" "${file%.old}"
+		mv "$file" "${file%.old}"
+	done
+}
+
 showclip() {
 	file=$(mktemp --suffix=.png)
 	pastepng > "$file"
