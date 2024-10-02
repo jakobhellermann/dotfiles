@@ -10,22 +10,17 @@ default_border pixel 2
 
 focus_follows_mouse no
 gaps inner 8
-
 #smart_gaps on
 smart_borders on
 
-
-
-
-
 # swayfx
-blur enable
-blur_xray disable
-blur_passes 1
-blur_radius 5
-blur_brightness 1
+# blur enable
+# blur_xray disable
+# blur_passes 1
+# blur_radius 5
+# blur_brightness 1
 
-corner_radius 6
+# corner_radius 6
 
 scratchpad_minimize enable
 
@@ -33,3 +28,5 @@ scratchpad_minimize enable
 #shadows enable
 #default_dim_inactive 0.1
 
+
+# vim: ft=swayconfig

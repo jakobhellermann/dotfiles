@@ -2,11 +2,11 @@ set $term kitty
 set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 
 # Start Apps
-bindsym $mod+return exec $term
-bindsym $mod+t exec $term
+bindsym $mod+shift+return exec $term
+# bindsym $mod+t exec $term
+# bindsym $mod+g exec $term
 bindsym $mod+f exec firefox
 
-bindsym $mod+g exec $term
 
 bindsym $mod+d exec $menu
 bindsym $mod+a exec $menu
