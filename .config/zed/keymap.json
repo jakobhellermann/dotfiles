@@ -35,6 +35,30 @@
       "g I": "editor::GoToImplementation",
     },
   },
+
+  {
+    // disable some netrw stuff
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "ctrl-p": "file_finder::Toggle",
+
+      "n": "project_panel::NewFile",
+      "shift-n": "project_panel::NewDirectory",
+
+      "h": "project_panel::SelectParent",
+      "l": "project_panel::ExpandSelectedEntry",
+      "shift-h": "project_panel::CollapseSelectedEntry",
+      "shift-l": "project_panel::ExpandSelectedEntry",
+
+      "%": null,
+      "d": null,
+      "o": null,
+      "t": null,
+      "v": null,
+      "p": null,
+      "-": null,
+    },
+  },
   {
     "context": "Pane",
     "bindings": {
