@@ -141,6 +141,7 @@ alias dgds='dg diff --staged'
 alias dgs='dg status -s'
 alias dgp='dg push'
 alias dgl='dg pull --autostash'
+alias dglo='dg log --oneline'
 alias dgam='dg commit -am'
 alias dgr='dg rebase -i HEAD~5'
 
