@@ -6,7 +6,6 @@ alias ddrmcontainers='docker ps -aq | xargs sudo docker rm'
 alias ddrmdangling='docker images -f "dangling=true" -q | xargs sudo docker rmi'
 alias ddrit='docker run --rm -it'
 
-alias pm=podman
 alias pmstoprunning='podman ps -q | xargs podman stop'
 alias pmrmcontainers='podman ps -aq | xargs podman rm'
 alias pmrmdangling='podman images -f "dangling=true" -q | xargs podman rmi'
@@ -26,7 +25,6 @@ alias pi='ssh -o LogLevel=QUIET pi@pi'
 # shell
 alias pathp='printf "%s\n" ${(@s/:/)PATH}'
 alias pwdtopath='export PATH="$(pwd):$PATH"'
-alias reloadaliases='source $HOME/.aliases'
 alias escapenewline="awk 1 ORS='\\\\n'"
 alias uuidbytes="python3 -c 'import uuid; print(list(uuid.uuid4().bytes))'"
 alias randomu64='shuf -i 1-18446744073709551615 -n 1'
@@ -62,9 +60,8 @@ command -v fdfind >/dev/null && alias fd='fdfind'
 command -v batcat >/dev/null && alias bat='batcat'
 command -v bat >/dev/null && alias cat='bat'
 
-alias pw='pwgen 16 1 | tr -d '\n' | copy'
-
 alias hx=helix
+alias pw='pwgen 16 1 | tr -d '\n' | copy'
 
 # development
 
@@ -75,8 +72,6 @@ alias activate='source 2>/dev/null .venv/bin/activate || echo no or .venv found'
 alias cargofind='cargo tree -e no-dev -i'
 alias cargodup='cargo tree -e no-dev -d'
 alias watchdocs='cargo doc --no-deps --open && cargo watch -x "doc --no-deps"'
-alias watchthis='cargo watch -s "!!"'
-alias cargodebinstall='sudo dpkg -i $(cargo deb)'
 alias targetclean='find . -type d -name target -prune -exec rm -rf {} +'
 alias CARGOPRINTBIN='CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUNNER=echo'
 cargorunwith() {
@@ -96,7 +91,6 @@ cratedeps() {
 	rm -rf "$dir"
 	popd >/dev/null
 }
-bevyclippy() { cargo clippy "$@" -- -D warnings -A clippy::type_complexity; }
 
 # git
 alias gdm='git diff main'
@@ -141,17 +135,14 @@ alias aurgit='git -c init.defaultbranch=master -c "core.sshCommand=ssh -i ~/.ssh
 alias dg='git --git-dir "$HOME/.dotfiles" --work-tree "$HOME"'
 alias dga='dg add -f'
 alias dgc='dg commit -p'
-alias dgc!='dg commit --amend'
 alias dgd='dg diff'
+alias dgdl='dg diff HEAD~1 HEAD'
 alias dgds='dg diff --staged'
 alias dgs='dg status -s'
 alias dgp='dg push'
 alias dgl='dg pull --autostash'
 alias dgam='dg commit -am'
 alias dgr='dg rebase -i HEAD~5'
-
-# gnome
-alias restartgnome="busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s 'Meta.restart(\"Restarting…\")'"
 
 # os stuff
 alias open='xdg-open'
@@ -188,19 +179,21 @@ lscount() {
 
 alias watchthis="watchexec !!"
 
-
-
 # widgets
 
-#find_matching() {
-#	sk --interactive --cmd 'rg --files-with-matches --ignore-case "{}"' --cmd-prompt '> ' --preview 'cat {}'
-#}
-#__widget_find_matching() {
-#  LBUFFER="${LBUFFER}$(find_matching)"
-#  local ret=$?
-#  zle reset-prompt
-#  return $ret
-#}
+if [ -n "$ZSH_VERSION" ]; then
+   # assume Zsh
 
-# zle -N __widget_find_matching
-# bindkey "^Q" __widget_find_matching
+	find_matching() {
+		sk --interactive --cmd 'rg --files-with-matches --ignore-case "{}"' --cmd-prompt '> ' --preview 'cat {}'
+	}
+	_widget_find_matching() {
+	  LBUFFER="${LBUFFER}$(find_matching)"
+	  local ret=$?
+	  zle reset-prompt
+	  return $ret
+	}
+
+	zle -N _widget_find_matching
+	bindkey "^Q" _widget_find_matching
+fi
