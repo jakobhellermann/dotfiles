@@ -13,7 +13,7 @@ output * bg /home/jakob/Pictures/wallpapers/sway fill
 
 set $mod Mod1
 
-include keybinds/*
-include *
+include config.d/keybinds/*
+include config.d/*
 
 include /etc/sway/config.d/*
