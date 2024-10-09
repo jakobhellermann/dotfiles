@@ -3,9 +3,6 @@ set $down j
 set $up k
 set $right l
 
-bindsym $mod+shift+r layout default
-bindsym $mod+shift+t layout splith
-
 ## General
 floating_modifier Mod1
 bindsym $mod+shift+q kill

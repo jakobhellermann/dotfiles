@@ -1,6 +1,7 @@
 for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 # float by default
+for_window [app_id=".*"] floating enable
 for_window {
 	[app_id="kitty"] floating disable
 	[class="Code"] floating disable
@@ -13,7 +14,7 @@ for_window [title="Choose a file"] floating enable
 
 assign {
 	[app_id="firefox"] 1
-	[class="steam"] 5
+	# [class="steam"] 5
 	[class="Spotify"] 9
 }
 
