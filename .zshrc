@@ -1,11 +1,11 @@
-# oh-my-zsh config
+function () {
+
+# oh-my-zsh
 ZSH_CACHE_DIR=""
 case $(uname) in
   Darwin) ZSH_CACHE_DIR="$HOME/Library/Caches/zsh";;
   Linux) ZSH_CACHE_DIR="$HOME/.cache/zsh";;
 esac
-
-plugins=( git colored-man-pages extract dotenv fzf )
 
 ZSH_COMPDUMP="$ZSH_CACHE_DIR/zcompdump-$ZSH_VERSION"
 HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
@@ -13,17 +13,22 @@ ZSH="$HOME/.oh-my-zsh"
 DISABLE_AUTO_UPDATE=true
 DISABLE_AUTO_TITLE=true
 
+plugins=( git colored-man-pages extract dotenv fzf )
 source "$ZSH/oh-my-zsh.sh"
 
 # user config
-configs=("$HOME/.env" "$HOME/.env.local" "$HOME/.aliases")
-scripts=("$HOME/.local/share/zsh/jjsimple.zsh-theme" "$HOME/.fzf/shell/key-bindings.zsh")
-evalcmds=("zoxide init zsh")
+local configs=("$HOME/.env" "$HOME/.aliases")
+local scripts=(
+	"$HOME/.local/share/zsh/jjsimple.zsh-theme"
+)
+local evalcmds=(
+	"zoxide init zsh"
+)
 
-hostname=${$(hostnamectl hostname):r}
+local hostname=$(hostnamectl hostname)
 for c in $configs; do
-	[[ -f "$c.$hostname" ]] && source "$c.$hostname"
 	[[ -f "$c" ]] && source "$c"
+	[[ -f "$c.$hostname" ]] && source "$c.$hostname"
 done
 
 for s in $scripts; do
@@ -36,10 +41,11 @@ for cmd in $evalcmds; do
 	fi
 done
 
-test -d "$HOME/.zshrc.d" && for file in $(ls "$HOME/.zshrc.d"); do
-	echo "$file"
+test -d "$HOME/.zshrc.d" && for file in "$HOME/.zshrc.d"/*(N); do
+	source "$file"
 done
 
-TRAPUSR1() { rehash }
-
+TRAPUSR1() { rehash; }
 true
+
+}
