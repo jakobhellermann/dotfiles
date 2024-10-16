@@ -1,5 +1,7 @@
 set $term kitty
-set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+
+# set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+set $menu fuzzel
 
 # Start Apps
 bindsym $mod+shift+return exec $term

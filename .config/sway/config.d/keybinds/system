@@ -15,7 +15,7 @@ bindsym XF86MonBrightnessUp exec swayosd-client --brightness raise
 bindsym XF86MonBrightnessDown exec swayosd-client --brightness lower
 
 # screenshots
-bindsym Mod1+shift+s exec 'grim -g "$(slurp)" | wl-copy'
+bindsym Mod1+shift+s exec 'grim -g "$(slurp)" - | wl-copy'
 
 
 bindsym Mod4+l swaylock -f c 000000
