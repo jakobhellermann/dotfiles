@@ -10,8 +10,8 @@ default_border pixel 2
 
 focus_follows_mouse no
 gaps inner 8
-#smart_gaps on
 smart_borders on
+#smart_gaps on
 
 # swayfx
 # blur enable

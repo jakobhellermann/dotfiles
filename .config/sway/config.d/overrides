@@ -7,6 +7,8 @@ for_window {
 	[class="Code"] floating disable
 	[app_id="Zed"] floating disable
 	[app_id="firefox"] floating disable
+	[app_id="krita"] floating disable
+	[app_id="CelesteStudio.GTK"] floating disable
 }
 
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
