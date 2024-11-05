@@ -8,6 +8,14 @@ input * {
 	repeat_rate 30
 }
 
+input type:touchpad {
+	tap enabled
+	dwt enabled
+	natural_scroll enabled
+	middle_emulation enabled
+	tap_button_map lrm
+}
+
 # Output
 output * bg /home/jakob/Pictures/wallpapers/sway fill
 

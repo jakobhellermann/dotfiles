@@ -58,7 +58,7 @@ alias code.='code .'
 alias ytdownload='youtube-dl -x --audio-format mp3'
 command -v fdfind >/dev/null && alias fd='fdfind'
 command -v batcat >/dev/null && alias bat='batcat'
-command -v bat >/dev/null && alias cat='bat'
+command -v bat >/dev/null && alias cat='bat -n'
 
 alias hx=helix
 alias pw='pwgen 16 1 | tr -d '\n' | copy'
