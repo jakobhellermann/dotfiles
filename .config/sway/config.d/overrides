@@ -9,6 +9,7 @@ for_window {
 	[app_id="firefox"] floating disable
 	[app_id="krita"] floating disable
 	[app_id="CelesteStudio.GTK"] floating disable
+	# [app_id="jetbrains-idea"] floating disable
 }
 
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
