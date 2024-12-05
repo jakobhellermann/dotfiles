@@ -4,6 +4,7 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim.vim'
+Plug 'tpope/vim-surround'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
