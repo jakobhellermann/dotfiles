@@ -3,7 +3,18 @@
 #assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["rustup", "node", "cargo", "sdkman", "gem", "firmware", "gcloud"]
+disable = [
+  "cargo",
+  "containers",
+  "gcloud",
+  "gem",
+  "helm",
+  "node",
+  "pipx",
+  "rustup",
+  "sdkman",
+  "shell",
+]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
