@@ -93,7 +93,7 @@ cratedeps() {
 }
 
 # git
-alias gdm='git diff main'
+alias gdm='git diff $(git_main_branch)'
 alias gitrebaseroot='git rebase -i --root'
 alias gs='git status'
 
@@ -154,6 +154,8 @@ alias paste=wl-paste
 alias copy=wl-copy
 alias pastepng=wl-paste
 alias tracefiles='strace -e open,openat'
+
+alias copyn='tr -d "\n" | copy'
 
 mvold() {
 	for file in $(ls | grep -v '\.old$'); do
