@@ -20,6 +20,7 @@ source "$ZSH/oh-my-zsh.sh"
 local configs=("$HOME/.env" "$HOME/.aliases")
 local scripts=(
 	"$HOME/.local/share/zsh/jjsimple.zsh-theme"
+	"$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 )
 local evalcmds=(
 	"zoxide init zsh"
