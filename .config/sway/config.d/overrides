@@ -4,11 +4,14 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 for_window [app_id=".*"] floating enable
 for_window {
 	[app_id="kitty"] floating disable
-	[class="Code"] floating disable
 	[app_id="Zed"] floating disable
 	[app_id="firefox"] floating disable
 	[app_id="krita"] floating disable
 	[app_id="CelesteStudio.GTK"] floating disable
+	[app_id="org.kde.falkon"] floating disable
+	[app_id="org.qutebrowser.qutebrowser"] floating disable
+	[class="Code"] floating disable
+	[class="discord"] floating disable
 	# [app_id="jetbrains-idea"] floating disable
 }
 
@@ -17,7 +20,7 @@ for_window [title="Choose a file"] floating enable
 
 assign {
 	[app_id="firefox"] 1
-	# [class="steam"] 5
 	[class="Spotify"] 9
+	# [class="steam"] 5
 }
 
