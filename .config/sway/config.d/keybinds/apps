@@ -12,7 +12,10 @@ bindsym $mod+f exec firefox
 
 bindsym $mod+d exec $menu
 bindsym $mod+a exec $menu
-bindsym --release Super_L exec $menu
+bindsym --release Super_L exec pkill fuzzel || $menu
 
-bindsym $mod+c exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/projects.sh'
-bindsym $mod+shift+e exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/control.sh'
+# bindsym $mod+c			exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/projects.sh'
+bindsym $mod+c			exec cd ~/.config/rofi/scripts && ./projects.sh $(./projects.sh | fuzzel --dmenu)
+
+# bindsym $mod+shift+e	exec cd ~/.config/rofi/scripts && ./control.sh $(./control.sh | fuzzel --dmenu)
+bindsym $mod+shift+e	exec rofi -show Projects -modes 'Projects:~/.config/rofi/scripts/control.sh'
