@@ -22,11 +22,11 @@ smart_borders on
 
 # corner_radius 6
 
+gap_click_redirect enabled
 scratchpad_minimize enable
 
 #layer_effects "waybar" shadows enable;
 #shadows enable
 #default_dim_inactive 0.1
-
 
 # vim: ft=swayconfig
