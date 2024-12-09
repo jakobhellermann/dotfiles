@@ -4,9 +4,6 @@
   "buffer_font_family": "Recursive Mono Linear Static",
 
   "vim_mode": true,
-  "vim": {
-    "use_system_clipboard": "always",
-  },
   "relative_line_numbers": false,
 
   // remove unwanted features
@@ -17,12 +14,15 @@
   "chat_panel": {
     "button": false,
   },
+  "assistant": {
+    "version": "2",
+    "button": false,
+    "enabled": false,
+  },
   "features": {
     "inline_completion_provider": "none",
   },
-  "assistant": {
-    "version": "2",
-    "enabled": false,
+  "notification_panel": {
     "button": false,
   },
   "collaboration_panel": {
@@ -75,7 +75,7 @@
       },
     },
     "JSONC": {
-      "show_inline_completions": true,
+      "show_inline_completions": false,
       "formatter": "prettier",
     },
     "TypeScript": {

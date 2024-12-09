@@ -12,6 +12,13 @@
       "ctrl-t": "project_symbols::Toggle",
     },
   },
+
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-d": "pane::CloseActiveItem",
+    },
+  },
   {
     "context": "Editor",
     "bindings": {
