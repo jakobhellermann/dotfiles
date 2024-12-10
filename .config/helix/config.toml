@@ -11,31 +11,36 @@ select = "underline"
 [keys.insert]
 C-c = "normal_mode"
 
-# vim compatibility
-esc = ["normal_mode", "collapse_selection", "keep_primary_selection"]
-
 [keys.normal]
-A-h = "jump_backward"
-A-left = "jump_backward"
-A-l = "jump_forward"
-A-right = "jump_forward"
-"," = { w = ":w", q = ":wq", r = [":w", ":config-reload"], "c" = ":config-open" }
+S-h = "jump_backward"
+S-left = "jump_backward"
+S-l = "jump_forward"
+S-right = "jump_forward"
+
 C-space = "command_palette"
+"," = { w = ":w", q = ":wq", r = [
+  ":w",
+  ":config-reload",
+], "c" = ":config-open", "d" = "keep_primary_selection" }
 
 # vim compatibility
 0 = "goto_line_start"
 "$" = "goto_line_end"
+G = "goto_file_end"
 C-r = "redo"
-V = ["select_mode", "extend_to_line_bounds"]
 esc = ["collapse_selection", "keep_primary_selection"]
+V = ["select_mode", "extend_to_line_bounds"]
+# esc = ["collapse_selection", "keep_primary_selection"]
 
 [keys.select]
-V = ["normal_mode", "collapse_selection"]
-v = ["normal_mode", "collapse_selection"]
+V = ["normal_mode"]
+# v = ["normal_mode", "collapse_selection"]
 
 # vim compatibility
 0 = "goto_line_start"
 "$" = "goto_line_end"
+G = "goto_file_end"
+C-r = "redo"
 k = ["extend_line_up", "extend_to_line_bounds"]
 j = ["extend_line_down", "extend_to_line_bounds"]
 esc = ["normal_mode", "collapse_selection", "keep_primary_selection"]
