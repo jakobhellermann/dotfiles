@@ -25,13 +25,3 @@ file-types = [
   "bazelrc",
   ".bash_aliases",
 ]
-
-[language.auto-pairs]
-'(' = ')'
-'[' = ']'
-'{' = '}'
-'"' = '"'
-
-[[grammar]]
-name = "typst"
-source = { git = "https://github.com/TheOnlyMrCat/tree-sitter-typst", rev = "7e96997dea0029622407994d0b9e6dbd6eae93ae" }

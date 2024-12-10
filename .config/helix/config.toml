@@ -1,4 +1,4 @@
-theme = "gruvbox"
+theme = "current"
 
 [editor.cursor-shape]
 normal = "block"
