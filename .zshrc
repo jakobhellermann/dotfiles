@@ -21,9 +21,11 @@ local configs=("$HOME/.env" "$HOME/.aliases")
 local scripts=(
 	"$HOME/.local/share/zsh/jjsimple.zsh-theme"
 	"$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+	# "$HOME/.sdkman/bin/sdkman-init.sh"
 )
 local evalcmds=(
 	"zoxide init zsh"
+	"fnm env"
 	"fasder --init auto aliases"
 )
 
