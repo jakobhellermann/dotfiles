@@ -13,6 +13,7 @@ for_window {
 	[app_id="org.qutebrowser.qutebrowser"] floating disable
 	[class="Code"] floating disable
 	[class="discord"] floating disable
+	[class="Slack"] floating disable
 	# [app_id="jetbrains-idea"] floating disable
 }
 
