@@ -7,6 +7,7 @@
 	unignore = update-index --no-skip-worktree
 	ignored = !git ls-files -v | grep \"^S\"
 	unstage = rm --cached
+	add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 
 [pull]
 	rebase = true

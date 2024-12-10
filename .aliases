@@ -134,7 +134,7 @@ alias aurgit='git -c init.defaultbranch=master -c "core.sshCommand=ssh -i ~/.ssh
 
 alias dg='git --git-dir "$HOME/.dotfiles" --work-tree "$HOME"'
 alias dga='dg add -f'
-alias dgc='dg commit -p'
+alias dgc='dg commit -p --verbose'
 alias dgd='dg diff'
 alias dgdl='dg diff HEAD~1 HEAD'
 alias dgds='dg diff --staged'
