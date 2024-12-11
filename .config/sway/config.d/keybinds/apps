@@ -1,4 +1,4 @@
-set $term kitty
+set $term foot
 
 # set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 set $menu fuzzel
