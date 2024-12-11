@@ -10,6 +10,8 @@ Plug 'lotabout/skim.vim'
 call plug#end()
 
 colorscheme lunaperche
+highlight Normal guibg=NONE ctermbg=NONE
+highlight NonText guibg=NONE ctermbg=NONE
 
 " autocmds
 autocmd BufNewFile,BufRead .aliases*,.env* set syntax=sh
