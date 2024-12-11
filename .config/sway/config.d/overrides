@@ -4,6 +4,7 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 for_window [app_id=".*"] floating enable
 for_window {
 	[app_id="kitty"] floating disable
+	[app_id="foot"] floating disable
 	[app_id="Zed"] floating disable
 	[app_id="firefox"] floating disable
 	[app_id="krita"] floating disable
