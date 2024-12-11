@@ -1,17 +1,19 @@
-bar {
-	bar swaybar_command waybar
-}
-
 font pango:Recursive Sans Linear Static 11
 titlebar_padding 1
 titlebar_border_thickness 0
 
-default_border pixel 2
-
 focus_follows_mouse no
+default_border pixel 2
 gaps inner 8
 smart_borders on
 #smart_gaps on
+
+output * bg ~/Pictures/wallpapers/sway fill
+
+bar {
+	bar swaybar_command waybar
+}
+
 
 # swayfx
 # blur enable
@@ -19,14 +21,10 @@ smart_borders on
 # blur_passes 1
 # blur_radius 5
 # blur_brightness 1
-
 # corner_radius 6
 
 gap_click_redirect enabled
 scratchpad_minimize enable
 
-#layer_effects "waybar" shadows enable;
-#shadows enable
-#default_dim_inactive 0.1
 
 # vim: ft=swayconfig
