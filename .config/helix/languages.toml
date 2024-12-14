@@ -25,3 +25,23 @@ file-types = [
   "bazelrc",
   ".bash_aliases",
 ]
+
+[language-server.nil]
+config.nil.formatting.command = ["nixfmt"]
+
+[[language]]
+name = "janet"
+scope = "source.janet"
+injection-regex = "janet"
+file-types = ["cgen", "janet", "jdn"]
+shebangs = ["janet"]
+roots = ["project.janet"]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = "janet-format" }
+grammar = "janet-simple"
+language-servers = ["janet-lsp"]
+auto-format = true
+
+[language-server]
+janet-lsp = { command = "janet-lsp", args = [] }
