@@ -4,7 +4,7 @@ titlebar_border_thickness 0
 
 focus_follows_mouse no
 default_border pixel 2
-gaps inner 8
+gaps inner 6
 smart_borders on
 #smart_gaps on
 
