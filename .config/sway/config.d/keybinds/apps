@@ -1,12 +1,10 @@
-set $term foot
+set $term foot -D $(~/.local/share/scripts/focusedpwd)
 
 # set $menu rofi -show drun -show-icons -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 set $menu fuzzel
 
 # Start Apps
 bindsym $mod+shift+return exec $term
-# bindsym $mod+t exec $term
-# bindsym $mod+g exec $term
 bindsym $mod+f exec firefox
 
 
