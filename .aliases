@@ -24,6 +24,7 @@ alias pi='ssh -o LogLevel=QUIET pi@pi'
 
 # shell
 alias pathp='printf "%s\n" ${(@s/:/)PATH}'
+alias fpathp='printf "%s\n" ${(@s/:/)fpath}'
 alias pwdtopath='export PATH="$(pwd):$PATH"'
 alias escapenewline="awk 1 ORS='\\\\n'"
 alias uuidbytes="python3 -c 'import uuid; print(list(uuid.uuid4().bytes))'"
