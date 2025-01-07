@@ -1,0 +1,110 @@
+#:schema https://raw.githubusercontent.com/jj-vcs/jj/main/cli/src/config-schema.json
+
+[user]
+name = "Jakob Hellermann"
+email = "jakob.hellermann@protonmail.com"
+
+[ui]
+color = "always"
+default-command = "log"
+editor = "nvim"
+paginate = "never"
+diff-editor = "gitpatch"
+conflict-marker-style = "git"
+
+[merge-tools.gitpatch]
+program = "sh"
+edit-args = [
+  "-c",
+  '''
+  set -eu
+  rm -f "$right/JJ-INSTRUCTIONS"
+  git -C "$left" init -q
+  git -C "$left" add -A
+  git -C "$left" commit -q -m baseline --allow-empty
+  mv "$left/.git" "$right"
+  git -C "$right" add --intent-to-add -A
+  git -C "$right" add -p
+  git -C "$right" diff-index --quiet --cached HEAD && { echo "No changes done, aborting split."; exit 1; }
+  git -C "$right" commit -q -m split
+  git -C "$right" restore . # undo changes in modified files
+  git -C "$right" reset .   # undo --intent-to-add
+  git -C "$right" clean -q -df # remove untracked files
+''',
+]
+merge-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
+diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
+
+
+[aliases]
+sq = ['squash']
+
+[revsets]
+log = "present(@) | ancestors(immutable_heads().., 6) | present(trunk())"
+
+[templates]
+log = 'builtin_log_oneline'
+op_log = 'builtin_op_log_oneline'
+draft_commit_description = '''
+concat(
+  description,
+  surround(
+    "\nJJ: This commit contains the following changes:\n", "",
+    indent("JJ:     ", diff.summary()),
+  ),
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
+
+[template-aliases]
+commit_summary = '"a"'
+'format_short_id(id)' = 'id.shortest(4)'
+'format_timestamp(timestamp)' = 'timestamp.ago()'
+'format_short_signature(signature)' = 'signature.name()'
+'builtin_log_oneline' = '''
+if(root,
+  format_root_commit(self),
+  label(if(current_working_copy, "working_copy"),
+    separate(" ",
+      format_short_change_id_with_hidden_and_divergent_info(self),
+      format_short_signature(author),
+      pad_end(0, format_timestamp(commit_timestamp(self)), " "),
+      if(description,
+        description.first_line(),
+        label(if(empty, "empty"), description_placeholder),
+      ),
+      bookmarks,
+      tags,
+      working_copies,
+      
+
+      if(git_head, label("git_head", "git_head()")),
+      if(conflict, label("conflict", "conflict")),
+      if(empty, label("empty", "(empty)")),
+
+      if(!description && current_working_copy, "\n" ++ self.diff().summary()),
+    ),
+  )
+)
+'''
+
+# format_short_commit_id(self.commit_id()),
+'format_operation_oneline(op)' = '''
+  separate(" ",
+    op.id().short(8), op.user(), op.time().end().ago(),
+    clean_operation_message(op.description().first_line()),
+    if(op.tags(), op.tags()),
+  )
+'''
+'clean_operation_message(msg)' = '''
+coalesce(
+  if(snapshot, label("empty", "snapshot")),
+  if(msg.starts_with("undo operation"), msg.substr(0, 23)),
+  if(msg.starts_with("squash commits into"), msg.substr(0, 28)),
+  if(msg.starts_with("split commit"), msg.substr(0, 21)),
+  if(msg.starts_with("commit "), msg.substr(0, 15)),
+  msg
+)
+'''
+'format_root_operation_oneline(root)' = 'separate(" ", root.id().short(8), label("root", "root()")) ++ "\n"'
