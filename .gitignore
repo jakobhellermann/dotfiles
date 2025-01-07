@@ -5,6 +5,7 @@ playground
 pnpm-lock.yaml
 
 /target_web
+/.jj
 
 /testfiles
 .venv
