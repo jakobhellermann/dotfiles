@@ -8,9 +8,21 @@ email = "jakob.hellermann@protonmail.com"
 color = "always"
 default-command = "log"
 editor = "nvim"
-paginate = "never"
 diff-editor = "gitpatch"
 conflict-marker-style = "git"
+pager = "less -FRX"
+
+[revsets]
+log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
+
+[aliases]
+sq = ['squash']
+ab = ['abandon']
+all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
+badvance = ['bookmark', 'move', '--from', 'latset(bookmarks() & ::@)', '--to', '@-']
+
+[colors]
+"diff token".underline = false
 
 [merge-tools.gitpatch]
 program = "sh"
@@ -35,13 +47,6 @@ edit-args = [
 merge-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
 diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
 
-
-[aliases]
-sq = ['squash']
-
-[revsets]
-log = "present(@) | ancestors(immutable_heads().., 6) | present(trunk())"
-
 [templates]
 log = 'builtin_log_oneline'
 op_log = 'builtin_op_log_oneline'
@@ -58,38 +63,30 @@ concat(
 '''
 
 [template-aliases]
-commit_summary = '"a"'
 'format_short_id(id)' = 'id.shortest(4)'
-'format_timestamp(timestamp)' = 'timestamp.ago()'
 'format_short_signature(signature)' = 'signature.name()'
+'format_timestamp(timestamp)' = 'timestamp.ago()'
+'format_short_commit_id(id)' = ''
 'builtin_log_oneline' = '''
 if(root,
   format_root_commit(self),
   label(if(current_working_copy, "working_copy"),
-    separate(" ",
-      format_short_change_id_with_hidden_and_divergent_info(self),
-      format_short_signature(author),
-      pad_end(0, format_timestamp(commit_timestamp(self)), " "),
-      if(description,
-        description.first_line(),
-        label(if(empty, "empty"), description_placeholder),
-      ),
-      bookmarks,
-      tags,
-      working_copies,
-      
+    concat(
+      separate(" ",
+	    format_short_commit_header(self),
+        if(empty, label("empty", "(empty)")),
+        if(description,
+          description.first_line(),
+          label(if(empty, "empty"), description_placeholder),
+        ),
 
-      if(git_head, label("git_head", "git_head()")),
-      if(conflict, label("conflict", "conflict")),
-      if(empty, label("empty", "(empty)")),
-
-      if(!description && current_working_copy, "\n" ++ self.diff().summary()),
+		if(!description && current_working_copy, "\n" ++ self.diff().summary()),
+      ) ++ "\n",
     ),
   )
 )
 '''
 
-# format_short_commit_id(self.commit_id()),
 'format_operation_oneline(op)' = '''
   separate(" ",
     op.id().short(8), op.user(), op.time().end().ago(),
