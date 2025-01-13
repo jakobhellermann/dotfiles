@@ -19,6 +19,7 @@
 	excludesfile = ~/.gitignore
 	quotepath = false
 	autocrlf = input
+	editor = nvim
 
 [init]
 	defaultBranch = main
