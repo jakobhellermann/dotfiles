@@ -10,7 +10,7 @@ Plug 'tpope/vim-surround'
 
 call plug#end()
 
-colorscheme lunaperche
+colorscheme wildcharm
 highlight Normal guibg=NONE ctermbg=NONE
 highlight NonText guibg=NONE ctermbg=NONE
 
@@ -54,6 +54,7 @@ set nowrap
 let mapleader = "\," 
 
 nno <Leader>w :w<CR>
+nno <Leader>x :x<CR>
 nno <Leader>r :so $MYVIMRC<CR>
 
 " system keyboard
