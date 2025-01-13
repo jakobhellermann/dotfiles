@@ -11,4 +11,4 @@ install_paru() {
 }
 command -v paru >/dev/null || install_paru
 
-paru -S --needed spotify visual-studio-code-bin
+paru -S --needed topgrade spotify visual-studio-code-bin
