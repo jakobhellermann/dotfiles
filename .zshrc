@@ -44,6 +44,7 @@ for cmd in $evalcmds; do
 		eval "$(eval $cmd)"
 	fi
 done
+unfunction jj
 
 test -d "$HOME/.zshrc.d" && for file in "$HOME/.zshrc.d"/*(N); do
 	source "$file"
