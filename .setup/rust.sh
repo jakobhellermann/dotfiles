@@ -7,10 +7,7 @@ command -v cargo >/dev/null || curl --proto '=https' --tlsv1.2 -sSf https://sh.r
 test -f "$HOME/.cargo/env" && source "$HOME/.cargo/env"
 
 
-crates=(\
-	skim exa sd du-dust topgrade skim topgrade \
-	cargo-watch cargo-outdated cargo-expand cargo-whatfeatures cargo-asm cargo-llvm-lines cargo-nextest cargo-hack\
-)
+crates=(cargo-watch cargo-outdated cargo-expand cargo-whatfeatures cargo-asm cargo-llvm-lines cargo-nextest cargo-hack)
 uninstalled=()
 
 for crate in "${crates[@]}"; do
@@ -18,7 +15,3 @@ for crate in "${crates[@]}"; do
 done
 
 cargo install "${uninstalled[@]}"
-
-# cargo install \
-# 	skim exa sd du-dust topgrade skim topgrade \
-# 	cargo-watch cargo-outdated cargo-expand cargo-whatfeatures cargo-asm cargo-llvm-lines cargo-nextest cargo-hack
