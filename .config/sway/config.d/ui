@@ -23,8 +23,8 @@ bar {
 # blur_brightness 1
 # corner_radius 6
 
-gap_click_redirect enabled
-scratchpad_minimize enable
+# gap_click_redirect enabled
+# scratchpad_minimize enable
 
 
 # vim: ft=swayconfig
