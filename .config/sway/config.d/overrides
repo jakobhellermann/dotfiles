@@ -14,11 +14,14 @@ for_window {
 	[class="Code"] floating disable
 	[class="discord"] floating disable
 	[class="Slack"] floating disable
+	[class="Spotify"] floating disable
 	# [app_id="jetbrains-idea"] floating disable
 }
+for_window [window_type="dialog"] floating enable
 
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
 for_window [title="Choose a file"] floating enable
+for_window [title="Discord Updater"] floating enable
 
 assign {
 	[app_id="firefox"] 1
