@@ -110,9 +110,9 @@ if(root,
           label(if(empty, "empty"), description_placeholder),
         ),
 
-	 	if(!description && current_working_copy, "\n" ++ self.diff().summary()),
-      ) ++ "\n",
-    ),
+	 	if(!description && current_working_copy, "\n" ++ self.diff().summary(), "\n")
+	  )
+	)
   )
 )
 '''
