@@ -24,7 +24,7 @@ autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
 
 " behaviour
 set updatetime=400
-set ttimeoutlen=5
+" set ttimeoutlen=5
 
 set undodir=/tmp/nvim-undo-dir
 set undofile
