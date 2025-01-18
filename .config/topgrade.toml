@@ -9,8 +9,10 @@ disable = [
   "gcloud",
   "gem",
   "helm",
+  "home_manager",
   "node",
   "pipx",
+  "platformio_core",
   "rustup",
   "sdkman",
   "shell",
@@ -23,7 +25,7 @@ disable = [
 #only = ["system", "emacs"]
 
 # Do not ask to retry failed steps (default: false)
-#no_retry = true
+no_retry = true
 
 # Run inside tmux
 #run_in_tmux = true
