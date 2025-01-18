@@ -3,7 +3,20 @@
 #assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["cargo", "containers", "gcloud", "gem", "helm", "node", "pipx", "rustup", "sdkman", "shell"]
+disable = [
+	"cargo",
+	"containers",
+	"gcloud",
+	"gem",
+	"helm",
+	"home_manager",
+	"node",
+	"pipx",
+	"platformio_core",
+	"rustup",
+	"sdkman",
+	"shell"
+]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
@@ -12,7 +25,7 @@ disable = ["cargo", "containers", "gcloud", "gem", "helm", "node", "pipx", "rust
 #only = ["system", "emacs"]
 
 # Do not ask to retry failed steps (default: false)
-#no_retry = true
+no_retry = true
 
 # Run inside tmux
 #run_in_tmux = true
