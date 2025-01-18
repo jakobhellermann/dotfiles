@@ -1,4 +1,4 @@
-#:schema https://raw.githubusercontent.com/jj-vcs/jj/main/cli/src/config-schema.json
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
 [user]
 name = "Jakob Hellermann"
@@ -18,8 +18,38 @@ log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
 [aliases]
 sq = ['squash']
 ab = ['abandon']
+
 all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
-badvance = ['bookmark', 'move', '--from', 'latset(bookmarks() & ::@)', '--to', '@-']
+tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks())', '--to', '@-']
+nextconflict = ['edit', 'roots(conflicts())']
+fork = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  '''
+set -euo pipefail
+
+if jj git remote list | grep 'upstream' >/dev/null; then
+	echo "remote 'upstream' already exists"
+	exit
+fi
+origin=$(jj git remote list | grep 'origin' | cut -d' ' -f2)
+
+fork=$(yes no | gh repo fork "$origin" 2>&1 || true)
+fork=$(echo "$fork" \
+	| sed -r 's|https://github.com/|git@github.com:|' \
+	| sed -r 's|(.*) already exists|git@github.com:\1|')
+
+echo "$fork"
+
+jj git remote rename origin upstream 2>/dev/null
+jj config get "revset-aliases.'trunk()'" | sed 's/origin/upstream/' | xargs jj config set --repo "revset-aliases.'trunk()'"
+
+jj git remote add origin "$fork"
+''',
+]
 
 [colors]
 "diff token".underline = false
@@ -80,12 +110,13 @@ if(root,
           label(if(empty, "empty"), description_placeholder),
         ),
 
-		if(!description && current_working_copy, "\n" ++ self.diff().summary()),
+	 	if(!description && current_working_copy, "\n" ++ self.diff().summary()),
       ) ++ "\n",
     ),
   )
 )
 '''
+
 
 'format_operation_oneline(op)' = '''
   separate(" ",
