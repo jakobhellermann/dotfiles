@@ -55,6 +55,7 @@ let mapleader = "\,"
 
 nno <Leader>w :w<CR>
 nno <Leader>x :x<CR>
+nno <Leader>q :q<CR>
 nno <Leader>r :so $MYVIMRC<CR>
 
 " system keyboard
