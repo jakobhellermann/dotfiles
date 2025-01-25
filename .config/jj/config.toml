@@ -10,7 +10,7 @@ default-command = "log"
 editor = "nvim"
 diff-editor = "gitpatch"
 conflict-marker-style = "git"
-pager = "less -FRX"
+pager = "less -FRXS --wordwrap"
 
 [revsets]
 log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
