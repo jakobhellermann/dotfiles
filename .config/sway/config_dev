@@ -5,9 +5,11 @@ set $mod Mod1
 
 exec foot
 # exec kitty
-# exec qutebrowser
+exec qutebrowser
 # exec cd /home/jakob/dev/rust/contrib/zed && WAYLAND_DISPLAY=wayland-2 cargo r
 
 include config.d/keybinds/*
 include config.d/*
 include /etc/sway/config.d/*
+
+gaps inner 16
