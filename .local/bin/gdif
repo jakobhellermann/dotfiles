@@ -7,6 +7,6 @@ if ! git rev-parse >& /dev/null; then
   exit 1
 fi
 
-sk --ansi -c 'git log --oneline --color' --preview 'commit=$(echo {} | cut -d" " -f1); git -c color.ui=always diff $commit^ $commit' >/dev/null
+sk --ansi -c 'git log --oneline --color' --preview 'commit=(echo {} | cut -d" " -f1) git -c color.ui=always diff $commit^ $commit' >/dev/null
 
 true

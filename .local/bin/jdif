@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if ! jj workspace root >& /dev/null; then
+  echo "not in jj repo"
+  exit 1
+fi
+
+sk --reverse --ansi -c 'jj log --color always' --preview 'set commit (echo {} |  sed "s/\x1B\[[0-9;]\{1,\}[Ashow-Za-z]//g" | rg " [a-z]+ " -o | head -n1); test -z $commit || jj show $commit' >/dev/null
+
+true
