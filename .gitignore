@@ -11,3 +11,7 @@ pnpm-lock.yaml
 .venv
 
 *.sln.DotSettings.user
+
+perf.data
+perf.data.old
+profile.json
