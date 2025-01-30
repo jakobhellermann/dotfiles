@@ -15,13 +15,20 @@ pager = "less -FRXS --wordwrap"
 [revsets]
 log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
 
+[revset-aliases]
+firstconflict = "roots(conflicts())"
+siblings = "siblings(@)"
+'siblings(x)' = "x-+ ~x"
+
 [aliases]
 sq = ['squash']
 ab = ['abandon']
+hsplit = ['split', '--parallel', '--config', 'ui.editor="true"']
+hsquash = ['squash', '--from', 'siblings(@)']
 
 all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks())', '--to', '@-']
-nextconflict = ['edit', 'roots(conflicts())']
+nextconflict = ['edit', 'firstconflict']
 fork = [
   'util',
   'exec',
