@@ -10,4 +10,4 @@ Description = Trigger zsh command rehash
 Depends = zsh
 Depends = procps-ng
 When = PostTransaction
-Exec = /usr/bin/pkill zsh --signal=USR1 || true
+Exec = /usr/bin/sh -c '/usr/bin/pkill zsh --signal=USR1 || true'
