@@ -12,6 +12,7 @@ color = "always"
 default-command = "log"
 editor = "nvim"
 diff-editor = "diffpatch"
+merge-editor = "vscode"
 conflict-marker-style = "git"
 pager = "less -FRXS --wordwrap"
 movement.edit = true
@@ -80,6 +81,11 @@ fork = [
   '-c',
   '''
 set -euo pipefail
+
+if ! gh auth status>/dev/null; then
+	echo "Run gh auth login"
+	exit
+fi
 
 if jj git remote list | grep 'upstream' >/dev/null; then
 	echo "remote 'upstream' already exists"
