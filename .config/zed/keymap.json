@@ -21,4 +21,21 @@
       "cmd-ö": "terminal_panel::ToggleFocus",
     },
   },
+  {
+    // netrw stuff
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "n": "project_panel::NewFile",
+      "shift-n": "project_panel::NewDirectory",
+      "h": "project_panel::CollapseSelectedEntry",
+      "l": "project_panel::ExpandSelectedEntry",
+      "%": null,
+      "d": null,
+      "o": null,
+      "t": null,
+      "v": null,
+      "p": null,
+      "-": null,
+    },
+  },
 ]
