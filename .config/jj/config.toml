@@ -79,13 +79,13 @@ edit-args = [
   git -C "$right" restore . # undo changes in modified files
   git -C "$right" reset .   # undo --intent-to-add
   git -C "$right" clean -q -df # remove untracked files
-''',
+  ''',
 ]
 merge-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
 diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
 
 [templates]
-log = 'builtin_log_oneline'
+log = 'builtin_log_oneline ++ if(!description && current_working_copy, diff.summary())'
 op_log = 'builtin_op_log_oneline'
 draft_commit_description = '''
 concat(
@@ -94,6 +94,7 @@ concat(
     "\nJJ: This commit contains the following changes:\n", "",
     indent("JJ:     ", diff.summary()),
   ),
+  "JJ: ",
   "\nJJ: ignore-rest\n",
   diff.git(),
 )
@@ -104,30 +105,9 @@ concat(
 'format_short_signature(signature)' = 'signature.name()'
 'format_timestamp(timestamp)' = 'timestamp.ago()'
 'format_short_commit_id(id)' = ''
-'builtin_log_oneline' = '''
-if(root,
-  format_root_commit(self),
-  label(if(current_working_copy, "working_copy"),
-    concat(
-      separate(" ",
-	    format_short_commit_header(self),
-        if(empty, label("empty", "(empty)")),
-        if(description,
-          description.first_line(),
-          label(if(empty, "empty"), description_placeholder),
-        ),
-
-	 	if(!description && current_working_copy, "\n" ++ self.diff().summary(), "\n")
-	  )
-	)
-  )
-)
-'''
-
-
 'format_operation_oneline(op)' = '''
   separate(" ",
-    op.id().short(8), op.user(), op.time().end().ago(),
+    op.id().short(8), op.time().end().ago(),
     clean_operation_message(op.description().first_line()),
     if(op.tags(), op.tags()),
   )
@@ -135,11 +115,13 @@ if(root,
 'clean_operation_message(msg)' = '''
 coalesce(
   if(snapshot, label("empty", "snapshot")),
-  if(msg.starts_with("undo operation"), msg.substr(0, 23)),
   if(msg.starts_with("squash commits into"), msg.substr(0, 28)),
+  if(msg.starts_with("describe commit"), msg.substr(0, 24)),
+  if(msg.starts_with("abandon commit"), msg.substr(0, 23)),
+  if(msg.starts_with("undo operation"), msg.substr(0, 23)),
   if(msg.starts_with("split commit"), msg.substr(0, 21)),
+  if(msg.starts_with("edit commit"), msg.substr(0, 20)),
   if(msg.starts_with("commit "), msg.substr(0, 15)),
   msg
 )
 '''
-'format_root_operation_oneline(root)' = 'separate(" ", root.id().short(8), label("root", "root()")) ++ "\n"'
