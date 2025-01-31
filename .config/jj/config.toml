@@ -5,7 +5,8 @@ show-commit-id = false
 
 [user]
 name = "Jakob Hellermann"
-email = "jakob.hellermann@protonmail.com"
+# email = "jakob.hellermann@protonmail.com"
+email = "hellermann@sipgate.de"
 
 [ui]
 color = "always"
