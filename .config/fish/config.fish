@@ -19,3 +19,6 @@ if not string match -q -- $PNPM_HOME $PATH
     set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+
+# Ensure nix packages have priority over system binaries
+fish_add_path --prepend --move ~/.nix-profile/bin
