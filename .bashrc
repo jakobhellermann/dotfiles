@@ -32,3 +32,5 @@ if [ -f /usr/share/bash-completion/bash_completion ]; then
 elif [ -f /etc/bash_completion ]; then
 . /etc/bash_completion
 fi
+source /Users/sipgatejj/.sdkman/bin/sdkman-init.sh
+source ~/.local/share/mill/completion/mill-completion.sh # MILL_SOURCE_COMPLETION_LINE

@@ -35,3 +35,5 @@ baseline
 
 /.claude/settings.local.json
 .DS_Store
+
+Test Results*.xml

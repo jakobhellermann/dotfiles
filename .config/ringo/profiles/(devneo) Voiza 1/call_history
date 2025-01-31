@@ -1,0 +1,5 @@
+{"ts":"2026-03-30 10:48:06","dir":"outgoing","peer":"sip:015755357012@dev.sipgate.de","duration":"no answer","duration_secs":0}
+{"ts":"2026-03-30 10:55:09","dir":"outgoing","peer":"sip:0511-36059299@dev.sipgate.de","duration":"no answer","duration_secs":0}
+{"ts":"2026-03-30 10:55:39","dir":"outgoing","peer":"sip:051136059299@dev.sipgate.de","duration":"00:00:16","duration_secs":16}
+{"ts":"2026-04-07 10:16:27","dir":"outgoing","peer":"sip:015755357012@dev.sipgate.de","duration":"00:00:01","duration_secs":1}
+{"ts":"2026-04-09 11:33:04","dir":"outgoing","peer":"sip:55000@dev.sipgate.de","duration":"00:00:09","duration_secs":9}
