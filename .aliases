@@ -1,5 +1,5 @@
 # docker
-alias docker='sudo docker'
+# alias docker='sudo docker'
 alias docker-compose='sudo docker-compose'
 alias ddstoprunning='docker ps -q | xargs sudo docker stop'
 alias ddrmcontainers='docker ps -aq | xargs sudo docker rm'
