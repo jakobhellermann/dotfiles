@@ -6,7 +6,8 @@ coauthors = []
 
 [user]
 name = "Jakob Hellermann"
-email = "jakob.hellermann@protonmail.com"
+# email = "jakob.hellermann@protonmail.com"
+email = "hellermann@sipgate.de"
 
 [snapshot]
 max-new-file-size = "10MiB"
