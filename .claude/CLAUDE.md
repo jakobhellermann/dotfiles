@@ -7,4 +7,6 @@
 - instead of piping long-running processes directly to grep, tee them to a file and grep afterwards
 - use double dollars to escape properties in spring kotlin: `@Value($$"${config.path.to.var}") private val foo: String`
 - prefer git WIP commits over stashes
+- prefer git switch over checkout
+- dont use sdkman, use my global java/maven install
 

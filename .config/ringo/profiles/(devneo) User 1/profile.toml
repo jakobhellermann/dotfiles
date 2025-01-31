@@ -1,0 +1,10 @@
+display_name = "(devneo) Voiza 2"
+username = "1126226e0"
+password = "abrK9wm3kwE4"
+domain = "dev.sipgate.de"
+notify = false
+mwi = false
+
+[custom_headers]
+
+[metadata]

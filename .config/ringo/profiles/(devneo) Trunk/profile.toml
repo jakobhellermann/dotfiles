@@ -1,0 +1,10 @@
+display_name = "(devneo) Trunk"
+username = "1126226t0"
+password = "oPq4SiKuSnzd"
+domain = "sipconnect.dev.sipgate.de"
+notify = false
+mwi = false
+
+[custom_headers]
+
+[metadata]

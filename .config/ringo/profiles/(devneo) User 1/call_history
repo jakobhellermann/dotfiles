@@ -1,0 +1,10 @@
+{"ts":"2026-03-30 11:00:24","dir":"outgoing","peer":"sip:50000@dev.sipgate.de","duration":"00:01:10","duration_secs":70}
+{"ts":"2026-04-09 11:33:30","dir":"outgoing","peer":"sip:55000@dev.sipgate.de","duration":"00:00:03","duration_secs":3}
+{"ts":"2026-04-09 11:33:38","dir":"outgoing","peer":"sip:54999@dev.sipgate.de","duration":"no answer","duration_secs":0}
+{"ts":"2026-04-09 11:33:46","dir":"outgoing","peer":"sip:+4954999@dev.sipgate.de","duration":"no answer","duration_secs":0}
+{"ts":"2026-04-09 11:47:20","dir":"outgoing","peer":"sip:+4951111@dev.sipgate.de","duration":"00:00:03","duration_secs":3}
+{"ts":"2026-04-09 11:47:49","dir":"outgoing","peer":"sip:+4950000@dev.sipgate.de","duration":"00:00:24","duration_secs":24}
+{"ts":"2026-04-09 13:55:25","dir":"outgoing","peer":"sip:50999@dev.sipgate.de","duration":"00:00:02","duration_secs":2}
+{"ts":"2026-04-09 13:55:32","dir":"outgoing","peer":"sip:51000@dev.sipgate.de","duration":"00:00:04","duration_secs":4}
+{"ts":"2026-04-09 13:55:38","dir":"outgoing","peer":"sip:54999@dev.sipgate.de","duration":"00:00:01","duration_secs":1}
+{"ts":"2026-04-09 13:55:41","dir":"outgoing","peer":"sip:55000@dev.sipgate.de","duration":"00:00:02","duration_secs":2}
