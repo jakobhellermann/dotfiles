@@ -11,7 +11,7 @@ right = ["diagnostics", "register", "position", "file-encoding"]
 
 [editor.lsp]
 display-messages = true
-display-inlay-hints = true
+display-inlay-hints = false
 
 [editor]
 # https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
@@ -19,9 +19,14 @@ display-inlay-hints = true
 
 [keys.insert]
 C-c = "normal_mode"
-C-space = "completion"
+C-space = "command_palette"
+A-ret = "code_action"
 
 [keys.normal]
+F8 = "goto_next_diag"
+S-F8 = "goto_next_diag"
+A-ret = "code_action"
+
 S-h = "jump_backward"
 S-left = "jump_backward"
 S-l = "jump_forward"
@@ -51,6 +56,9 @@ esc = ["collapse_selection", "keep_primary_selection"]
 V = ["select_mode", "extend_to_line_bounds"]
 i = ["collapse_selection", "insert_mode"]
 # esc = ["collapse_selection", "keep_primary_selection"]
+[keys.normal.space]
+i = ":toggle-option lsp.display-inlay-hints"
+
 
 [keys.select]
 V = ["normal_mode"]
