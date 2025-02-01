@@ -1,5 +1,8 @@
 "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
+[custom]
+show-commit-id = false
+
 [user]
 name = "Jakob Hellermann"
 email = "jakob.hellermann@protonmail.com"
@@ -11,21 +14,22 @@ editor = "nvim"
 diff-editor = "gitpatch"
 conflict-marker-style = "git"
 pager = "less -FRXS --wordwrap"
+movement.edit = true
 
-[revsets]
-log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
+[colors]
+"diff token".underline = false
 
-[revset-aliases]
-firstconflict = "roots(conflicts())"
-siblings = "siblings(@)"
-'siblings(x)' = "x-+ ~x"
+[fix.tools.rustfmt]
+command = ["rustfmt", "--emit", "stdout"]
+patterns = ["glob:'**/*.rs'"]
 
 [aliases]
 sq = ['squash']
 ab = ['abandon']
 hsplit = ['split', '--parallel', '--config', 'ui.editor="true"']
 hsquash = ['squash', '--from', 'siblings(@)']
-
+megamerge = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
+dev = ['edit', 'dev']
 all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks())', '--to', '@-']
 nextconflict = ['edit', 'firstconflict']
@@ -58,31 +62,15 @@ jj git remote add origin "$fork"
 ''',
 ]
 
-[colors]
-"diff token".underline = false
+[revsets]
+graph-prioritize = "coalesce(dev, present(main))"
+log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
 
-[merge-tools.gitpatch]
-program = "sh"
-edit-args = [
-  "-c",
-  '''
-  set -eu
-  rm -f "$right/JJ-INSTRUCTIONS"
-  git -C "$left" init -q
-  git -C "$left" add -A
-  git -C "$left" commit -q -m baseline --allow-empty
-  mv "$left/.git" "$right"
-  git -C "$right" add --intent-to-add -A
-  git -C "$right" add -p
-  git -C "$right" diff-index --quiet --cached HEAD && { echo "No changes done, aborting split."; exit 1; }
-  git -C "$right" commit -q -m split
-  git -C "$right" restore . # undo changes in modified files
-  git -C "$right" reset .   # undo --intent-to-add
-  git -C "$right" clean -q -df # remove untracked files
-  ''',
-]
-merge-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
-diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
+[revset-aliases]
+firstconflict = "roots(conflicts())"
+siblings = "siblings(@)"
+dev = 'description(exact:"dev\n")'
+'siblings(x)' = "x-+ ~x"
 
 [templates]
 log = 'builtin_log_oneline ++ if(!description && current_working_copy, diff.summary())'
@@ -104,7 +92,7 @@ concat(
 'format_short_id(id)' = 'id.shortest(4)'
 'format_short_signature(signature)' = 'signature.name()'
 'format_timestamp(timestamp)' = 'timestamp.ago()'
-'format_short_commit_id(id)' = ''
+'format_short_commit_id(id)' = 'if(config("custom.show-commit-id").as_boolean(), id.shortest(4))'
 'format_operation_oneline(op)' = '''
   separate(" ",
     op.id().short(8), op.time().end().ago(),
@@ -125,3 +113,26 @@ coalesce(
   msg
 )
 '''
+
+[merge-tools.gitpatch]
+program = "sh"
+edit-args = [
+  "-c",
+  '''
+  set -eu
+  rm -f "$right/JJ-INSTRUCTIONS"
+  git -C "$left" init -q
+  git -C "$left" add -A
+  git -C "$left" commit -q -m baseline --allow-empty
+  mv "$left/.git" "$right"
+  git -C "$right" add --intent-to-add -A
+  git -C "$right" add -p
+  git -C "$right" diff-index --quiet --cached HEAD && { echo "No changes done, aborting split."; exit 1; }
+  git -C "$right" commit -q -m split
+  git -C "$right" restore . # undo changes in modified files
+  git -C "$right" reset .   # undo --intent-to-add
+  git -C "$right" clean -q -df # remove untracked files
+  ''',
+]
+merge-args = ["-c", "echo gitpatch cannot be used as a merge tool"]
+diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
