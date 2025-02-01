@@ -2,6 +2,8 @@ TODO.md
 todo.md
 playground
 
+/target_*
+
 pnpm-lock.yaml
 
 /target_web
@@ -15,3 +17,6 @@ pnpm-lock.yaml
 perf.data
 perf.data.old
 profile.json
+profile.json.gz
+
+out.svg
