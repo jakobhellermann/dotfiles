@@ -11,7 +11,7 @@ email = "jakob.hellermann@protonmail.com"
 color = "always"
 default-command = "log"
 editor = "nvim"
-diff-editor = "gitpatch"
+diff-editor = "diffpatch"
 conflict-marker-style = "git"
 pager = "less -FRXS --wordwrap"
 movement.edit = true
@@ -26,10 +26,12 @@ patterns = ["glob:'**/*.rs'"]
 [aliases]
 sq = ['squash']
 ab = ['abandon']
+cii = ['commit', '-i']
 hsplit = ['split', '--parallel', '--config', 'ui.editor="true"']
 hsquash = ['squash', '--from', 'siblings(@)']
 megamerge = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
 dev = ['edit', 'dev']
+head = ['new', 'heads(@::)']
 all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks())', '--to', '@-']
 nextconflict = ['edit', 'firstconflict']
