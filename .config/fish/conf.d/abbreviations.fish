@@ -1,6 +1,6 @@
 abbr --add jl 'jj git fetch --all-remotes'
 abbr --add jp 'jj git push'
-abbr --add jdr 'jj diff --from (jj_current_bookmark)'
+abbr --add jdr 'jj interdiff --from (jj_current_bookmark)@origin'
 
 function last_history_item
     echo $history[1]
