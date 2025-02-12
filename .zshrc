@@ -26,7 +26,7 @@ local scripts=(
 local evalcmds=(
 	"zoxide init zsh"
 	"fnm env"
-	"fasder --init auto aliases"
+	# "fasder --init auto aliases"
 )
 
 local hostname=$(hostnamectl hostname)
