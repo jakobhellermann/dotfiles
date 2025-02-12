@@ -19,12 +19,13 @@ display-inlay-hints = false
 
 [keys.insert]
 C-c = "normal_mode"
-C-space = "command_palette"
+# C-space = "command_palette"
+C-space = "completion"
 A-ret = "code_action"
 
 [keys.normal]
 F8 = "goto_next_diag"
-S-F8 = "goto_next_diag"
+S-F8 = "goto_prev_diag"
 A-ret = "code_action"
 
 S-h = "jump_backward"
