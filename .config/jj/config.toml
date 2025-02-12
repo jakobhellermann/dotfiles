@@ -16,6 +16,9 @@ conflict-marker-style = "git"
 pager = "less -FRXS --wordwrap"
 movement.edit = true
 
+[git]
+push-new-bookmarks = true
+
 [colors]
 "diff token".underline = false
 
@@ -24,17 +27,28 @@ command = ["rustfmt", "--emit", "stdout"]
 patterns = ["glob:'**/*.rs'"]
 
 [aliases]
+# shortcuts
 sq = ['squash']
 ab = ['abandon']
 cii = ['commit', '-i']
-hsplit = ['split', '--parallel', '--config', 'ui.editor="true"']
-hsquash = ['squash', '--from', 'siblings(@)']
-megamerge = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
-dev = ['edit', 'dev']
-head = ['new', 'heads(@::)']
-all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
+
+# commands
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks())', '--to', '@-']
+swap = ['rebase', '-r', '@', '-B', '@-']
+# hsplit = ['split', '--parallel', '--config', 'ui.editor="true"']
+# hsquash = ['squash', '--from', 'siblings(@)']
+
+# movement
+dev = ['edit', 'dev']
+head = ['new', 'coalesce(dev, trunk())']
 nextconflict = ['edit', 'firstconflict']
+
+# rebase stuf
+dev-create = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
+# dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
+dev-add-parent = ['rebase', '-s', 'dev', '-d', 'all:dev-', '-d']
+all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
+
 fork = [
   'util',
   'exec',
@@ -65,17 +79,18 @@ jj git remote add origin "$fork"
 ]
 
 [revsets]
-graph-prioritize = "coalesce(dev, present(main))"
-log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
+log-graph-prioritize = "coalesce(dev, present(main))"
+log = "log"
 
 [revset-aliases]
 firstconflict = "roots(conflicts())"
 siblings = "siblings(@)"
 dev = 'description(exact:"dev\n")'
+log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
 'siblings(x)' = "x-+ ~x"
 
 [templates]
-log = 'builtin_log_oneline ++ if(!description && current_working_copy, diff.summary())'
+log = 'builtin_log_oneline ++ if((!description || description == "dev\n") && current_working_copy, diff.summary())'
 op_log = 'builtin_op_log_oneline'
 draft_commit_description = '''
 concat(
@@ -138,3 +153,8 @@ edit-args = [
 ]
 merge-args = ["-c", "echo gitpatch cannot be used as a merge tool"]
 diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
+
+[[--scope]]
+--when.commands = ["evolog"]
+[--scope.custom]
+show-commit-id = true
