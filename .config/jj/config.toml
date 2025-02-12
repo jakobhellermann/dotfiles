@@ -48,6 +48,9 @@ dev-create = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
 # dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
 dev-add-parent = ['rebase', '-s', 'dev', '-d', 'all:dev-', '-d']
 all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
+into-parent = ['rebase', '-s', '@', '-A', '@-']
+
+sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
 
 fork = [
   'util',
@@ -85,6 +88,7 @@ log = "log"
 [revset-aliases]
 firstconflict = "roots(conflicts())"
 siblings = "siblings(@)"
+all = "::"
 dev = 'description(exact:"dev\n")'
 log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
 'siblings(x)' = "x-+ ~x"
@@ -108,6 +112,7 @@ concat(
 [template-aliases]
 'format_short_id(id)' = 'id.shortest(4)'
 'format_short_signature(signature)' = 'signature.name()'
+'format_short_signature_oneline(signature)' = 'signature.name()'
 'format_timestamp(timestamp)' = 'timestamp.ago()'
 'format_short_commit_id(id)' = 'if(config("custom.show-commit-id").as_boolean(), id.shortest(4))'
 'format_operation_oneline(op)' = '''

@@ -20,7 +20,7 @@
     "enabled": false,
   },
   "features": {
-    "inline_completion_provider": "none",
+    "edit_prediction_provider": "none",
   },
   "notification_panel": {
     "button": false,
@@ -30,7 +30,7 @@
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": true,
+    "metrics": false,
   },
 
   // UI
@@ -75,7 +75,7 @@
       },
     },
     "JSONC": {
-      "show_inline_completions": false,
+      "show_edit_predictions": false,
       "formatter": "prettier",
     },
     "TypeScript": {
