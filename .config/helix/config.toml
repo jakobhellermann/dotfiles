@@ -40,7 +40,7 @@ C-l = "select_next_sibling"
 C-space = "command_palette"
 C-S-down = "copy_selection_on_next_line"
 C-S-up = "copy_selection_on_prev_line"
-"," = { w = ":w", q = ":wq", r = [
+"," = { w = ":w", q = ":wq", x = ":x", r = [
   ":w",
   ":config-reload",
 ], "c" = ":config-open", "d" = "keep_primary_selection", "," = "goto_last_accessed_file" }
