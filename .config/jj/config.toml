@@ -21,10 +21,16 @@ push-new-bookmarks = true
 
 [colors]
 "diff token".underline = false
+# "diff removed token" = { bg = "#221111", underline = false }
+# "diff added token" = { bg = "#002200", underline = false }
 
 [fix.tools.rustfmt]
 command = ["rustfmt", "--emit", "stdout"]
 patterns = ["glob:'**/*.rs'"]
+
+[fix.tools.ktfmt]
+command = ["ktfmt", "--kotlinlang-style", "--stdin-name=$path", "-"]
+patterns = ["glob:'**/*.kt'"]
 
 [aliases]
 # shortcuts
@@ -51,6 +57,20 @@ all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
 into-parent = ['rebase', '-s', '@', '-A', '@-']
 
 sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
+
+# plumbing
+gitcommit = [
+  'log',
+  '--ignore-working-copy',
+  '--no-graph',
+  '--color',
+  'never',
+  '--no-pager',
+  '-T',
+  'commit_id',
+  '-r',
+  '@',
+]
 
 fork = [
   'util',
@@ -90,6 +110,7 @@ firstconflict = "roots(conflicts())"
 siblings = "siblings(@)"
 all = "::"
 dev = 'description(exact:"dev\n")'
+empty = 'mutable() & empty() & description("") ~@'
 log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
 'siblings(x)' = "x-+ ~x"
 
@@ -160,6 +181,6 @@ merge-args = ["-c", "echo gitpatch cannot be used as a merge tool"]
 diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
 
 [[--scope]]
---when.commands = ["evolog"]
+--when.commands = ["evolog", "operation"]
 [--scope.custom]
 show-commit-id = true
