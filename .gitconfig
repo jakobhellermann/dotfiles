@@ -2,6 +2,9 @@
 	name = Jakob Hellermann
 	email = jakob.hellermann@protonmail.com
 
+[advice]
+	detachedHead = false
+
 [alias]
 	ignore = update-index --skip-worktree
 	unignore = update-index --no-skip-worktree
