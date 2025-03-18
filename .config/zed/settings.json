@@ -1,7 +1,7 @@
 {
-  "theme": "Ayu Dark",
-  "ui_font_family": "Recursive Sans Linear Static",
-  "buffer_font_family": "Recursive Mono Linear Static",
+  // "theme": "Ayu Dark",
+  // "ui_font_family": "Recursive Sans Linear Static",
+  // "buffer_font_family": "Recursive Mono Linear Static",
 
   "vim_mode": true,
   "relative_line_numbers": false,
@@ -12,7 +12,7 @@
     "button": false,
   },
   "chat_panel": {
-    "button": false,
+    "button": "never",
   },
   "assistant": {
     "version": "2",
