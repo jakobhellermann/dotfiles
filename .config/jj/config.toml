@@ -15,6 +15,7 @@ diff-editor = "diffpatch"
 merge-editor = "vscode"
 conflict-marker-style = "git"
 pager = "less -FRXS --wordwrap"
+always-allow-large-revsets = true
 movement.edit = true
 
 [git]
@@ -38,6 +39,7 @@ patterns = ["glob:'**/*.kt'"]
 sq = ['squash']
 ab = ['abandon']
 cii = ['commit', '-i']
+fixme = ['fix', '-s@']
 
 # commands
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks())', '--to', '@-']
@@ -58,6 +60,14 @@ all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
 into-parent = ['rebase', '-s', '@', '-A', '@-']
 
 sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
+top = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  'jj git fetch --all-remotes && jj new "trunk()" --quiet && jj',
+]
 
 # plumbing
 gitcommit = [
@@ -108,7 +118,7 @@ jj git remote add origin "$fork"
 ]
 
 [revsets]
-log-graph-prioritize = "coalesce(dev, present(main))"
+log-graph-prioritize = "coalesce(dev, @, present(main))"
 log = "log"
 
 [revset-aliases]
