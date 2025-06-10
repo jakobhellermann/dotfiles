@@ -24,6 +24,9 @@
 	autocrlf = input
 	editor = nvim
 
+[interactive]
+    singlekey = true
+
 [init]
 	defaultBranch = main
 
