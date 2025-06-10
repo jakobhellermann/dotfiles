@@ -2,24 +2,29 @@
 
 [custom]
 show-commit-id = false
+coauthors = ["andris"]
+# coauthors = ["andris", "david"]
 
 [user]
 name = "Jakob Hellermann"
 email = "jakob.hellermann@protonmail.com"
 
 [ui]
-color = "always"
 default-command = "log"
-editor = "nvim"
-diff-editor = "diffpatch"
-merge-editor = "vscode"
+color = "always"
 conflict-marker-style = "git"
-pager = "less -FRXS --wordwrap"
 always-allow-large-revsets = true
 movement.edit = true
 
+editor = "nvim"
+diff-editor = "diffpatch"
+merge-editor = "vscode"
+pager = "less -FRXS --wordwrap"
+
 [git]
+colocate = true
 push-new-bookmarks = true
+write-change-id-header = true
 
 [colors]
 "diff token".underline = false
@@ -51,15 +56,6 @@ swap = ['rebase', '-r', '@', '-B', '@-']
 dev = ['edit', 'dev']
 head = ['new', 'coalesce(dev, trunk())']
 nextconflict = ['edit', 'firstconflict']
-
-# rebase stuf
-dev-create = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
-# dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
-dev-add-parent = ['rebase', '-s', 'dev', '-d', 'all:dev-', '-d']
-all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
-into-parent = ['rebase', '-s', '@', '-A', '@-']
-
-sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
 top = [
   'util',
   'exec',
@@ -68,6 +64,15 @@ top = [
   '-c',
   'jj git fetch --all-remotes && jj new "trunk()" --quiet && jj',
 ]
+
+# rebase stuf
+dev-create = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
+# dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
+dev-add = ['rebase', '-s', 'dev', '-d', 'all:dev-', '-d']
+all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
+into-parent = ['rebase', '-s', '@', '-A', '@-']
+
+sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
 
 # plumbing
 gitcommit = [
@@ -93,20 +98,20 @@ fork = [
 set -euo pipefail
 
 if ! gh auth status>/dev/null; then
-	echo "Run gh auth login"
-	exit
+echo "Run gh auth login"
+exit
 fi
 
 if jj git remote list | grep 'upstream' >/dev/null; then
-	echo "remote 'upstream' already exists"
-	exit
+echo "remote 'upstream' already exists"
+exit
 fi
 origin=$(jj git remote list | grep 'origin' | cut -d' ' -f2)
 
 fork=$(yes no | gh repo fork "$origin" 2>&1 || true)
 fork=$(echo "$fork" \
-	| sed -r 's|https://github.com/|git@github.com:|' \
-	| sed -r 's|(.*) already exists|git@github.com:\1|')
+| sed -r 's|https://github.com/|git@github.com:|' \
+| sed -r 's|(.*) already exists|git@github.com:\1|')
 
 echo "$fork"
 
@@ -135,18 +140,20 @@ log = 'builtin_log_oneline ++ if((!description || description == "dev\n") && cur
 op_log = 'builtin_op_log_oneline'
 draft_commit_description = '''
 concat(
-  description,
+  coalesce(description, default_commit_description),
   surround(
     "\nJJ: This commit contains the following changes:\n", "",
     indent("JJ:     ", diff.summary()),
   ),
-  "JJ: ",
-  "\nJJ: ignore-rest\n",
-  diff.git(),
+  surround("JJ: \nJJ: ignore-rest\n", "", diff.git())
 )
 '''
 
 [template-aliases]
+default_commit_description = '''
+surround("\n\n", "\n", config("custom.coauthors").as_string_list().map(|author| "Co-Authored-By: " ++ author).join("\n"))
+'''
+
 'format_short_id(id)' = 'id.shortest(4)'
 'format_short_signature(signature)' = 'signature.name()'
 'format_short_signature_oneline(signature)' = 'signature.name()'
