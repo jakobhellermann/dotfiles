@@ -2,8 +2,7 @@
 
 [custom]
 show-commit-id = false
-coauthors = ["andris"]
-# coauthors = ["andris", "david"]
+coauthors = []
 
 [user]
 name = "Jakob Hellermann"
@@ -25,6 +24,7 @@ pager = "less -FRXS --wordwrap"
 colocate = true
 push-new-bookmarks = true
 write-change-id-header = true
+private-commits = "private"
 
 [colors]
 "diff token".underline = false
@@ -47,7 +47,7 @@ cii = ['commit', '-i']
 fixme = ['fix', '-s@']
 
 # commands
-tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks())', '--to', '@-']
+tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
 swap = ['rebase', '-r', '@', '-B', '@-']
 # hsplit = ['split', '--parallel', '--config', 'ui.editor="true"']
 # hsquash = ['squash', '--from', 'siblings(@)']
@@ -133,6 +133,7 @@ all = "::"
 dev = 'description(exact:"dev\n")'
 empty = 'mutable() & empty() & description("") ~@'
 log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
+private = "description(glob:'wip:*') | description(glob:'private:*')"
 'siblings(x)' = "x-+ ~x"
 
 [templates]
