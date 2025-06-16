@@ -1,4 +1,4 @@
-for_window [shell="xwayland"] title_format "[XWayland] %title"
+# for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 # float by default
 for_window [app_id=".*"] floating enable
@@ -8,13 +8,14 @@ for_window {
 	[app_id="Zed"] floating disable
 	[app_id="firefox"] floating disable
 	[app_id="krita"] floating disable
-	[app_id="CelesteStudio.GTK"] floating disable
+	# [app_id="CelesteStudio.GTK"] floating disable
 	[app_id="org.kde.falkon"] floating disable
 	[app_id="org.qutebrowser.qutebrowser"] floating disable
 	[class="Code"] floating disable
 	[class="discord"] floating disable
 	[class="Slack"] floating disable
 	[class="Spotify"] floating disable
+
 	# [app_id="jetbrains-idea"] floating disable
 }
 for_window [window_type="dialog"] floating enable
@@ -24,10 +25,18 @@ for_window [title="Choose a file"] floating enable
 for_window [title="Discord Updater"] floating enable
 for_window [title="Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox"] floating enable
 
+for_window [class="steam_app_1809540" title="^[Z]"] move scratchpad
+
 assign {
 	[app_id="firefox"] 1
 	[class="Spotify"] 9
+
+	# [title="Z:.*NineSols.exe"] 2
+	[class="steam_app_1809540" title="^[^Z]"] 2
+	[class="hollow_knight.x86_64"] 2
+
 	# [class="steam"] 5
+	[class="Celeste"] 10
 }
 
 for_window [app_id="firefox"] inhibit_idle fullscreen

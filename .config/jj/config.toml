@@ -18,7 +18,8 @@ movement.edit = true
 editor = "nvim"
 diff-editor = "diffpatch"
 merge-editor = "vscode"
-pager = "less -FRXS --wordwrap"
+# pager = "less -FRXS --wordwrap"
+pager = "less -FRX --wordwrap"
 
 [git]
 colocate = true
@@ -49,6 +50,7 @@ fixme = ['fix', '-s@']
 # commands
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
 swap = ['rebase', '-r', '@', '-B', '@-']
+squash-restore = ['restore', '--from', '@', '--into', '@-', '--restore-descendants']
 # hsplit = ['split', '--parallel', '--config', 'ui.editor="true"']
 # hsquash = ['squash', '--from', 'siblings(@)']
 
@@ -64,6 +66,7 @@ top = [
   '-c',
   'jj git fetch --all-remotes && jj new "trunk()" --quiet && jj',
 ]
+sib = ['util', 'exec', 'sh', '--', '-c', 'jj prev && jj next']
 
 # rebase stuf
 dev-create = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
@@ -129,11 +132,12 @@ log = "log"
 [revset-aliases]
 firstconflict = "roots(conflicts())"
 siblings = "siblings(@)"
-all = "::"
+# all = "::"
 dev = 'description(exact:"dev\n")'
 empty = 'mutable() & empty() & description("") ~@'
-log = "present(@) | ancestors(immutable_heads().., 4) | present(trunk())"
-private = "description(glob:'wip:*') | description(glob:'private:*')"
+log = "present(@) | ancestors(immutable_heads().. ~ hidden, 4) | present(trunk())"
+private = "description(glob:'private:*')"
+hidden = "description(glob:'hidden:*')"
 'siblings(x)' = "x-+ ~x"
 
 [templates]

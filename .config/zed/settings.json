@@ -1,20 +1,28 @@
 {
-  // "theme": "Ayu Dark",
+  "theme": "Ayu Dark",
   // "ui_font_family": "Recursive Sans Linear Static",
-  // "buffer_font_family": "Recursive Mono Linear Static",
+  // "buffer_font_family": "JetBrains Mono",
+  "buffer_font_family": "Recursive Mono Linear Static",
 
   "vim_mode": true,
   "relative_line_numbers": false,
+  "autosave": "on_focus_change",
 
   // remove unwanted features
   "auto_update": false,
   "terminal": {
     "button": false,
+    "shell": "system",
+    "detect_venv": "off",
+    "toolbar": {
+      "breadcrumbs": false,
+    },
+    "dock": "bottom",
   },
   "chat_panel": {
     "button": "never",
   },
-  "assistant": {
+  "agent": {
     "version": "2",
     "button": false,
     "enabled": false,
@@ -56,6 +64,8 @@
     "**/Thumbs.db",
     "**/.settings",
     "**/.venv",
+    "**/.jj",
+    "**/.idea",
   ],
 
   // language config
@@ -76,10 +86,33 @@
     },
     "JSONC": {
       "show_edit_predictions": false,
-      "formatter": "prettier",
     },
     "TypeScript": {
       "formatter": "prettier",
+    },
+  },
+
+  "diagnostics": {
+    "button": true,
+    "include_warnings": true,
+    "lsp_pull_diagnostics": {
+      "enabled": true,
+      "debounce_ms": 50,
+    },
+    "inline": {
+      "enabled": true,
+      "update_debounce_ms": 150,
+      "padding": 4,
+      "min_column": 0,
+      "max_severity": null,
+    },
+    "cargo": null,
+  },
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        // "check": { "command": "clippy" }
+      },
     },
   },
 }

@@ -29,3 +29,6 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,close'
 # gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark
 # gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
+
+gsettings set org.gtk.Settings.FileChooser sort-directories-first true
+gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
