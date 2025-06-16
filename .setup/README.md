@@ -14,6 +14,7 @@ chmod +x dotfiles.sh
 jj git clone git@github.com:jakobhellermann/dotfiles
 mv dotfiles/.jj . && rm dotfiles -fr
 jj config set --repo snapshot.auto-track 'none()'
+echo '*' > .jj/repo/store/git/info/exclude
 ```
 
 # os install

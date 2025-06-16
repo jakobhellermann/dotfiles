@@ -18,5 +18,11 @@ perf.data
 perf.data.old
 profile.json
 profile.json.gz
+flamegraph.svg
+dhat-heap.json
 
 out.svg
+
+baseline
+
+*.xxd

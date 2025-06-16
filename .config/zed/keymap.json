@@ -1,4 +1,5 @@
 [
+  // what I'm used to
   {
     "bindings": {
       "ctrl-w ctrl-w": "pane::CloseActiveItem",
@@ -12,7 +13,6 @@
       "ctrl-t": "project_symbols::Toggle",
     },
   },
-
   {
     "context": "Terminal",
     "bindings": {
@@ -23,17 +23,76 @@
     "context": "Editor",
     "bindings": {
       "ctrl-shift-v": "markdown::OpenPreviewToTheSide",
+      "ctrl-alt-down": "editor::GoToHunk",
+      "ctrl-alt-up": "editor::GoToPreviousHunk",
+      "ctrl-alt-h": "editor::GoToPreviousHunk",
+      "ctrl-alt-l": "editor::GoToHunk",
+      "ctrl-alt-j": "editor::ToggleSelectedDiffHunks",
+      "ctrl-alt-k": "editor::ToggleSelectedDiffHunks",
+      "ctrl-alt-z": "git::Restore",
     },
   },
+
+  // fixes
   {
-    "context": "Editor && (vim_mode==normal||vim_mode==visual) && !menu",
+    "context": "BufferSearchBar",
+    "bindings": { "enter": "search::SelectNextMatch" }, // enter on
+  },
+
+  // vim
+  {
+    "context": "VimControl",
     "bindings": {
-      "shift-space": "editor::SelectLargerSyntaxNode",
-      "space": "editor::SelectSmallerSyntaxNode",
+      "ä x": "vim::SelectLargerSyntaxNode",
+      "ö x": "vim::SelectSmallerSyntaxNode",
+      "ä d": "editor::GoToDiagnostic",
+      "ö d": "editor::GoToPreviousDiagnostic",
+
       "shift-h": "pane::GoBack",
       "shift-l": "pane::GoForward",
       "alt-h": "pane::GoBack",
       "alt-l": "pane::GoForward",
+    },
+  },
+  {
+    "context": "vim_mode==insert",
+    "bindings": {
+      "ctrl-c": ["workspace::SendKeystrokes", "escape ctrl-s"],
+    },
+  },
+  // unbind defaults
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "ctrl-d": null,
+      "ctrl-o": null,
+      "ctrl-a": "editor::SelectAll",
+    },
+  },
+  {
+    "context": "VimControl && vim_operator==none",
+    "bindings": {
+      "(": null,
+      ")": null,
+    },
+  },
+  // extra stuff
+  {
+    "context": "VimControl && vim_mode == visual",
+    "bindings": {
+      "s": "vim::PushAddSurrounds",
+    },
+  },
+
+  {
+    "context": "VimControl",
+    "bindings": {
+      /*"shift-space": [
+        "workspace::SendKeystrokes",
+        "alt-shift-right  alt-shift-right"
+      ],*/
+      "shift-space": ["workspace::SendKeystrokes", "$ v a { V ä x v"],
+      // "shift-space": "editor::SelectLargerSyntaxnode",
     },
   },
   {
@@ -42,21 +101,24 @@
       "g I": "editor::GoToImplementation",
     },
   },
+  {
+    "context": "Editor && vim_mode==insert",
+    "bindings": {
+      "ctrl-v": "editor::Paste",
+    },
+  },
 
   {
     // disable some netrw stuff
     "context": "ProjectPanel && not_editing",
     "bindings": {
       "ctrl-p": "file_finder::Toggle",
-
       "n": "project_panel::NewFile",
       "shift-n": "project_panel::NewDirectory",
-
       "h": "project_panel::SelectParent",
       "l": "project_panel::ExpandSelectedEntry",
       "shift-h": "project_panel::CollapseSelectedEntry",
       "shift-l": "project_panel::ExpandSelectedEntry",
-
       "%": null,
       "d": null,
       "o": null,
