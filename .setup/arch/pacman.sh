@@ -3,7 +3,7 @@
 set -euo pipefail
 
 sudo pacman -S --needed git neovim curl zsh which \
-	ripgrep bat dust fd sd jq skim htop eza ripgrep fzf github-cli rsync \
+	ripgrep bat dust fd sd jq skim htop eza ripgrep fzf github-cli rsync pkgfile \
 	graphviz imagemagick unzip \
 	base-devel mold clang shellcheck rustup bacon inotify-tools
 
