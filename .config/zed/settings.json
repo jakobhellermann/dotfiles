@@ -9,6 +9,9 @@
   "autosave": "on_focus_change",
 
   // remove unwanted features
+  "title_bar": {
+    "show_sign_in": false,
+  },
   "auto_update": false,
   "terminal": {
     "button": false,
@@ -18,14 +21,18 @@
       "breadcrumbs": false,
     },
     "dock": "bottom",
+    "option_as_meta": true,
   },
   "chat_panel": {
     "button": "never",
   },
   "agent": {
-    "version": "2",
-    "button": false,
-    "enabled": false,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1",
+    },
+    "button": true,
+    "enabled": true,
   },
   "features": {
     "edit_prediction_provider": "none",
@@ -47,7 +54,6 @@
   },
   "cursor_blink": false,
   "gutter": {
-    "code_actions": false,
     "folds": false,
   },
   "git": {
@@ -70,13 +76,14 @@
 
   // language config
   "file_types": {
-    "JSON": [".prettierrc"],
+    // "JSON": [".prettierrc"]
   },
   "languages": {
     "Markdown": {
       "format_on_save": "off",
     },
     "Python": {
+      "format_on_save": "off",
       "formatter": {
         "external": {
           "command": "ruff",
@@ -90,6 +97,10 @@
     "TypeScript": {
       "formatter": "prettier",
     },
+    "Nix": {
+      "language_servers": ["nixd"],
+    },
+    "XML": { "format_on_save": "off" },
   },
 
   "diagnostics": {
