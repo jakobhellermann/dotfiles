@@ -5,5 +5,5 @@ if status is-interactive
     set fish_cursor_default block
     set fish_greeting
 
-    type -q pay-repects && pay-respects fish --alias --nocnf | source
+    type -q pay-respects && pay-respects fish --alias --nocnf | source
 end
