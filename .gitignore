@@ -2,6 +2,7 @@ TODO.md
 todo.md
 playground
 
+/.idea
 /target_*
 
 pnpm-lock.yaml
@@ -20,6 +21,9 @@ profile.json
 profile.json.gz
 flamegraph.svg
 dhat-heap.json
+*.mm_profdata
+
+cmp-*.sh
 
 out.svg
 
