@@ -33,7 +33,7 @@ private-commits = "private"
 # "diff added token" = { bg = "#002200", underline = false }
 
 [fix.tools.rustfmt]
-command = ["rustfmt", "--emit", "stdout"]
+command = ["rustfmt", "--emit=stdout", "--edition=2024"]
 patterns = ["glob:'**/*.rs'"]
 
 [fix.tools.ktfmt]
@@ -70,10 +70,11 @@ sib = ['util', 'exec', 'sh', '--', '-c', 'jj prev && jj next']
 
 # rebase stuf
 dev-create = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
-# dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
+dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
 dev-add = ['rebase', '-s', 'dev', '-d', 'all:dev-', '-d']
 all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
-into-parent = ['rebase', '-s', '@', '-A', '@-']
+insert-after-parent = ['rebase', '-s', '@', '-A', '@-']
+outsert = ['rebase', '-r', '@', '-d', '@-']
 
 sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
 
@@ -155,6 +156,7 @@ concat(
 '''
 
 [template-aliases]
+nl = '"\n"'
 default_commit_description = '''
 surround("\n\n", "\n", config("custom.coauthors").as_string_list().map(|author| "Co-Authored-By: " ++ author).join("\n"))
 '''
