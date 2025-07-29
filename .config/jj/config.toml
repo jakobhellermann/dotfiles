@@ -92,6 +92,43 @@ gitcommit = [
   '@',
 ]
 
+team = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  '''
+	set -euo pipefail
+
+	coauthorsfile="$(dirname $(jj config path --user))/coauthors.json"
+
+	if [[ $# -eq 0 ]]; then
+		jj config list --color never | rg 'custom.coauthors' | head -n1 | cut -d= -f2 | jq --raw-output .[]
+		exit 0
+	fi
+	if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+		echo "jj team alias1 alias2"
+		echo "jj team # show current"
+		echo "jj team disable"
+		exit 0
+	fi
+	if [[ "$1" == "list" ]]; then
+		jq '.' "$coauthorsfile"
+		exit 0
+	fi
+	if [[ "$1" == "disable" ]]; then
+		jj config set --user custom.coauthors "[]"
+		exit 0
+	fi
+
+	coauthors=$(jq --compact-output '. as $coauthors | $ARGS.positional | map($coauthors[.])' "$coauthorsfile" --args "$@")
+	jj config set --user custom.coauthors "$coauthors"
+	echo "$coauthors" | jq --raw-output .[]
+''',
+  '',
+]
+
 fork = [
   'util',
   'exec',
