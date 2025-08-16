@@ -22,6 +22,7 @@ C-c = "normal_mode"
 # C-space = "command_palette"
 C-space = "completion"
 A-ret = "code_action"
+C-backspace = "delete_word_backward"
 
 [keys.normal]
 F8 = "goto_next_diag"
