@@ -48,11 +48,27 @@ cii = ['commit', '-i']
 fixme = ['fix', '-s@']
 
 # commands
+info = ['log', '--no-graph']
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
 swap = ['rebase', '-r', '@', '-B', '@-']
-squash-restore = ['restore', '--from', '@', '--into', '@-', '--restore-descendants']
-# hsplit = ['split', '--parallel', '--config', 'ui.editor="true"']
-# hsquash = ['squash', '--from', 'siblings(@)']
+swap- = ['rebase', '-r', '@-', '-B', '@--']
+'tug^' = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@--']
+tug1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+"', '']
+tug2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1++"', '']
+unconflict-bookmark-git = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  'jj bookmark move "$1" --to "$1@git"',
+  '',
+]
+
+new- = ['new', '@-']
+show- = ['show', '-r', '@-']
+desc- = ['desc', '-r', '@-']
+diff- = ['new', '-r', '@-']
 
 # movement
 dev = ['edit', 'dev']
@@ -69,13 +85,13 @@ top = [
 sib = ['util', 'exec', 'sh', '--', '-c', 'jj prev && jj next']
 
 # rebase stuf
-dev-create = ['new', 'all:heads(trunk():: & mine())', '-m', 'dev']
+dev-create = ['new', 'heads(trunk():: & mine())', '-m', 'dev']
 dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
-dev-add = ['rebase', '-s', 'dev', '-d', 'all:dev-', '-d']
-all-rebase = ['rebase', '-s', 'all:roots(immutable_heads()..)', '-d', 'trunk()']
+dev-add = ['rebase', '-s', 'dev', '-d', 'dev-', '-d']
+all-rebase = ['rebase', '-s', 'roots((immutable_heads()|trunk())..)', '-d', 'trunk()']
 insert-after-parent = ['rebase', '-s', '@', '-A', '@-']
+insert-after-parent- = ['rebase', '-r', '@-', '-A', '@--']
 outsert = ['rebase', '-r', '@', '-d', '@-']
-
 sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
 
 # plumbing
@@ -173,7 +189,8 @@ siblings = "siblings(@)"
 # all = "::"
 dev = 'description(exact:"dev\n")'
 empty = 'mutable() & empty() & description("") ~@'
-log = "present(@) | ancestors(immutable_heads().. ~ hidden, 4) | present(trunk())"
+log = "present(@) | ancestors((immutable_heads() | trunk()).. ~ log-ignore, 4) | present(trunk())"
+log-ignore = "hidden"
 private = "description(glob:'private:*')"
 hidden = "description(glob:'hidden:*')"
 'siblings(x)' = "x-+ ~x"
