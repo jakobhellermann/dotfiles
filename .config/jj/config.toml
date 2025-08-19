@@ -190,13 +190,15 @@ siblings = "siblings(@)"
 dev = 'description(exact:"dev\n")'
 empty = 'mutable() & empty() & description("") ~@'
 log = "present(@) | ancestors((immutable_heads() | trunk()).. ~ log-ignore, 4) | present(trunk())"
+log-ui = "present(@) | ancestors(immutable_heads().. ~ hidden, 12) | present(trunk())"
 log-ignore = "hidden"
+log-unmerged = "present(@) | ancestors(trunk().. ~ hidden, 2) | present(trunk())"
 private = "description(glob:'private:*')"
 hidden = "description(glob:'hidden:*')"
 'siblings(x)' = "x-+ ~x"
 
 [templates]
-log = 'builtin_log_oneline ++ if((!description || description == "dev\n") && current_working_copy, diff.summary())'
+log = 'builtin_log_oneline_patch ++ if((!description || description == "dev\n") && current_working_copy, diff.summary())'
 op_log = 'builtin_op_log_oneline'
 draft_commit_description = '''
 concat(
@@ -213,6 +215,35 @@ concat(
 nl = '"\n"'
 default_commit_description = '''
 surround("\n\n", "\n", config("custom.coauthors").as_string_list().map(|author| "Co-Authored-By: " ++ author).join("\n"))
+'''
+
+
+builtin_log_oneline_patch = '''
+if(root,
+  format_root_commit(self),
+  label(if(current_working_copy, "working_copy"),
+    concat(
+      separate(" ",
+        format_short_change_id_with_hidden_and_divergent_info(self),
+        format_timestamp(commit_timestamp(self)),
+        bookmarks,
+        if(description,
+          description.first_line(),
+          label(if(empty, "empty"), description_placeholder),
+        ),
+        tags,
+        working_copies,
+        if(git_head, label("git_head", "git_head()")),
+        format_short_commit_id(commit_id),
+        if(conflict, label("conflict", "conflict")),
+        if(config("ui.show-cryptographic-signatures").as_boolean(),
+          format_short_cryptographic_signature(signature)),
+        if(empty, label("empty", "(empty)")),
+        format_short_signature_oneline(author),
+      ) ++ "\n",
+    ),
+  )
+)
 '''
 
 'format_short_id(id)' = 'id.shortest(4)'
