@@ -15,6 +15,7 @@
       "ctrl-ö": "terminal_panel::ToggleFocus",
       "f1": "command_palette::Toggle",
       "ctrl-w": "pane::CloseActiveItem",
+      "ctrl-shift-b": "workspace::ToggleBottomDock",
     },
   },
   {
@@ -35,7 +36,6 @@
   {
     "context": "AgentPanel",
     "bindings": {
-      "ctrl-alt-b": "workspace::ToggleRightDock", // can be removed soon
       "ctrl-f4": "workspace::ToggleRightDock",
       "ctrl-shift-?": "workspace::ToggleRightDock",
       "ctrl-d": "workspace::ToggleRightDock",
