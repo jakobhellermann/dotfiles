@@ -1,7 +1,4 @@
 {
-  "session": {
-    "trust_all_worktrees": true,
-  },
   "theme": "VSCode Dark Modern",
   "buffer_font_family": ".ZedMono",
 

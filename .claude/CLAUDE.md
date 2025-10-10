@@ -1,2 +1,4 @@
 - use context7 mcp server to look up-to-date info, docs and versions
 - don't guess my intentions, ask for clarifications if necessary
+- before removing asserts, think about it or ask me
+- never commit to vcs or do destructive actions without checking in
