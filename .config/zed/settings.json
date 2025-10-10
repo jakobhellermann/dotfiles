@@ -23,9 +23,6 @@
     "dock": "bottom",
     "option_as_meta": true
   },
-  "chat_panel": {
-    "button": "never"
-  },
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
@@ -116,8 +113,7 @@
       "padding": 4,
       "min_column": 0,
       "max_severity": null
-    },
-    "cargo": null
+    }
   },
   "lsp": {
     "rust-analyzer": {
@@ -125,5 +121,6 @@
         // "check": { "command": "clippy" }
       }
     }
-  }
+  },
+  "extend_comment_on_newline": false
 }

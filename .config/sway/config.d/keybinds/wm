@@ -96,6 +96,6 @@ mode "resize" {
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
 }
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 
 # vim: ft=swayconfig

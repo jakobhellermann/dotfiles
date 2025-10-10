@@ -1,0 +1,1 @@
+complete --keep-order --exclusive --command unity-scene-repacker --arguments "(COMPLETE=fish "'/home/jakob/.cache/rust/debug/unity-scene-repacker'" -- (commandline --current-process --tokenize --cut-at-cursor) (commandline --current-token))"
