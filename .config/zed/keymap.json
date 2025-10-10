@@ -34,11 +34,32 @@
     },
   },
   {
+    "context": "Workspace",
+    "bindings": {
+      // "ctrl-alt-y": "workspace::ToggleAllDocks",
+      "ctrl-alt-y": "agent::KeepAll",
+
+      "alt-t": ["task::Rerun", { "reevaluate_context": true }],
+    },
+  },
+  {
     "context": "AgentPanel",
     "bindings": {
       "ctrl-f4": "workspace::ToggleRightDock",
       "ctrl-shift-?": "workspace::ToggleRightDock",
       "ctrl-d": "workspace::ToggleRightDock",
+    },
+  },
+  {
+    "context": "KeymapEditor",
+    "bindings": {
+      "ctrl-k ctrl-s": "zed::OpenKeymapFile",
+    },
+  },
+  {
+    "context": "AgentPanel",
+    "bindings": {
+      "ctrl-p": "file_finder::Toggle",
     },
   },
 
@@ -100,8 +121,17 @@
       "ctrl-d": ["editor::SelectNext", { "replace_newest": false }], // editor.action.addSelectionToNextFindMatch  / find_under_expand
       "ctrl-o": null,
       "ctrl-a": "editor::SelectAll",
+      "ctrl-y": "agent::Keep", // todo doesn't work
     },
   },
+  {
+    "context": "vim_mode == insert && !(showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-p": "file_finder::Toggle",
+      // "ctrl-n": null
+    },
+  },
+
   {
     "context": "VimControl && vim_operator==none",
     "bindings": {

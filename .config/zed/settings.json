@@ -45,6 +45,9 @@
     "diagnostics": false,
     "metrics": false,
   },
+  "session": {
+    "trust_all_worktrees": true,
+  },
 
   // UI
   "indent_guides": {
@@ -77,11 +80,8 @@
     // "JSON": [".prettierrc"]
   },
   "languages": {
-    "Markdown": {
-      "format_on_save": "off",
-    },
     "Python": {
-      "format_on_save": "off",
+      "format_on_save": "on",
       "formatter": {
         "external": {
           "command": "ruff",
@@ -95,11 +95,138 @@
     },
     "TypeScript": {
       "formatter": "prettier",
+      "language_servers": ["ty", "!basedpyright", "..."],
     },
     "Nix": {
       "language_servers": ["nixd"],
     },
     "XML": { "format_on_save": "off" },
+    "Beancount": { "format_on_save": "off" },
+
+    // oxc
+    "CSS": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
+    "HTML": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
+    "JavaScript": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+        {
+          "code_action": "source.fixAll.oxc",
+        },
+      ],
+    },
+
+    "JSON": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
+    "JSONC": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
+
+    "Markdown": {
+      "format_on_save": "off",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
+    "TypeScript": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
+    "TSX": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
+
+    "YAML": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
   },
 
   "diagnostics": {
@@ -123,6 +250,37 @@
         // "check": { "command": "clippy" }
       },
     },
+    "yaml-language-server": {
+      "settings": {
+        "yaml": {
+          "schemas": {
+            "https://raw.githubusercontent.com/kaitai-io/ksy_schema/master/ksy_schema.json": [
+              "*.ksy",
+            ],
+          },
+        },
+      },
+    },
+    /*"oxlint": {
+      "initialization_options": {
+        "settings": {
+          "configPath": null,
+          "run": "onType",
+          "disableNestedConfig": false,
+          "fixKind": "safe_fix",
+          "typeAware": true,
+          "unusedDisableDirectives": "deny",
+        },
+      },
+    },
+    "oxfmt": {
+      "initialization_options": {
+        "settings": {
+          "configPath": null,
+          "run": "onSave",
+        },
+      },
+    },*/
   },
   "extend_comment_on_newline": false,
 }
