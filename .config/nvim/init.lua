@@ -36,6 +36,7 @@ require("autocomplete")
 -- AUTOCMDS
 utils.associate(".aliases", "sh")
 utils.associate("ModLog.txt", "modlog")
+utils.associate("*.log", "log")
 
 vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "*",
