@@ -2,7 +2,7 @@
 # shortcuts
 sq = ['squash']
 ab = ['abandon']
-fixme = ['fix', '-s@']
+fixme = ['fix', '-s@', '--include-unchanged-files']
 
 # commands
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
@@ -21,11 +21,32 @@ unconflict-bookmark-git = [
   'sh',
   '--',
   '-c',
-  'jj bookmark move "$1" --to "$1@git"',
+  'jj bookmark move "$1" --to "$1@git" --allow-backwards',
   '',
+]
+unconflict-bookmark-origin = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  'jj bookmark move "$1" --to "$1@origin" --allow-backwards',
+  '',
+]
+mergiraf = ['util', 'exec', 'sh', '--', '-c', 'jj resolve --tool mergiraf']
+
+makemut = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  '''jj config set --repo 'revset-aliases."immutable_heads()"' "root()"''',
 ]
 
 # parent aliases
+sq- = ['squash', '-f', '@-', '-t', '@--']
+squash- = ['squash', '-f', '@-', '-t', '@--']
 new- = ['new', '@-']
 show- = ['show', '-r', '@-']
 desc- = ['desc', '-r', '@-']
