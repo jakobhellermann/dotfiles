@@ -8,6 +8,14 @@ gaps inner 6
 smart_borders on
 #smart_gaps on
 
+layer_effects "waybar" {
+    blur enable;
+}
+layer_effects "quickshell" {
+    blur enable;
+}
+# animation_duration_ms 250
+
 output * bg ~/Pictures/wallpapers/sway fill
 
 bar {
