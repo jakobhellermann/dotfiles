@@ -28,9 +28,9 @@ log = "log"
 
 [revset-aliases]
 # utilities
-dev = 'description(exact:"dev\n")'
+dev = 'coalesce(bookmarks("dev"), description(exact:"dev\n"))'
 empty = 'mutable() & empty() & description("") ~@'
-firstconflict = "roots(conflicts())"
+firstconflict = "latest(roots(conflicts()))"
 'siblings(x)' = "x-+ ~x"
 'siblings' = "siblings(@)"
 

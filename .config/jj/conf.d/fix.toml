@@ -1,11 +1,78 @@
-[fix.tools.rustfmt]
-command = ["rustfmt", "--emit=stdout", "--edition=2024"]
-patterns = ["glob:'**/*.rs'"]
+[fix.tools.oxfmt]
+command = ["oxfmt", "--stdin-filepath=$path"]
+patterns = [
+  "glob:'**/*.css'",
+  "glob:'**/*.html'",
+  "glob:'**/*.js'",
+  "glob:'**/*.json' ~ glob:'**/package-lock.json'",
+  "glob:'**/*.json5'",
+  "glob:'**/*.jsonc'",
+  "glob:'**/*.jsx'",
+  "glob:'**/*.md'",
+  "glob:'**/*.mdx'",
+  "glob:'**/*.scss'",
+  "glob:'**/*.toml'",
+  "glob:'**/*.ts'",
+  "glob:'**/*.tsx'",
+  "glob:'**/*.vue'",
+]
+
+[fix.tools.nixfmt]
+command = ["nixfmt"]
+patterns = ["glob:'**/*.nix'"]
+
+[fix.tools.biome]
+command = ["bunx", "@biomejs/biome", "check", "--stdin-file-path=$path", "--write"]
+patterns = [
+  "glob:'**/*.js'",
+  "glob:'**/*.jsx'",
+  "glob:'**/*.ts'",
+  "glob:'**/*.tsx'",
+  # "glob:'**/*.json'",
+]
+enabled = false
+
+[fix.tools.beancount]
+command = ["uvx", "--from=beancount", "bean-format", "-"]
+patterns = ["root-glob:'**/*.beancount'"]
+
+[fix.tools.csharpier]
+command = ["dotnet", "csharpier", "--write-stdout"]
+patterns = ["root-glob:'**/*.cs'"]
+
+[fix.tools.fish_indent]
+command = ["fish_indent"]
+patterns = ["glob:'**/*.fish'"]
+
+[fix.tools.gofmt]
+patterns = ["glob:'**/*.go'"]
+command = ["gofmt"]
 
 [fix.tools.ktfmt]
 command = ["ktfmt", "--kotlinlang-style", "--stdin-name=$path", "-"]
 patterns = ["glob:'**/*.kt'"]
 
-[fix.tools.fish_indent]
-command = ["fish_indent"]
-patterns = ["glob:'**/*.fish'"]
+[fix.tools.rubocop]
+command = ["rubocop", "--config", ".rubocop.yml", "--autocorrect", "--stdin", "$path", "--stderr"]
+patterns = ["glob:'**/*.rb'"]
+
+[fix.tools.ruff]
+command = ["ruff", "format", "-", "--stdin-filename=$path"]
+patterns = ["glob:'**/*.py'"]
+
+[fix.tools.rustfmt]
+command = ["rustfmt", "--emit=stdout", "--edition=2024"]
+patterns = ["glob:'**/*.rs'"]
+
+[fix.tools.shfmt]
+command = ["shfmt", "--filename=$path"]
+patterns = ["glob:'**/*.sh'"]
+
+[fix.tools.terraform]
+command = ["terraform", "fmt", "-"]
+patterns = ["glob:'**/*.tf'"]
+
+[fix.tools.yamlfmt]
+command = ["yamlfmt", "-in"]
+patterns = ["glob:'**/*.yml'", "glob:'**/*.yaml'"]
+enabled = false
