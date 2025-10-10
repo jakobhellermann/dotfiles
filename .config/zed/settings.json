@@ -253,4 +253,14 @@
       },
     },*/
   },
+
+  // credentials
+  "context_servers": {
+    "mcp-server-context7": {
+      "enabled": true,
+      "settings": {
+        "context7_api_key": "ctx7sk-19044bbc-5566-4a7d-84dc-2ec9026be71c",
+      },
+    },
+  },
 }
