@@ -22,6 +22,7 @@ profile.json.gz
 flamegraph.svg
 dhat-heap.json
 *.mm_profdata
+*trace*.json
 
 cmp-*.sh
 

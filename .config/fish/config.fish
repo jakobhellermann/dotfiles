@@ -11,7 +11,7 @@ if status is-interactive
 end
 
 # pnpm
-set -gx PNPM_HOME /Users/sipgatejj/Library/pnpm
+set -gx PNPM_HOME "$HOME/.cache/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
     set -gx PATH "$PNPM_HOME" $PATH
 end
