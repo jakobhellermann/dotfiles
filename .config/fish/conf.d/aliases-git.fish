@@ -7,7 +7,5 @@ abbr --add gl 'git pull'
 abbr --add glo 'git log --oneline'
 abbr --add gst 'git status'
 
-# abbr --add gco git checkout
-# abbr --add glo git log --oneline
-# abbr --add gp git push
-# abbr --add gl git pull
+abbr --add gp git push
+abbr --add gl git pull
