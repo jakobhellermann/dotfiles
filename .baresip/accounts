@@ -1,0 +1,25 @@
+# teamdev
+# SCS 7 <sip:1109964e7@proxy.dev.sipgate.de>;auth_pass=GnsM6nNcXxvb;audio_codecs=pcma
+# SCS 8 <sip:1109964e8@proxy.dev.sipgate.de>;auth_pass=1ZTcGDz3TJ6N;audio_codecs=pcma
+# Voiza 1 <sip:1109964e5@proxy.dev.sipgate.de>;auth_pass=M1tUjHaXjPmh;audio_codecs=pcma
+# NonITI <sip:1109964e9@proxy.dev.sipgate.de>;auth_pass=cj5pFbkxE8wV;audio_codecs=pcma
+#
+# dev trunk david <sip:1125996t0@sipconnect.sipgate.de>;auth_user=1125996t0;auth_pass=TwcNSPLMkPkd;stunserver=stun:stun.sipgate.net;outbound=sip:sipconnect.dev.sipgate.de
+
+Voiza 1 neopbx <sip:1126226e1@proxy.dev.sipgate.de>;auth_pass=JNEiRNxiuXgv;audio_codecs=pcma
+
+
+# teamdev2
+# 1123627e2
+# trunk <sip:1109964t0@sipconnect.dev.sipgate.de>;auth_pass=kDgkV3TQ3aJK;audio_codecs=pcma
+
+# zeitansage 01804100100
+
+# live
+# SCS Live <sip:3536797e5@sipgate.de>;auth_pass=ZBzjjpUsxqpe # 015678662900
+# Nonverified Live <sip:3782997e0@sipgate.de>;auth_pass=GNKSbaTfWN3b
+# Nonverified Live <sip:3782997e1@sipgate.de>;auth_pass=BNYYsBA3uHas
+
+# neopbx voip <sip:3880938e0@sipgate.de>;auth_pass=MuykvKF3EdDQ
+#
+# trunk 1 <sip:3880938t0@sipconnect.sipgate.de>;auth_pass=xwon12obnWmD
