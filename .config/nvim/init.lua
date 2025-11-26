@@ -12,11 +12,11 @@ bootstrap_pckr()
 
 require('pckr').add {
 	'airblade/vim-gitgutter',
-	'hrsh7th/cmp-buffer',
-	'hrsh7th/cmp-cmdline',
-	'hrsh7th/cmp-nvim-lsp',
-	'hrsh7th/cmp-path',
-	'hrsh7th/nvim-cmp',
+	-- 'hrsh7th/cmp-buffer',
+	-- 'hrsh7th/cmp-cmdline',
+	-- 'hrsh7th/cmp-nvim-lsp',
+	-- 'hrsh7th/cmp-path',
+	-- 'hrsh7th/nvim-cmp',
 	'ibhagwan/fzf-lua',
 	'neovim/nvim-lspconfig',
 	'rstacruz/vim-closer',
