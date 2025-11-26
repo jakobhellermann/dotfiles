@@ -12,17 +12,17 @@ bootstrap_pckr()
 
 require('pckr').add {
 	'airblade/vim-gitgutter',
-	'lotabout/skim.vim',
-	'neovim/nvim-lspconfig',
-	'rstacruz/vim-closer',
-	-- { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' },
-	-- { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/cmp-path',
 	'hrsh7th/nvim-cmp',
+	'ibhagwan/fzf-lua',
+	'neovim/nvim-lspconfig',
+	'rstacruz/vim-closer',
 	'tpope/vim-surround',
+	-- { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' },
+	-- { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 }
 
 require("options")
@@ -38,6 +38,7 @@ utils.associate(".aliases", "sh")
 utils.associate("ModLog.txt", "modlog")
 utils.associate("*.log", "log")
 
+-- restore position
 vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
@@ -48,5 +49,3 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 		end
 	end
 })
-
--- KEYBINDINGS
