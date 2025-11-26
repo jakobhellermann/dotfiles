@@ -6,7 +6,7 @@
 #
 # dev trunk david <sip:1125996t0@sipconnect.sipgate.de>;auth_user=1125996t0;auth_pass=TwcNSPLMkPkd;stunserver=stun:stun.sipgate.net;outbound=sip:sipconnect.dev.sipgate.de
 
-Voiza 1 neopbx <sip:1126226e1@proxy.dev.sipgate.de>;auth_pass=JNEiRNxiuXgv;audio_codecs=pcma
+# Voiza 1 neopbx <sip:1126226e1@proxy.dev.sipgate.de>;auth_pass=JNEiRNxiuXgv;audio_codecs=pcma
 
 
 # teamdev2

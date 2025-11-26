@@ -6,6 +6,7 @@ case $(uname) in
   Darwin) ZSH_CACHE_DIR="$HOME/Library/Caches/zsh";;
   Linux) ZSH_CACHE_DIR="$HOME/.cache/zsh";;
 esac
+mkdir -p "$ZSH_CACHE_DIR"
 
 ZSH_COMPDUMP="$ZSH_CACHE_DIR/zcompdump-$ZSH_VERSION"
 HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
@@ -14,7 +15,7 @@ DISABLE_AUTO_UPDATE=true
 DISABLE_AUTO_TITLE=true
 
 plugins=( git colored-man-pages extract dotenv fzf )
-source "$ZSH/oh-my-zsh.sh"
+test -d "$ZSH" && source "$ZSH/oh-my-zsh.sh"
 
 # user config
 local configs=("$HOME/.env" "$HOME/.aliases")
@@ -29,7 +30,7 @@ local evalcmds=(
 	# "fasder --init auto aliases"
 )
 
-local hostname=$(hostnamectl hostname)
+local hostname=$(hostname)
 for c in $configs; do
 	[[ -f "$c" ]] && source "$c"
 	[[ -f "$c.$hostname" ]] && source "$c.$hostname"

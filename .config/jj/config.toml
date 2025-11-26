@@ -6,8 +6,7 @@ coauthors = []
 
 [user]
 name = "Jakob Hellermann"
-# email = "jakob.hellermann@protonmail.com"
-email = "hellermann@sipgate.de"
+email = "jakob.hellermann@protonmail.com"
 
 [ui]
 default-command = "log"
