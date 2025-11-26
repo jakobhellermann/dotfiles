@@ -1,8 +1,8 @@
 {
-  "theme": "Ayu Dark",
+  // "theme": "Ayu Dark",
   // "ui_font_family": "Recursive Sans Linear Static",
   // "buffer_font_family": "JetBrains Mono",
-  "buffer_font_family": "Recursive Mono Linear Static",
+  // "buffer_font_family": "Recursive Mono Linear Static",
 
   "vim_mode": true,
   "relative_line_numbers": "disabled",
@@ -21,7 +21,7 @@
       "breadcrumbs": false
     },
     "dock": "bottom",
-    "option_as_meta": true
+    "option_as_meta": false
   },
   "agent": {
     "default_model": {
