@@ -23,9 +23,10 @@ nmap 99 <Plug>(GitGutterNextHunk)
 ]]
 
 -- skim
-keymap("n", "<Leader>f", ":Files<CR>", silent)
-keymap("n", "<Leader>g", ":GFiles<CR>", silent)
-keymap("n", "<Leader>b", ":Buffers<CR>", silent)
+keymap("n", "<Leader>f", ":FzfLua files<CR>", silent)
+keymap("n", "<Leader>g", ":FzfLua git_files<CR>", silent)
+keymap("n", "<Leader>b", ":FzfLua buffers<CR>", silent)
+keymap("n", "<D-p>", ":FzfLua global<CR>", silent)
 
 vim.keymap.set("n", "<F8>", function() vim.diagnostic.jump({ count = 1, float = true }) end)
 vim.keymap.set("n", "<F20>", function() vim.diagnostic.jump({ count = -1, float = true }) end)
