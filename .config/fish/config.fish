@@ -1,0 +1,30 @@
+type -q fnm && fnm env | source
+
+if status is-interactive
+    set fish_key_bindings fish_hybrid_key_bindings
+    set fish_cursor_unknown line
+    set fish_cursor_normal block
+    set fish_cursor_default block
+    set fish_greeting
+
+    set -gx LIBRARY_PATH "$HOME/.nix-profile/lib"
+
+    type -q pay-respects && pay-respects fish --alias --nocnf | source
+    test -f /opt/homebrew/bin/brew && /opt/homebrew/bin/brew shellenv | source
+
+    complete -c './mvnw' -w mvn
+    complete -c './gradlew' -w gradle
+end
+
+# pnpm
+set -gx PNPM_HOME "$HOME/.cache/pnpm"
+fish_add_path --move "$PNPM_HOME/bin" "$PNPM_HOME"
+# pnpm end
+
+direnv hook fish | source
+
+# Ensure nix packages have priority over system binaries
+fish_add_path --prepend --move ~/.nix-profile/bin
+
+# Slack MCP OAuth callback port (pi-mcp-adapter defaults to 19876, Slack rejects that)
+set -gx MCP_OAUTH_CALLBACK_PORT 3118
