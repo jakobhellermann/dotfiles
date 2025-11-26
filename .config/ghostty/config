@@ -1,7 +1,5 @@
 window-width = 116
 window-height = 28
 keybind = shift+enter=text:\x1b\r
-window-decoration = none
-background-opacity = 0.6
-background = #070707
+# window-decoration = none
 
