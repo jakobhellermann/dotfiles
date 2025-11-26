@@ -23,7 +23,7 @@
       "breadcrumbs": false,
     },
     "dock": "bottom",
-    "option_as_meta": true,
+    "option_as_meta": false,
   },
   "agent": {
     "default_model": {
