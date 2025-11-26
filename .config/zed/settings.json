@@ -1,6 +1,14 @@
 {
   // theme
-  "diff_view_style": "unified",
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
   "theme": "VSCode Dark Modern",
   "ui_font_family": ".ZedSans", // default
   "buffer_font_family": "Recursive Mono Linear Static",
@@ -24,21 +32,23 @@
     "toolbar": {
       "breadcrumbs": false,
     },
-    // "dock": "bottom",
-    "option_as_meta": true,
+    "dock": "bottom",
+    "option_as_meta": false,
   },
   "agent": {
-    // "dock": "right",
+    "dock": "right",
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-4.1",
     },
-    "button": false,
+    "button": true,
     "enabled": true,
   },
   "edit_predictions": {
-    "allow_data_collection": "no",
     "provider": null,
+  },
+  "notification_panel": {
+    "button": false,
   },
   "collaboration_panel": {
     "dock": "left",
@@ -53,15 +63,6 @@
   },
 
   // UI
-  "project_panel": {
-    "dock": "left",
-  },
-  // "outline_panel": {
-  //   "dock": "left",
-  // },
-  // "git_panel": {
-  //   "dock": "left",
-  // },
   "indent_guides": {
     "enabled": false,
   },
@@ -102,15 +103,12 @@
   "languages": {
     // disable format on save
     "XML": { "format_on_save": "off" },
-    "TOML": { "format_on_save": "off" },
-    "CSharp": {
-      "format_on_save": "off",
-    },
     "Beancount": {
       "tab_size": 2,
       "format_on_save": "off",
     },
     "Java": { "format_on_save": "off" },
+    "CSharp": { "format_on_save": "off" },
     "C": { "format_on_save": "off" },
     "C++": { "format_on_save": "off" },
 
@@ -125,7 +123,7 @@
           "arguments": ["format", "-"],
         },
       },
-      "language_servers": ["ty", "!pylsp", "!basedpyright", "..."],
+      "language_servers": ["ty", "!basedpyright", "..."],
     },
 
     // prefer oxc over prettier
@@ -191,7 +189,6 @@
           },
         },
       ],
-      "format_on_save": "off",
     },
     "TypeScript": {
       "prettier": {
