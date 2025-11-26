@@ -1,3 +1,3 @@
-function paste --wraps=wl-paste --description 'alias paste wl-paste'
-    wl-paste $argv
+function paste --wraps=pbpaste --description 'alias paste pbpaste'
+    pbpaste $argv
 end

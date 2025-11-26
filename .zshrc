@@ -30,7 +30,7 @@ local evalcmds=(
 	# "fasder --init auto aliases"
 )
 
-local hostname=$(hostnamectl hostname)
+local hostname=$(hostname)
 for c in $configs; do
 	[[ -f "$c" ]] && source "$c"
 	[[ -f "$c.$hostname" ]] && source "$c.$hostname"
