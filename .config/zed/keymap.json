@@ -1,149 +1,31 @@
 [
-  // general
   {
     "bindings": {
-      "ctrl-w ctrl-w": "pane::CloseActiveItem",
-      "ctrl-b": "workspace::ToggleLeftDock", // override vim keybind
-      "ctrl-f": "vim::Search",
-      "ctrl-q": null,
-      "ctrl-shift-`": "terminal_panel::ToggleFocus",
-      "ctrl-shift-a": "command_palette::Toggle",
-      "ctrl-shift-enter": "workspace::NewTerminal",
-      "ctrl-shift-w": null,
-      "ctrl-shift-ö": "terminal_panel::ToggleFocus",
-      "ctrl-t": "project_symbols::Toggle",
-      "ctrl-ö": "terminal_panel::ToggleFocus",
-      "f1": "command_palette::Toggle",
-      "ctrl-w": "pane::CloseActiveItem",
-      "ctrl-shift-b": "workspace::ToggleBottomDock",
-    },
-  },
-  {
-    "context": "Editor",
-    "bindings": {
-      "ctrl-shift-v": "markdown::OpenPreviewToTheSide",
-      "ctrl-alt-down": "editor::GoToHunk",
-      "ctrl-alt-up": "editor::GoToPreviousHunk",
-      "ctrl-alt-h": "editor::GoToPreviousHunk",
-      "ctrl-alt-l": "editor::GoToHunk",
-      "ctrl-alt-j": "editor::ToggleSelectedDiffHunks",
-      "ctrl-alt-k": "editor::ToggleSelectedDiffHunks",
-      "ctrl-alt-z": "git::Restore",
-      "ctrl-shift-alt-up": "editor::AddSelectionAbove",
-      "ctrl-shift-alt-down": "editor::AddSelectionBelow",
+      "cmd-q": "workspace::CloseWindow", // instead of closing all instances
+      "ctrl-<": null,
     },
   },
   {
     "context": "Workspace",
     "bindings": {
-      // "ctrl-alt-y": "workspace::ToggleAllDocks",
-      "ctrl-alt-y": "agent::KeepAll",
-
-      "alt-t": ["task::Rerun", { "reevaluate_context": true }],
-    },
-  },
-  {
-    "context": "AgentPanel",
-    "bindings": {
-      "ctrl-f4": "workspace::ToggleRightDock",
-      "ctrl-shift-?": "workspace::ToggleRightDock",
-      "ctrl-d": "workspace::ToggleRightDock",
+      "F1": "command_palette::Toggle",
     },
   },
   {
     "context": "KeymapEditor",
     "bindings": {
-      "ctrl-k ctrl-s": "zed::OpenKeymapFile",
+      "cmd-k cmd-s": "zed::OpenKeymapFile",
     },
   },
   {
-    "context": "AgentPanel",
     "bindings": {
-      "ctrl-p": "file_finder::Toggle",
-    },
-  },
-
-  // fixes
-  {
-    "context": "BufferSearchBar",
-    "bindings": { "enter": "search::SelectNextMatch" },
-  },
-
-  // vim
-  {
-    "context": "VimControl",
-    "bindings": {
-      "ä x": "vim::SelectLargerSyntaxNode",
-      "ö x": "vim::SelectSmallerSyntaxNode",
-      "ä d": "editor::GoToDiagnostic",
-      "ö d": "editor::GoToPreviousDiagnostic",
-
-      "shift-h": "pane::GoBack",
-      "shift-l": "pane::GoForward",
-
-      ", q": "pane::CloseActiveItem",
-      ", x": "pane::CloseActiveItem",
-      ", ,": "pane::AlternateFile",
-      ", w": "workspace::Save",
-      ", w d": "editor::GoToDefinitionSplit",
-      ", w g d": "editor::GoToDefinitionSplit",
-      ", w shift-d": "editor::GoToTypeDefinitionSplit",
-      ", w g shift-d": "editor::GoToTypeDefinitionSplit",
-      ", w space": "editor::OpenExcerptsSplit",
-      ", w g space": "editor::OpenExcerptsSplit",
-    },
-  },
-  {
-    "context": "vim_mode == normal",
-    "bindings": {
-      "g I": "editor::GoToImplementation",
-      "shift-space": ["workspace::SendKeystrokes", "$ v a { V ä x v"],
-    },
-  },
-  {
-    "context": "vim_mode == insert",
-    "bindings": {
-      "ctrl-v": "editor::Paste",
-      "ctrl-c": ["workspace::SendKeystrokes", "escape ctrl-s"],
-    },
-  },
-  {
-    "context": "vim_mode == visual",
-    "bindings": {
-      "s": "vim::PushAddSurrounds",
-    },
-  },
-
-  // unbind unwanted defaults
-  {
-    "context": "VimControl && !menu",
-    "bindings": {
-      "ctrl-d": ["editor::SelectNext", { "replace_newest": false }], // editor.action.addSelectionToNextFindMatch  / find_under_expand
-      "ctrl-o": null,
-      "ctrl-a": "editor::SelectAll",
-      "ctrl-y": "agent::Keep", // todo doesn't work
-    },
-  },
-  {
-    "context": "vim_mode == insert && !(showing_code_actions || showing_completions)",
-    "bindings": {
-      "ctrl-p": "file_finder::Toggle",
-      // "ctrl-n": null
-    },
-  },
-
-  {
-    "context": "VimControl && vim_operator==none",
-    "bindings": {
-      "(": null,
-      ")": null,
+      "cmd-ö": "terminal_panel::ToggleFocus",
     },
   },
   {
     // netrw stuff
     "context": "ProjectPanel && not_editing",
     "bindings": {
-      "ctrl-p": "file_finder::Toggle",
       "n": "project_panel::NewFile",
       "shift-n": "project_panel::NewDirectory",
       "h": "project_panel::CollapseSelectedEntry",
@@ -155,82 +37,6 @@
       "v": null,
       "p": null,
       "-": null,
-    },
-  },
-  {
-    "context": "Pane",
-    "bindings": {
-      "ctrl-1": ["pane::ActivateItem", 0],
-      "ctrl-2": ["pane::ActivateItem", 1],
-      "ctrl-3": ["pane::ActivateItem", 2],
-      "ctrl-4": ["pane::ActivateItem", 3],
-      "ctrl-5": ["pane::ActivateItem", 4],
-      "ctrl-6": ["pane::ActivateItem", 5],
-      "ctrl-7": ["pane::ActivateItem", 6],
-      "ctrl-8": ["pane::ActivateItem", 7],
-      "ctrl-9": ["pane::ActivateItem", 8],
-      "ctrl-0": "pane::ActivateLastItem",
-    },
-  },
-  {
-    "context": "AgentPanel || GitPanel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
-    "bindings": {
-      ", w left": "workspace::ActivatePaneLeft",
-      ", w right": "workspace::ActivatePaneRight",
-      ", w up": "workspace::ActivatePaneUp",
-      ", w down": "workspace::ActivatePaneDown",
-      ", w ctrl-h": "workspace::ActivatePaneLeft",
-      ", w ctrl-l": "workspace::ActivatePaneRight",
-      ", w ctrl-k": "workspace::ActivatePaneUp",
-      ", w ctrl-j": "workspace::ActivatePaneDown",
-      ", w h": "workspace::ActivatePaneLeft",
-      ", w l": "workspace::ActivatePaneRight",
-      ", w k": "workspace::ActivatePaneUp",
-      ", w j": "workspace::ActivatePaneDown",
-      ", w shift-left": "workspace::SwapPaneLeft",
-      ", w shift-right": "workspace::SwapPaneRight",
-      ", w shift-up": "workspace::SwapPaneUp",
-      ", w shift-down": "workspace::SwapPaneDown",
-      ", w shift-h": "workspace::SwapPaneLeft",
-      ", w shift-l": "workspace::SwapPaneRight",
-      ", w shift-k": "workspace::SwapPaneUp",
-      ", w shift-j": "workspace::SwapPaneDown",
-      ", w >": "vim::ResizePaneRight",
-      ", w <": "vim::ResizePaneLeft",
-      ", w -": "vim::ResizePaneDown",
-      ", w +": "vim::ResizePaneUp",
-      ", w _": "vim::MaximizePane",
-      ", w =": "vim::ResetPaneSizes",
-      ", w g t": "pane::ActivateNextItem",
-      ", w ctrl-g t": "pane::ActivateNextItem",
-      ", w g shift-t": "pane::ActivatePreviousItem",
-      ", w ctrl-g shift-t": "pane::ActivatePreviousItem",
-      ", w w": "workspace::ActivateNextPane",
-      ", w ctrl-w": "workspace::ActivateNextPane",
-      ", w p": "workspace::ActivatePreviousPane",
-      ", w ctrl-p": "workspace::ActivatePreviousPane",
-      ", w shift-w": "workspace::ActivatePreviousPane",
-      ", w ctrl-shift-w": "workspace::ActivatePreviousPane",
-      ", w ctrl-v": "pane::SplitVertical",
-      ", w v": "pane::SplitVertical",
-      ", w shift-s": "pane::SplitHorizontal",
-      ", w ctrl-s": "pane::SplitHorizontal",
-      ", w s": "pane::SplitHorizontal",
-      ", w ctrl-c": "pane::CloseActiveItem",
-      ", w c": "pane::CloseActiveItem",
-      ", w ctrl-q": "pane::CloseActiveItem",
-      ", w q": "pane::CloseActiveItem",
-      ", w ctrl-a": "pane::CloseAllItems",
-      ", w a": "pane::CloseAllItems",
-      ", w ctrl-o": "workspace::CloseInactiveTabsAndPanes",
-      ", w o": "workspace::CloseInactiveTabsAndPanes",
-      ", w ctrl-n": "workspace::NewFileSplitHorizontal",
-      ", w n": "workspace::NewFileSplitHorizontal",
-    },
-  },
-  {
-    "bindings": {
-      ", l r": "editor::RestartLanguageServer",
     },
   },
 ]
