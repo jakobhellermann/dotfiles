@@ -5,7 +5,7 @@
   "buffer_font_family": "Recursive Mono Linear Static",
 
   "vim_mode": true,
-  "relative_line_numbers": false,
+  "relative_line_numbers": "disabled",
   "autosave": "on_focus_change",
 
   // remove unwanted features

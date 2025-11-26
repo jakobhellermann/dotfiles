@@ -1,3 +1,4 @@
+abbr --add gaa 'git add --all'
 abbr --add gb 'git branch'
 abbr --add gcm 'git checkout main'
 abbr --add gcmsg 'git commit -m'
