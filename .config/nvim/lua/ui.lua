@@ -1,7 +1,7 @@
 vim.cmd [[
-" colorscheme wildcharm
-" highlight Normal guibg=NONE ctermbg=NONE
-" highlight NonText guibg=NONE ctermbg=NONE
+colorscheme wildcharm
+highlight Normal guibg=NONE ctermbg=NONE
+highlight NonText guibg=NONE ctermbg=NONE
 ]]
 
 -- vim.cmd [[highlight LineNr ctermbg=None]]
