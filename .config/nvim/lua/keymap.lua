@@ -1,20 +1,38 @@
-vim.g.mapleader = ","
 local keymap = vim.keymap.set
-
 local silent = { silent = true }
-keymap("n", "<Leader>w", ":w<CR>", silent)
-keymap("n", "<Leader>x", ":x<CR>", silent)
-keymap("n", "<Leader>q", ":q<CR>", silent)
-keymap("n", "<Leader>r", ":so $MYVIMRC<CR>", silent)
+
+vim.g.mapleader = ","
+keymap("n", "<Leader>w", ":w<Enter>", silent)
+keymap("n", "<Leader>x", ":x<Enter>", silent)
+keymap("n", "<Leader>q", ":q<Enter>", silent)
+keymap("n", "<Leader>r", ":so $MYVIMRC<Enter>", silent)
 keymap("n", "<Leader><Leader>", "<C-^>", silent)
-
 keymap("v", "<Leader>y", '"+y', silent)
+keymap("n", "<Leader>ds", vim.diagnostic.open_float, { desc = "Show diagnostic" })
 
+-- forward/backward
+keymap("n", "H", "<C-o>", { noremap = true, silent = true })
+keymap("n", "L", "<C-i>", { noremap = true, silent = true })
+
+-- center
 keymap("n", "n", "nzz", silent)
 keymap("n", "N", "Nzz", silent)
 keymap("n", "*", "*zz", silent)
 keymap("n", "#", "#zz", silent)
 keymap("n", "g*", "g*zz", silent)
+
+-- diagnostics
+local virtual_text_enabled = true
+vim.diagnostic.config({ virtual_text = virtual_text_enabled })
+keymap(
+	"n", "<leader>dv",
+	function() vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text }) end,
+	{ desc = "Toggle diagnostics virtual text" }
+)
+
+keymap("n", "<F8>", function() vim.diagnostic.jump({ count = 1, float = true }) end)
+keymap("n", "<F20>", function() vim.diagnostic.jump({ count = -1, float = true }) end)
+
 
 -- gitgutter
 vim.cmd [[
@@ -22,16 +40,13 @@ nmap 88 <Plug>(GitGutterPrevHunk)
 nmap 99 <Plug>(GitGutterNextHunk)
 ]]
 
--- skim
-keymap("n", "<Leader>f", ":FzfLua files<CR>", silent)
-keymap("n", "<Leader>g", ":FzfLua git_files<CR>", silent)
-keymap("n", "<Leader>b", ":FzfLua buffers<CR>", silent)
-keymap("n", "<D-p>", ":FzfLua global<CR>", silent)
+-- palette
+keymap("n", "<Leader>f", ":FzfLua files<Enter>", silent)
+keymap("n", "<Leader>g", ":FzfLua git_files<Enter>", silent)
+keymap("n", "<Leader>b", ":FzfLua buffers<Enter>", silent)
+keymap("n", "<D-p>", ":FzfLua global<Enter>", silent)
 
-vim.keymap.set("n", "<F8>", function() vim.diagnostic.jump({ count = 1, float = true }) end)
-vim.keymap.set("n", "<F20>", function() vim.diagnostic.jump({ count = -1, float = true }) end)
-
-
+-- close windows on escape
 vim.keymap.set('n', '<Esc>', function()
 	local wins = vim.api.nvim_tabpage_list_wins(0)
 	for _, win in ipairs(wins) do
@@ -43,6 +58,7 @@ vim.keymap.set('n', '<Esc>', function()
 	vim.cmd('stopinsert')
 end, silent)
 
+-- lsp keymap
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(event)
 		local bufmap = function(mode, lhs, rhs)
@@ -64,6 +80,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		bufmap('n', '<A-Enter>', vim.lsp.buf.code_action)
 	end
 })
-
-vim.keymap.set("n", "H", "<C-o>", { noremap = true, silent = true })
-vim.keymap.set("n", "L", "<C-i>", { noremap = true, silent = true })
