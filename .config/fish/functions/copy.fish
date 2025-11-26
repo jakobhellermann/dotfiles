@@ -1,3 +1,3 @@
-function copy --wraps=wl-copy --description 'alias copy wl-copy'
-    wl-copy $argv
+function copy --wraps=pbcopy --description 'alias copy pbcopy'
+    pbcopy $argv
 end

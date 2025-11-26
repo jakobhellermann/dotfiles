@@ -34,3 +34,4 @@ baseline
 *.jar
 
 /.claude/settings.local.json
+/.DS_Store
