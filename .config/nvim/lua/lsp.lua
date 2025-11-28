@@ -55,6 +55,7 @@ vim.lsp.enable({
 	"just",
 	"kotlin_language_server",
 	"leanls",
+	"lemminx",
 	"lua_ls",
 	"mesonlsp",
 	"nixd",
@@ -62,6 +63,7 @@ vim.lsp.enable({
 	"rust_analyzer",
 	"taplo",
 	"tinymist",
+	"vtsls",
 	"wgsl_analyzer",
 	"zls",
 })
