@@ -4,11 +4,18 @@
 
 os=$(uname | tr '[:upper:]' '[:lower:]')
 
-extensions=("$HOME/.env" "$HOME/.aliases" )
+configs=("$HOME/.env" "$HOME/.aliases" )
+evalcmds=("fnm env")
 
-for p in "${extensions[@]}"; do
+for p in "${configs[@]}"; do
 	[[ -f "$p.$os" ]] && source "$p.$os"
 	[[ -f "$p" ]] && source "$p"
+done
+
+for cmd in "${evalcmds[@]}"; do
+    if command -v "${cmd%% *}" >/dev/null 2>&1; then
+        eval "$($cmd)"
+    fi
 done
 
 PROMPT_DIRTRIM=1
