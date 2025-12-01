@@ -8,6 +8,9 @@ coauthors = []
 name = "Jakob Hellermann"
 email = "jakob.hellermann@protonmail.com"
 
+[snapshot]
+max-new-file-size = "10MiB"
+
 [ui]
 default-command = "log"
 color = "always"
@@ -40,6 +43,10 @@ patterns = ["glob:'**/*.rs'"]
 command = ["ktfmt", "--kotlinlang-style", "--stdin-name=$path", "-"]
 patterns = ["glob:'**/*.kt'"]
 
+[fix.tools.fish_indent]
+command = ["fish_indent"]
+patterns = ["glob:'**/*.fish'"]
+
 [aliases]
 # shortcuts
 sq = ['squash']
@@ -48,13 +55,13 @@ cii = ['commit', '-i']
 fixme = ['fix', '-s@']
 
 # commands
-info = ['log', '--no-graph']
 tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
 swap = ['rebase', '-r', '@', '-B', '@-']
 swap- = ['rebase', '-r', '@-', '-B', '@--']
 'tug^' = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@--']
 tug1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+"', '']
 tug2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1++"', '']
+tug3 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+++"', '']
 unconflict-bookmark-git = [
   'util',
   'exec',
@@ -64,6 +71,7 @@ unconflict-bookmark-git = [
   'jj bookmark move "$1" --to "$1@git"',
   '',
 ]
+git-checkout = ['util', 'exec', 'sh', '--', '-c', 'git checkout $(jj current-bookmark)']
 
 new- = ['new', '@-']
 show- = ['show', '-r', '@-']
@@ -71,7 +79,6 @@ desc- = ['desc', '-r', '@-']
 diff- = ['new', '-r', '@-']
 
 # movement
-dev = ['edit', 'dev']
 head = ['new', 'coalesce(dev, trunk())']
 nextconflict = ['edit', 'firstconflict']
 top = [
@@ -84,7 +91,7 @@ top = [
 ]
 sib = ['util', 'exec', 'sh', '--', '-c', 'jj prev && jj next']
 
-# rebase stuf
+# rebase stuff
 dev-create = ['new', 'heads(trunk():: & mine())', '-m', 'dev']
 dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
 dev-add = ['rebase', '-s', 'dev', '-d', 'dev-', '-d']
@@ -95,6 +102,7 @@ outsert = ['rebase', '-r', '@', '-d', '@-']
 sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
 
 # plumbing
+current-bookmark = ['bookmark', 'list', '-r', '@-', '--tracked', '-T', 'if(!remote, name)']
 gitcommit = [
   'log',
   '--ignore-working-copy',
@@ -107,6 +115,20 @@ gitcommit = [
   '-r',
   '@',
 ]
+
+# scripts
+update = ['util', 'exec', 'sh', '--', '-c', '''
+	set -euo pipefail
+
+	bookmark=$(jj current-bookmark)
+	if test -z "$bookmark"; then
+		echo 'Not on a bookmark right now'
+		exit 0
+	fi
+
+	jj git fetch --all-remotes
+	jj new "$bookmark"
+''', '']
 
 team = [
   'util',
@@ -189,12 +211,13 @@ siblings = "siblings(@)"
 # all = "::"
 dev = 'description(exact:"dev\n")'
 empty = 'mutable() & empty() & description("") ~@'
-log = "present(@) | ancestors((immutable_heads() | trunk()).. ~ log-ignore, 4) | present(trunk())"
-log-ui = "present(@) | ancestors(immutable_heads().. ~ hidden, 12) | present(trunk())"
+log = "present(@) | ancestors((builtin_immutable_heads() | trunk()).. ~ log-ignore, 4) | present(trunk())"
+log-ui = "present(@) | ancestors(builtin_immutable_heads().. ~ hidden, 12) | present(trunk())"
 log-ignore = "hidden"
 log-unmerged = "present(@) | ancestors(trunk().. ~ hidden, 2) | present(trunk())"
 private = "description(glob:'private:*')"
 hidden = "description(glob:'hidden:*')"
+at = "@"
 'siblings(x)' = "x-+ ~x"
 
 [templates]

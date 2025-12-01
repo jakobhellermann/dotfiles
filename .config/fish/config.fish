@@ -1,3 +1,5 @@
+type -q fnm && fnm env | source
+
 if status is-interactive
     set fish_key_bindings fish_hybrid_key_bindings
     set fish_cursor_unknown line

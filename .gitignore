@@ -31,3 +31,5 @@ baseline
 
 *.xxd
 *.jar
+
+/.claude/settings.local.json
