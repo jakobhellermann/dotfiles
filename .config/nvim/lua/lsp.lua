@@ -1,29 +1,3 @@
---[[ local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-vim.lsp.config.rust_analyzer = { capabilities = capabilities }
-vim.lsp.config.lua_ls = {
-	capabilities = capabilities
-}
---]]
-
-
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(event)
-		local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
-
-		if not client:supports_method('textDocument/willSaveWaitUntil')
-			and client:supports_method('textDocument/formatting') then
-			vim.api.nvim_create_autocmd('BufWritePre', {
-				group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
-				buffer = event.buf,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
-				end,
-			})
-		end
-	end
-})
-
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
