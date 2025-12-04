@@ -18,11 +18,12 @@ require('pckr').add {
 	'tpope/vim-surround',
 }
 
+require("autocomplete")
+require("format_on_save")
+require("keymap")
+require("lsp")
 require("options")
 require("ui")
-require("lsp")
-require("keymap")
-require("autocomplete")
 
 -- THEME
 
