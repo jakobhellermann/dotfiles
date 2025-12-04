@@ -1,0 +1,11 @@
+[fix.tools.rustfmt]
+command = ["rustfmt", "--emit=stdout", "--edition=2024"]
+patterns = ["glob:'**/*.rs'"]
+
+[fix.tools.ktfmt]
+command = ["ktfmt", "--kotlinlang-style", "--stdin-name=$path", "-"]
+patterns = ["glob:'**/*.kt'"]
+
+[fix.tools.fish_indent]
+command = ["fish_indent"]
+patterns = ["glob:'**/*.fish'"]

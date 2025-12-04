@@ -1,0 +1,47 @@
+[aliases]
+update = ['util', 'exec', 'sh', '--', '-c', '''
+	set -euo pipefail
+
+	bookmark=$(jj current-bookmark)
+	if test -z "$bookmark"; then
+		echo 'Not on a bookmark right now'
+		exit 0
+	fi
+
+	jj git fetch --all-remotes
+	jj new "$bookmark"
+''', '']
+
+fork = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  '''
+set -euo pipefail
+
+if ! gh auth status>/dev/null; then
+echo "Run gh auth login"
+exit
+fi
+
+if jj git remote list | grep 'upstream' >/dev/null; then
+echo "remote 'upstream' already exists"
+exit
+fi
+origin=$(jj git remote list | grep 'origin' | cut -d' ' -f2)
+
+fork=$(yes no | gh repo fork "$origin" 2>&1 || true)
+fork=$(echo "$fork" \
+| sed -r 's|https://github.com/|git@github.com:|' \
+| sed -r 's|(.*) already exists|git@github.com:\1|')
+
+echo "$fork"
+
+jj git remote rename origin upstream 2>/dev/null
+jj config get "revset-aliases.'trunk()'" | sed 's/origin/upstream/' | xargs jj config set --repo "revset-aliases.'trunk()'"
+
+jj git remote add origin "$fork"
+''',
+]

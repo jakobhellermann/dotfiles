@@ -1,0 +1,9 @@
+[custom]
+show-commit-id = false
+show-current-files = true
+coauthors = []
+
+# [[--scope]]
+# --when.commands = ["evolog", "operation"]
+# [--scope.custom]
+# show-commit-id = true
