@@ -1,9 +1,5 @@
 "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
-[custom]
-show-commit-id = false
-coauthors = []
-
 [user]
 name = "Jakob Hellermann"
 email = "jakob.hellermann@protonmail.com"
@@ -21,286 +17,44 @@ movement.edit = true
 editor = "nvim"
 diff-editor = "diffpatch"
 merge-editor = "vscode"
-# pager = "less -FRXS --wordwrap"
 pager = "less -FRX --wordwrap"
+# pager = "less -FRXS --wordwrap"
 
 [git]
 colocate = true
-push-new-bookmarks = true
 write-change-id-header = true
 private-commits = "private"
-
-[colors]
-"diff token".underline = false
-# "diff removed token" = { bg = "#221111", underline = false }
-# "diff added token" = { bg = "#002200", underline = false }
-
-[fix.tools.rustfmt]
-command = ["rustfmt", "--emit=stdout", "--edition=2024"]
-patterns = ["glob:'**/*.rs'"]
-
-[fix.tools.ktfmt]
-command = ["ktfmt", "--kotlinlang-style", "--stdin-name=$path", "-"]
-patterns = ["glob:'**/*.kt'"]
-
-[fix.tools.fish_indent]
-command = ["fish_indent"]
-patterns = ["glob:'**/*.fish'"]
-
-[aliases]
-# shortcuts
-sq = ['squash']
-ab = ['abandon']
-cii = ['commit', '-i']
-fixme = ['fix', '-s@']
-
-# commands
-tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
-swap = ['rebase', '-r', '@', '-B', '@-']
-swap- = ['rebase', '-r', '@-', '-B', '@--']
-'tug^' = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@--']
-tug-2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1-"', '']
-tug-1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1-"', '']
-tug1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+"', '']
-tug2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1++"', '']
-tug3 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+++"', '']
-unconflict-bookmark-git = [
-  'util',
-  'exec',
-  'sh',
-  '--',
-  '-c',
-  'jj bookmark move "$1" --to "$1@git"',
-  '',
-]
-git-checkout = ['util', 'exec', 'sh', '--', '-c', 'git checkout $(jj current-bookmark)']
-
-new- = ['new', '@-']
-show- = ['show', '-r', '@-']
-desc- = ['desc', '-r', '@-']
-diff- = ['new', '-r', '@-']
-rebase- = ['rebase', '-r', '@-']
-
-# movement
-head = ['new', 'coalesce(dev, trunk())']
-nextconflict = ['edit', 'firstconflict']
-top = [
-  'util',
-  'exec',
-  'sh',
-  '--',
-  '-c',
-  'jj git fetch --all-remotes && jj new "trunk()" --quiet && jj',
-]
-sib = ['util', 'exec', 'sh', '--', '-c', 'jj prev && jj next']
-
-# rebase stuff
-dev-create = ['new', 'heads(trunk():: & mine())', '-m', 'dev']
-dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
-dev-add = ['rebase', '-s', 'dev', '-d', 'dev-', '-d']
-all-rebase = ['rebase', '-s', 'roots((immutable_heads()|trunk())..)', '-d', 'trunk()']
-insert-after-parent = ['rebase', '-s', '@', '-A', '@-']
-insert-after-parent- = ['rebase', '-r', '@-', '-A', '@--']
-outsert = ['rebase', '-r', '@', '-d', '@-']
-sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
-
-# plumbing
-current-bookmark = ['bookmark', 'list', '-r', '@-', '--tracked', '-T', 'if(!remote, name)']
-gitcommit = [
-  'log',
-  '--ignore-working-copy',
-  '--no-graph',
-  '--color',
-  'never',
-  '--no-pager',
-  '-T',
-  'commit_id',
-  '-r',
-  '@',
-]
-
-# scripts
-update = ['util', 'exec', 'sh', '--', '-c', '''
-	set -euo pipefail
-
-	bookmark=$(jj current-bookmark)
-	if test -z "$bookmark"; then
-		echo 'Not on a bookmark right now'
-		exit 0
-	fi
-
-	jj git fetch --all-remotes
-	jj new "$bookmark"
-''', '']
-
-team = [
-  'util',
-  'exec',
-  'sh',
-  '--',
-  '-c',
-  '''
-	set -euo pipefail
-
-	coauthorsfile="$(dirname $(jj config path --user))/coauthors.json"
-
-	if [[ $# -eq 0 ]]; then
-		jj config list --color never | rg 'custom.coauthors' | head -n1 | cut -d= -f2 | jq --raw-output .[]
-		exit 0
-	fi
-	if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-		echo "jj team alias1 alias2"
-		echo "jj team # show current"
-		echo "jj team disable"
-		exit 0
-	fi
-	if [[ "$1" == "list" ]]; then
-		jq '.' "$coauthorsfile"
-		exit 0
-	fi
-	if [[ "$1" == "disable" ]]; then
-		jj config set --user custom.coauthors "[]"
-		exit 0
-	fi
-
-	coauthors=$(jq --compact-output '. as $coauthors | $ARGS.positional | map($coauthors[.])' "$coauthorsfile" --args "$@")
-	jj config set --user custom.coauthors "$coauthors"
-	echo "$coauthors" | jq --raw-output .[]
-''',
-  '',
-]
-
-fork = [
-  'util',
-  'exec',
-  'sh',
-  '--',
-  '-c',
-  '''
-set -euo pipefail
-
-if ! gh auth status>/dev/null; then
-echo "Run gh auth login"
-exit
-fi
-
-if jj git remote list | grep 'upstream' >/dev/null; then
-echo "remote 'upstream' already exists"
-exit
-fi
-origin=$(jj git remote list | grep 'origin' | cut -d' ' -f2)
-
-fork=$(yes no | gh repo fork "$origin" 2>&1 || true)
-fork=$(echo "$fork" \
-| sed -r 's|https://github.com/|git@github.com:|' \
-| sed -r 's|(.*) already exists|git@github.com:\1|')
-
-echo "$fork"
-
-jj git remote rename origin upstream 2>/dev/null
-jj config get "revset-aliases.'trunk()'" | sed 's/origin/upstream/' | xargs jj config set --repo "revset-aliases.'trunk()'"
-
-jj git remote add origin "$fork"
-''',
-]
 
 [revsets]
 log-graph-prioritize = "coalesce(dev, @, present(main))"
 log = "log"
 
 [revset-aliases]
-firstconflict = "roots(conflicts())"
-siblings = "siblings(@)"
-# all = "::"
+# utilities
 dev = 'description(exact:"dev\n")'
 empty = 'mutable() & empty() & description("") ~@'
-private = "description(glob:'private:*')"
-hidden = "description(glob:'hidden:*')"
-at = "@"
+firstconflict = "roots(conflicts())"
+'siblings(x)' = "x-+ ~x"
+'siblings' = "siblings(@)"
+
+# simpler to type sometimes
+me = "@"
 this = "@"
 par = "@-"
-'siblings(x)' = "x-+ ~x"
 
+# classes
+private = "description(glob:'private:*')"
+hidden = "description(glob:'hidden:*')"
+
+# log presets
 log = "present(@) | ancestors((builtin_immutable_heads() | trunk()).. ~ hidden, 4) | present(trunk())"
 log-ignore = "none"
 log-ui = "present(@) | ancestors(builtin_immutable_heads().. ~ hidden, 12) | present(trunk())"
 log-unmerged = "present(@) | ancestors(trunk().. ~ hidden, 2) | present(trunk())"
 
 
-[templates]
-log = 'builtin_log_oneline_patch ++ if((!description || description == "dev\n") && current_working_copy, diff.summary())'
-op_log = 'builtin_op_log_oneline'
-draft_commit_description = '''
-concat(
-  coalesce(description, default_commit_description),
-  surround(
-    "\nJJ: This commit contains the following changes:\n", "",
-    indent("JJ:     ", diff.summary()),
-  ),
-  surround("JJ: \nJJ: ignore-rest\n", "", diff.git())
-)
-'''
-
 [template-aliases]
 nl = '"\n"'
-default_commit_description = '''
-surround("\n\n", "\n", config("custom.coauthors").as_string_list().map(|author| "Co-Authored-By: " ++ author).join("\n"))
-'''
-
-
-builtin_log_oneline_patch = '''
-if(root,
-  format_root_commit(self),
-  label(if(current_working_copy, "working_copy"),
-    concat(
-      separate(" ",
-        format_short_change_id_with_hidden_and_divergent_info(self),
-        format_timestamp(commit_timestamp(self)),
-        bookmarks,
-        if(description,
-          description.first_line(),
-          label(if(empty, "empty"), description_placeholder),
-        ),
-        tags,
-        working_copies,
-        if(git_head, label("git_head", "git_head()")),
-        format_short_commit_id(commit_id),
-        if(conflict, label("conflict", "conflict")),
-        if(config("ui.show-cryptographic-signatures").as_boolean(),
-          format_short_cryptographic_signature(signature)),
-        if(empty, label("empty", "(empty)")),
-        format_short_signature_oneline(author),
-      ) ++ "\n",
-    ),
-  )
-)
-'''
-
-'format_short_id(id)' = 'id.shortest(4)'
-'format_short_signature(signature)' = 'signature.name()'
-'format_short_signature_oneline(signature)' = 'signature.name()'
-'format_timestamp(timestamp)' = 'timestamp.ago()'
-'format_short_commit_id(id)' = 'if(config("custom.show-commit-id").as_boolean(), id.shortest(4))'
-'format_operation_oneline(op)' = '''
-  separate(" ",
-    op.id().short(8), op.time().end().ago(),
-    clean_operation_message(op.description().first_line()),
-    if(op.tags(), op.tags()),
-  )
-'''
-'clean_operation_message(msg)' = '''
-coalesce(
-  if(snapshot, label("empty", "snapshot")),
-  if(msg.starts_with("squash commits into"), msg.substr(0, 28)),
-  if(msg.starts_with("describe commit"), msg.substr(0, 24)),
-  if(msg.starts_with("abandon commit"), msg.substr(0, 23)),
-  if(msg.starts_with("undo operation"), msg.substr(0, 23)),
-  if(msg.starts_with("split commit"), msg.substr(0, 21)),
-  if(msg.starts_with("edit commit"), msg.substr(0, 20)),
-  if(msg.starts_with("commit "), msg.substr(0, 15)),
-  msg
-)
-'''
 
 [merge-tools.gitpatch]
 program = "sh"
@@ -324,8 +78,3 @@ edit-args = [
 ]
 merge-args = ["-c", "echo gitpatch cannot be used as a merge tool"]
 diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
-
-[[--scope]]
---when.commands = ["evolog", "operation"]
-[--scope.custom]
-show-commit-id = true

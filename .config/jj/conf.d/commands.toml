@@ -1,0 +1,70 @@
+[aliases]
+# shortcuts
+sq = ['squash']
+ab = ['abandon']
+fixme = ['fix', '-s@']
+
+# commands
+tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
+swap = ['rebase', '-r', '@', '-B', '@-']
+swap- = ['rebase', '-r', '@-', '-B', '@--']
+'tug^' = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@--']
+tug-2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1-"', '']
+tug-1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1-"', '']
+tug1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+"', '']
+tug2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1++"', '']
+tug3 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+++"', '']
+git-checkout = ['util', 'exec', 'sh', '--', '-c', 'git checkout $(jj current-bookmark)']
+unconflict-bookmark-git = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  'jj bookmark move "$1" --to "$1@git"',
+  '',
+]
+
+# parent aliases
+new- = ['new', '@-']
+show- = ['show', '-r', '@-']
+desc- = ['desc', '-r', '@-']
+diff- = ['new', '-r', '@-']
+rebase- = ['rebase', '-r', '@-']
+
+# movement
+head = ['new', 'coalesce(dev, trunk())']
+nextconflict = ['edit', 'firstconflict']
+top = [
+  'util',
+  'exec',
+  'sh',
+  '--',
+  '-c',
+  'jj git fetch --all-remotes && jj new "trunk()" --quiet && jj',
+]
+sib = ['util', 'exec', 'sh', '--', '-c', 'jj prev && jj next']
+
+# rebase stuff
+all-rebase = ['rebase', '-s', 'roots((immutable_heads() | trunk())..)', '-d', 'trunk()']
+dev-create = ['new', 'heads(trunk():: & mine())', '-m', 'dev']
+dev-insert = ['rebase', '-A', 'main', '-B', 'dev']
+insert-after-parent = ['rebase', '-s', '@', '-A', '@-']
+insert-after-parent- = ['rebase', '-r', '@-', '-A', '@--']
+outsert = ['rebase', '-r', '@', '-d', '@-']
+sq-restore-descendants = ['restore', '-f', '@', '-t', '@-', '--restore-descendants']
+
+# plumbing
+current-bookmark = ['bookmark', 'list', '-r', '@-', '--tracked', '-T', 'if(!remote, name)']
+gitcommit = [
+  'log',
+  '--ignore-working-copy',
+  '--no-graph',
+  '--color',
+  'never',
+  '--no-pager',
+  '-T',
+  'commit_id',
+  '-r',
+  '@',
+]
