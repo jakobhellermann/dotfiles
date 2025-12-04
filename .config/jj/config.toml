@@ -59,6 +59,8 @@ tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--t
 swap = ['rebase', '-r', '@', '-B', '@-']
 swap- = ['rebase', '-r', '@-', '-B', '@--']
 'tug^' = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@--']
+tug-2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1-"', '']
+tug-1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1-"', '']
 tug1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+"', '']
 tug2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1++"', '']
 tug3 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+++"', '']
@@ -77,6 +79,7 @@ new- = ['new', '@-']
 show- = ['show', '-r', '@-']
 desc- = ['desc', '-r', '@-']
 diff- = ['new', '-r', '@-']
+rebase- = ['rebase', '-r', '@-']
 
 # movement
 head = ['new', 'coalesce(dev, trunk())']
@@ -211,14 +214,18 @@ siblings = "siblings(@)"
 # all = "::"
 dev = 'description(exact:"dev\n")'
 empty = 'mutable() & empty() & description("") ~@'
-log = "present(@) | ancestors((builtin_immutable_heads() | trunk()).. ~ log-ignore, 4) | present(trunk())"
-log-ui = "present(@) | ancestors(builtin_immutable_heads().. ~ hidden, 12) | present(trunk())"
-log-ignore = "hidden"
-log-unmerged = "present(@) | ancestors(trunk().. ~ hidden, 2) | present(trunk())"
 private = "description(glob:'private:*')"
 hidden = "description(glob:'hidden:*')"
 at = "@"
+this = "@"
+par = "@-"
 'siblings(x)' = "x-+ ~x"
+
+log = "present(@) | ancestors((builtin_immutable_heads() | trunk()).. ~ hidden, 4) | present(trunk())"
+log-ignore = "none"
+log-ui = "present(@) | ancestors(builtin_immutable_heads().. ~ hidden, 12) | present(trunk())"
+log-unmerged = "present(@) | ancestors(trunk().. ~ hidden, 2) | present(trunk())"
+
 
 [templates]
 log = 'builtin_log_oneline_patch ++ if((!description || description == "dev\n") && current_working_copy, diff.summary())'
