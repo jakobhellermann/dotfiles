@@ -9,3 +9,10 @@ if status is-interactive
 
     type -q pay-respects && pay-respects fish --alias --nocnf | source
 end
+
+# pnpm
+set -gx PNPM_HOME /Users/sipgatejj/Library/pnpm
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
