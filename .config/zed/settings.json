@@ -8,7 +8,7 @@
 
   // remove unwanted features
   "title_bar": {
-    "show_sign_in": false
+    "show_sign_in": false,
   },
   "auto_update": false,
   "terminal": {
@@ -16,45 +16,45 @@
     "shell": "system",
     "detect_venv": "off",
     "toolbar": {
-      "breadcrumbs": false
+      "breadcrumbs": false,
     },
     "dock": "bottom",
-    "option_as_meta": true
+    "option_as_meta": true,
   },
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "model": "gpt-4.1",
     },
     "button": true,
-    "enabled": true
+    "enabled": true,
   },
   "features": {
-    "edit_prediction_provider": "none"
+    "edit_prediction_provider": "none",
   },
   "notification_panel": {
-    "button": false
+    "button": false,
   },
   "collaboration_panel": {
-    "button": false
+    "button": false,
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
 
   // UI
   "indent_guides": {
-    "enabled": false
+    "enabled": false,
   },
   "cursor_blink": false,
   "gutter": {
-    "folds": false
+    "folds": false,
   },
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "file_scan_exclusions": [
     "**/.git",
@@ -66,7 +66,7 @@
     "**/.settings",
     "**/.venv",
     "**/.jj",
-    "**/.idea"
+    "**/.idea",
   ],
 
   // language config
@@ -75,27 +75,27 @@
   },
   "languages": {
     "Markdown": {
-      "format_on_save": "off"
+      "format_on_save": "off",
     },
     "Python": {
       "format_on_save": "off",
       "formatter": {
         "external": {
           "command": "ruff",
-          "arguments": ["format", "-"]
-        }
-      }
+          "arguments": ["format", "-"],
+        },
+      },
     },
     "JSONC": {
-      "show_edit_predictions": false
+      "show_edit_predictions": false,
     },
     "TypeScript": {
-      "formatter": "prettier"
+      "formatter": "prettier",
     },
     "Nix": {
-      "language_servers": ["nixd"]
+      "language_servers": ["nixd"],
     },
-    "XML": { "format_on_save": "off" }
+    "XML": { "format_on_save": "off" },
   },
 
   "diagnostics": {
@@ -103,22 +103,22 @@
     "include_warnings": true,
     "lsp_pull_diagnostics": {
       "enabled": true,
-      "debounce_ms": 50
+      "debounce_ms": 50,
     },
     "inline": {
       "enabled": true,
       "update_debounce_ms": 150,
       "padding": 4,
       "min_column": 0,
-      "max_severity": null
-    }
+      "max_severity": null,
+    },
   },
   "lsp": {
     "rust-analyzer": {
       "initialization_options": {
         // "check": { "command": "clippy" }
-      }
-    }
+      },
+    },
   },
-  "extend_comment_on_newline": false
+  "extend_comment_on_newline": false,
 }
