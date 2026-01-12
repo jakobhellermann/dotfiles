@@ -11,7 +11,6 @@ max-new-file-size = "10MiB"
 default-command = "log"
 color = "always"
 conflict-marker-style = "git"
-always-allow-large-revsets = true
 movement.edit = true
 
 editor = "nvim"
@@ -21,12 +20,10 @@ pager = "less -FRX --wordwrap"
 # pager = "less -FRXS --wordwrap"
 
 [git]
-colocate = true
-write-change-id-header = true
 private-commits = "private"
 
 [revsets]
-log-graph-prioritize = "coalesce(dev, @, present(main))"
+log-graph-prioritize = "coalesce(dev, @)"
 log = "log"
 
 [revset-aliases]
