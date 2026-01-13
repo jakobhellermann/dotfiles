@@ -88,6 +88,7 @@
           "arguments": ["format", "-"],
         },
       },
+      "language_servers": ["ty", "!basedpyright", "..."],
     },
     "JSONC": {
       "show_edit_predictions": false,
