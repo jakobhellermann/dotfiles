@@ -10,9 +10,9 @@ git --work-tree "$WORK_TREE" clone --bare https://github.com/jakobhellermann/dot
 git --git-dir "$GIT_DIR" --work-tree "$WORK_TREE" checkout
 
 if [ $? = 0 ]; then
-  echo "Checked out config.";
+	echo "Checked out config."
 else
-  exit 1
+	exit 1
 fi
 
 git --git-dir "$GIT_DIR" --work-tree "$WORK_TREE" config status.showUntrackedFiles no

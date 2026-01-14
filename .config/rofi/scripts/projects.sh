@@ -3,7 +3,7 @@
 cd
 
 if [ $# -ne 0 ]; then
-	coproc ( code "$@" > /dev/null 2>&1 )
+	coproc (code "$@" >/dev/null 2>&1)
 	exit 0
 fi
 

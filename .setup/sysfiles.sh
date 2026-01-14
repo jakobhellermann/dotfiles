@@ -16,14 +16,17 @@ apply() {
 }
 
 case "${1:-unset}" in
-	register)
-		shift
-		register "$@";;
-	apply)
-		apply;;
-	unset)
-		echo "sysfiles.sh register|apply";;
-	*)
-		echo "unknown option $1";;
+register)
+	shift
+	register "$@"
+	;;
+apply)
+	apply
+	;;
+unset)
+	echo "sysfiles.sh register|apply"
+	;;
+*)
+	echo "unknown option $1"
+	;;
 esac
-

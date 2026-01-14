@@ -12,7 +12,6 @@ sudo apt install -y tmux autojump htop graphviz librsvg2-bin imagemagick shellch
 sudo apt install -y -o Dpkg::Options::="--force-overwrite" bat ripgrep
 sudo apt install -y libssl-dev lld clang
 
-
 gui=$(test "$#" -gt 0 && test "$1" = "--gui")
 
 $gui && sudo apt install -y kitty gnome-tweaks fonts-jetbrains-mono
