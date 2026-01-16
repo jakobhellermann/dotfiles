@@ -1,48 +1,34 @@
 {
-    "height": 28, // Waybar height (to be removed for auto height)
-    "position": "bottom",
-    // "width": 1280, // Waybar width
-    // "spacing": 4, // Gaps between modules (4px)
-    "modules-left": [
-        "sway/workspaces",
-        "sway/mode",
-        "sway/scratchpad",
-    ],
-    "modules-center": [
-        "sway/window"
-    ],
-    "modules-right": [
-        "tray",
-        "clock"
-    ],
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+  "height": 28, // Waybar height (to be removed for auto height)
+  "position": "bottom",
+  // "width": 1280, // Waybar width
+  // "spacing": 4, // Gaps between modules (4px)
+  "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
+  "modules-center": ["sway/window"],
+  "modules-right": ["tray", "clock"],
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>",
+  },
+  "sway/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": ["", ""],
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}",
+  },
+  "tray": {
+    "spacing": 10,
+  },
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}",
+  },
+  "mpris": {
+    "format": "{player_icon} {title}",
+    "player-icons": {
+      "default": " ",
     },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": [
-            "",
-            ""
-        ],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
-    "tray": {
-        "spacing": 10
-    },
-    "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "mpris": {
-        "format": "{player_icon} {title}",
-        "player-icons": {
-            "default": " "
-        },
-        "title-len": 30,
-        "ignored-players": [
-            "firefox"
-        ]
-    }
+    "title-len": 30,
+    "ignored-players": ["firefox"],
+  },
 }
