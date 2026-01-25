@@ -66,6 +66,11 @@ patterns = [
   "glob:'**/*.jsonc'",
 ]
 
+[fix.tools.qmlformat]
+command = ["/usr/lib/qt6/bin/qmlformat", "$path"]
+patterns = ["glob:'**/*.qml'"]
+enabled = false
+
 [fix.tools.rubocop]
 command = ["rubocop", "--config", ".rubocop.yml", "--autocorrect", "--stdin", "$path", "--stderr"]
 patterns = ["glob:'**/*.rb'"]
