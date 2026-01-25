@@ -7,7 +7,7 @@ set $super Super_L
 # Start Apps
 bindsym $mod+shift+return exec $term
 bindsym $mod+ctrl+shift+return exec $term --app-id float
-bindsym $mod+f exec firefox
+bindsym $mod+f exec zen-browser
 
 
 bindsym $mod+d exec $menu
