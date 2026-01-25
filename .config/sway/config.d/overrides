@@ -3,20 +3,21 @@
 # float by default
 for_window [app_id=".*"] floating enable
 for_window {
-	[app_id="kitty"] floating disable
-	[app_id="foot"] floating disable
-	[app_id="zen"] floating disable
 	[app_id="Zed"] floating disable
 	[app_id="firefox"] floating disable
+	[app_id="foot"] floating disable
+	[app_id="kitty"] floating disable
 	[app_id="krita"] floating disable
-	# [app_id="CelesteStudio.GTK"] floating disable
 	[app_id="org.kde.falkon"] floating disable
 	[app_id="org.qutebrowser.qutebrowser"] floating disable
+	[app_id="spotify"] floating disable
+	[app_id="zen"] floating disable
 	[class="Code"] floating disable
-	[class="discord"] floating disable
 	[class="Slack"] floating disable
 	[class="Spotify"] floating disable
+	[class="discord"] floating disable
 
+	# [app_id="CelesteStudio.GTK"] floating disable
 	# [app_id="jetbrains-idea"] floating disable
 }
 for_window [window_type="dialog"] floating enable
