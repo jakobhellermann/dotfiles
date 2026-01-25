@@ -53,6 +53,8 @@ desc- = ['desc', '-r', '@-']
 diff- = ['new', '-r', '@-']
 rebase- = ['rebase', '-r', '@-']
 
+rebaseme = ['rebase', '-r', '@']
+
 # movement
 head = ['new', 'coalesce(dev, trunk())']
 nextconflict = ['edit', 'firstconflict']
