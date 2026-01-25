@@ -208,6 +208,11 @@
   },
 
   "lsp": {
+    "cargo-tom": {
+      "initialization_options": {
+        "offline": false,
+      },
+    },
     "yaml-language-server": {
       "settings": {
         "yaml": {
