@@ -7,3 +7,5 @@ fish_add_path ~/.dotnet/tools
 
 set -gx GOPATH ~/.local/share/go
 fish_add_path $GOPATH/bin
+
+test -d /usr/lib/qt6/bin && fish_add_path /usr/lib/qt6/bin
