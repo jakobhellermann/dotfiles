@@ -3,7 +3,7 @@ command = ["beancount-sort"]
 patterns = ["glob:'**/*.beancount'"]
 
 [fix.tools.beancount]
-command = ["uvx", "--from=beancount", "bean-format", "-"]
+command = ["bean-format", "-"]
 patterns = ["root-glob:'**/*.beancount'"]
 
 [fix.tools.biome]
@@ -47,14 +47,17 @@ patterns = [
   "glob:'**/*.json5'",
   # "glob:'**/*.jsonc'",
   "glob:'**/*.jsx'",
-  "glob:'**/*.md'",
-  "glob:'**/*.mdx'",
   "glob:'**/*.scss'",
   "glob:'**/*.toml'",
   "glob:'**/*.ts'",
   "glob:'**/*.tsx'",
   "glob:'**/*.vue'",
 ]
+
+[fix.tools.oxfmt-md]
+command = ["oxfmt", "--stdin-filepath=$path"]
+patterns = ["glob:'**/*.mdx'", "glob:'**/*.md'"]
+enabled = false
 
 [fix.tools.prettier-jsonc]
 command = ['pnpx', 'prettier', '--parser=jsonc']
