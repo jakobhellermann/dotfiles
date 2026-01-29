@@ -8,6 +8,8 @@ if status is-interactive
     set fish_greeting
 
     type -q pay-respects && pay-respects fish --alias --nocnf | source
+
+    complete -c './mvnw' -w mvn
 end
 
 # pnpm
