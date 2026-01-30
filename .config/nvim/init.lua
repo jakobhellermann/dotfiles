@@ -16,7 +16,28 @@ require('pckr').add {
 	'neovim/nvim-lspconfig',
 	'rstacruz/vim-closer',
 	'tpope/vim-surround',
+	{ 'mtrajano/tssorter.nvim', config = function()
+		require('tssorter').setup({
+			sortables = {
+				toml = {
+					tables = {
+						node = 'table'
+					}
+				}
+			}
+
+		})
+	end },
+	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 }
+
+require 'nvim-treesitter'.install { 'beancount', 'toml' }
+
+-- Enable treesitter for specific filetypes
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = { 'toml', 'beancount' },
+	callback = function() vim.treesitter.start() end,
+})
 
 require("autocomplete")
 require("format_on_save")
