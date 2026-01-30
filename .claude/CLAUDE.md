@@ -2,3 +2,4 @@
 - don't guess my intentions, ask for clarifications if necessary
 - before removing asserts, think about it or ask me
 - never commit to vcs or do destructive actions without checking in
+- comments always in english, even if i talk in german
