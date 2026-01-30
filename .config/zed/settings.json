@@ -4,10 +4,11 @@
   "ui_font_family": ".ZedSans", // default
   "buffer_font_family": "Recursive Mono Linear Static",
 
-  // main
-  "vim_mode": true,
-  "relative_line_numbers": "disabled",
+  // behaviour
   "autosave": "on_focus_change",
+  "extend_comment_on_newline": false,
+  "format_on_save": "on",
+  "vim_mode": true,
 
   // remove unwanted features
   "title_bar": {
@@ -79,9 +80,22 @@
   "file_types": {
     // "JSON": [".prettierrc"]
   },
+  "diagnostics": {
+    "include_warnings": true,
+    "inline": {
+      "enabled": true,
+    },
+  },
+
   "languages": {
+    // disable format on save
+    "XML": { "format_on_save": "off" },
+
+    // specify lsp
+    "Nix": {
+      "language_servers": ["nixd", "!nil"],
+    },
     "Python": {
-      "format_on_save": "on",
       "formatter": {
         "external": {
           "command": "ruff",
@@ -90,22 +104,9 @@
       },
       "language_servers": ["ty", "!basedpyright", "..."],
     },
-    "JSONC": {
-      "show_edit_predictions": false,
-    },
-    "TypeScript": {
-      "formatter": "prettier",
-      "language_servers": ["ty", "!basedpyright", "..."],
-    },
-    "Nix": {
-      "language_servers": ["nixd"],
-    },
-    "XML": { "format_on_save": "off" },
-    "Beancount": { "format_on_save": "off" },
 
-    // oxc
+    // prefer oxc over prettier
     "CSS": {
-      "format_on_save": "on",
       "prettier": {
         "allowed": false,
       },
@@ -118,7 +119,6 @@
       ],
     },
     "HTML": {
-      "format_on_save": "on",
       "prettier": {
         "allowed": false,
       },
@@ -131,7 +131,6 @@
       ],
     },
     "JavaScript": {
-      "format_on_save": "on",
       "prettier": {
         "allowed": false,
       },
@@ -146,9 +145,7 @@
         },
       ],
     },
-
     "JSON": {
-      "format_on_save": "on",
       "prettier": {
         "allowed": false,
       },
@@ -160,22 +157,7 @@
         },
       ],
     },
-    "JSONC": {
-      "format_on_save": "on",
-      "prettier": {
-        "allowed": false,
-      },
-      "formatter": [
-        {
-          "language_server": {
-            "name": "oxfmt",
-          },
-        },
-      ],
-    },
-
     "Markdown": {
-      "format_on_save": "off",
       "prettier": {
         "allowed": false,
       },
@@ -188,7 +170,6 @@
       ],
     },
     "TypeScript": {
-      "format_on_save": "on",
       "prettier": {
         "allowed": false,
       },
@@ -201,7 +182,6 @@
       ],
     },
     "TSX": {
-      "format_on_save": "on",
       "prettier": {
         "allowed": false,
       },
@@ -213,9 +193,7 @@
         },
       ],
     },
-
     "YAML": {
-      "format_on_save": "on",
       "prettier": {
         "allowed": false,
       },
@@ -229,27 +207,7 @@
     },
   },
 
-  "diagnostics": {
-    "button": true,
-    "include_warnings": true,
-    "lsp_pull_diagnostics": {
-      "enabled": true,
-      "debounce_ms": 50,
-    },
-    "inline": {
-      "enabled": true,
-      "update_debounce_ms": 150,
-      "padding": 4,
-      "min_column": 0,
-      "max_severity": null,
-    },
-  },
   "lsp": {
-    "rust-analyzer": {
-      "initialization_options": {
-        // "check": { "command": "clippy" }
-      },
-    },
     "yaml-language-server": {
       "settings": {
         "yaml": {
@@ -282,5 +240,4 @@
       },
     },*/
   },
-  "extend_comment_on_newline": false,
 }
