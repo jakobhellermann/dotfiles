@@ -15,13 +15,13 @@ vim.lsp.config("lua_ls", {
 })
 
 vim.lsp.enable({
-	"fish_lsp",
 	"bashls",
 	"biome",
 	"clangd",
 	"cmake",
 	"cssls",
 	"dockerls",
+	"fish_lsp",
 	"gopls",
 	"html",
 	"janet_lsp",
@@ -37,6 +37,7 @@ vim.lsp.enable({
 	"rust_analyzer",
 	"taplo",
 	"tinymist",
+	"ty",
 	"vtsls",
 	"wgsl_analyzer",
 	"zls",
