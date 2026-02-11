@@ -263,4 +263,144 @@
       },
     },
   },
+
+  "global_lsp_settings": {
+    "semantic_token_rules": [
+      {
+        "token_type": "error",
+        "font_weight": "bold",
+        "foreground_color": "#ffffff",
+      },
+      {
+        "token_type": "error_source",
+        "foreground_color": "#ffffff",
+      },
+      {
+        "token_type": "warning",
+        "font_weight": "bold",
+        "foreground_color": "#ffffff",
+      },
+      {
+        "token_type": "hint",
+        "foreground_color": "#ffffff",
+      },
+      {
+        "token_type": "conflict_description",
+        "foreground_color": "#808000",
+      },
+      {
+        "token_type": "commit_id",
+        "foreground_color": "#000080",
+      },
+      {
+        "token_type": "change_id",
+        "foreground_color": "#800080",
+      },
+      {
+        "token_type": "prefix",
+        "font_weight": "bold",
+        "foreground_color": "#cc00ff",
+      },
+      {
+        "token_type": "rest",
+        "foreground_color": "#808080",
+      },
+      {
+        "token_type": "change_offset",
+        "font_weight": "bold",
+      },
+      {
+        "token_type": "author",
+        "foreground_color": "#808000",
+      },
+      {
+        "token_type": "committer",
+        "foreground_color": "#808000",
+      },
+      {
+        "token_type": "timestamp",
+        "foreground_color": "#008080",
+      },
+      {
+        "token_type": "working_copies",
+        "foreground_color": "#008000",
+      },
+      {
+        "token_type": "bookmark",
+        "foreground_color": "#800080",
+      },
+      {
+        "token_type": "bookmarks",
+        "foreground_color": "#800080",
+      },
+      {
+        "token_type": "local_bookmarks",
+        "foreground_color": "#800080",
+      },
+      {
+        "token_type": "remote_bookmarks",
+        "foreground_color": "#800080",
+      },
+      {
+        "token_type": "tag",
+        "foreground_color": "#800080",
+      },
+      {
+        "token_type": "tags",
+        "foreground_color": "#800080",
+      },
+      {
+        "token_type": "git_ref",
+        "foreground_color": "#008000",
+      },
+      {
+        "token_type": "git_refs",
+        "foreground_color": "#008000",
+      },
+      {
+        "token_type": "git_head",
+        "foreground_color": "#008000",
+      },
+      {
+        "token_type": "divergent",
+        "foreground_color": "#800080",
+      },
+      {
+        "token_type": "conflict",
+        "foreground_color": "#800000",
+      },
+      {
+        "token_type": "empty",
+        "foreground_color": "#008000",
+      },
+      {
+        "token_type": "placeholder",
+        "foreground_color": "#d05000",
+      },
+      {
+        "token_type": "separator",
+        "foreground_color": "#808080",
+      },
+      {
+        "token_type": "elided",
+        "foreground_color": "#808080",
+      },
+      {
+        "token_type": "root",
+        "foreground_color": "#008000",
+      },
+      {
+        "token_type": "working_copy",
+        "font_weight": "bold",
+      },
+      {
+        "token_type": "snapshot",
+        "foreground_color": "#00af50",
+      },
+      {
+        "token_type": "name",
+        "foreground_color": "#cccc00",
+      },
+    ],
+  },
 }
