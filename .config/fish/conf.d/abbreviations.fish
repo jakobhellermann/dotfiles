@@ -1,7 +1,9 @@
 abbr --add jl 'jj git fetch'
 abbr --add jp 'jj git push'
+abbr --add ju jjui
 abbr --add jdr 'jj interdiff --from (jj_current_bookmark)@origin'
-abbr --add grbc 'git rebase --continue'
+
+abbr --add wo 'cd (jj workspace-path)'
 
 abbr --add dcup 'docker compose up -d'
 abbr --add dcd 'docker compose down'
