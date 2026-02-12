@@ -91,3 +91,31 @@ gitcommit = [
   '-r',
   '@',
 ]
+
+ui = ['util', 'exec', '--', 'jjui']
+
+# workspaces
+workspace-path = [
+  'util',
+  'exec',
+  '--',
+  'sh',
+  '-c',
+  'jj workspace root --name $(jj workspace list | sk --ansi | cut -d":" -f1)',
+]
+wo-add = [
+  'util',
+  'exec',
+  '--',
+  'sh',
+  '-c',
+  'set -eu; root=$(jj workspace root --name default 2>/dev/null || jj workspace root); jj workspace add --name $0 "$root.$0"',
+  # 'set -eu; root=$(jj workspace root --name default); e'
+]
+wo-delete = ['util', 'exec', '--', 'sh', '-c', '''
+  set -eu
+  ws_dir=$(jj workspace root --name "$0")
+  cd $ws_dir
+  jj workspace forget
+  rm -rf $ws_dir
+  ''', '']
