@@ -1,3 +1,5 @@
+abbr --add grhh 'git reset --hard'
+
 abbr --add jl 'jj git fetch'
 abbr --add jp 'jj git push'
 abbr --add ju jjui
