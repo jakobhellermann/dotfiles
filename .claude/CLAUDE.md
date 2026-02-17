@@ -1,5 +1,7 @@
 - use context7 mcp server to look up-to-date info, docs and versions
 - don't guess my intentions, ask for clarifications if necessary
-- before removing asserts, think about it or ask me
-- never commit to vcs or do destructive actions without checking in
+- before removing or changing asserts, think about whether the actual code should change instead or ask me
+- never commit to vcs or do destructive actions without asking first
 - comments always in english, even if i talk in german
+- prefer asserting full matches, i.e. assertEqual instead of assering not empty or contains
+- instead of piping long-running processes directly to grep, tee them to a file and grep afterwards
