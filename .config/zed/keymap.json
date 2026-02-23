@@ -1,5 +1,16 @@
 [
+  {
+    "context": "VimControl && !menu && extension==jjmagit",
+    "bindings": {
+      "enter": "editor::ToggleFold",
+      "shift-enter": "editor::ToggleFoldAll",
+      "tab": "editor::ToggleFold",
+      "shift-tab": "editor::ToggleFoldAll",
+    },
+  },
+
   // general
+
   {
     "bindings": {
       "ctrl-w ctrl-w": "pane::CloseActiveItem",
