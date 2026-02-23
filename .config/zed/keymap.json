@@ -228,4 +228,9 @@
       ", w n": "workspace::NewFileSplitHorizontal",
     },
   },
+  {
+    "bindings": {
+      ", l r": "editor::RestartLanguageServer",
+    },
+  },
 ]
