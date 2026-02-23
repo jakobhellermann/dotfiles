@@ -22,9 +22,6 @@ pager = "less -FRX --wordwrap"
 [git]
 private-commits = "private"
 
-[remotes.origin]
-auto-track-created-bookmarks = '*'
-
 [revsets]
 log-graph-prioritize = "coalesce(dev, @)"
 log = "log"
