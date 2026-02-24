@@ -34,7 +34,7 @@
     "enabled": true,
   },
   "edit_predictions": {
-    "provider": "none",
+    "provider": null,
   },
   "notification_panel": {
     "button": false,
@@ -90,6 +90,7 @@
   "languages": {
     // disable format on save
     "XML": { "format_on_save": "off" },
+    "Beancount": { "format_on_save": "off" },
 
     // specify lsp
     "Nix": {
