@@ -5,6 +5,7 @@ patterns = ["glob:'**/*.beancount'"]
 [fix.tools.beancount]
 command = ["bean-format", "-"]
 patterns = ["root-glob:'**/*.beancount'"]
+enabled = false
 
 [fix.tools.biome]
 command = ["bunx", "@biomejs/biome", "check", "--stdin-file-path=$path", "--write"]
