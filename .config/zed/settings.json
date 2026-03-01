@@ -91,6 +91,7 @@
     // disable format on save
     "XML": { "format_on_save": "off" },
     "Beancount": { "format_on_save": "off" },
+    "Java": { "format_on_save": "off" },
 
     // specify lsp
     "Nix": {
