@@ -5,3 +5,6 @@
 - comments always in english, even if i talk in german
 - prefer asserting full matches, i.e. assertEqual instead of assering not empty or contains
 - instead of piping long-running processes directly to grep, tee them to a file and grep afterwards
+
+- use double dollars to escape properties in spring kotlin: `@Value($$"${config.path.to.var}") private val foo: String`
+
