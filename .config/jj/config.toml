@@ -25,6 +25,7 @@ private-commits = "private"
 [revsets]
 log-graph-prioritize = "coalesce(dev, @)"
 log = "log"
+bookmark-advance-to = 'heads(@- | (@ ~description(exact:"")))'
 
 [revset-aliases]
 # utilities
@@ -33,6 +34,7 @@ empty = 'mutable() & empty() & description("") ~@'
 firstconflict = "latest(roots(conflicts()))"
 'siblings(x)' = "x-+ ~x"
 'siblings' = "siblings(@)"
+'desc:x' = 'description(regex:x)'
 
 # simpler to type sometimes
 me = "@"
