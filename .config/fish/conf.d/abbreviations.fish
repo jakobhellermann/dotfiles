@@ -1,4 +1,5 @@
 abbr --add grhh 'git reset --hard'
+abbr --add grbc 'git rebase --continue'
 
 abbr --add jl 'jj git fetch'
 abbr --add jp 'jj git push'
