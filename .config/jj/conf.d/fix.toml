@@ -3,9 +3,9 @@ command = ["beancount-sort"]
 patterns = ["glob:'**/*.beancount'"]
 
 [fix.tools.beancount]
-command = ["bean-format", "-"]
+command = ["bean-format", "-", "-c60"]
 patterns = ["root-glob:'**/*.beancount'"]
-enabled = false
+enabled = true
 
 [fix.tools.biome]
 command = ["bunx", "@biomejs/biome", "check", "--stdin-file-path=$path", "--write"]
