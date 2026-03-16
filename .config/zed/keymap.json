@@ -4,10 +4,10 @@
     "bindings": {
       "ctrl-w ctrl-w": "pane::CloseActiveItem",
       "ctrl-b": "workspace::ToggleLeftDock", // override vim keybind
-      "ctrl-f": "vim::Search",
+      "ctrl-f": "buffer_search::Deploy",
       "ctrl-q": null,
       "ctrl-shift-`": "terminal_panel::ToggleFocus",
-      "ctrl-shift-a": "command_palette::Toggle",
+      // "ctrl-shift-a": "command_palette::Toggle",
       "ctrl-shift-enter": "workspace::NewTerminal",
       "ctrl-shift-w": null,
       "ctrl-shift-ö": "terminal_panel::ToggleFocus",
@@ -16,8 +16,10 @@
       "f1": "command_palette::Toggle",
       "ctrl-w": "pane::CloseActiveItem",
       "ctrl-shift-b": "workspace::ToggleBottomDock",
+      "ctrl-alt-b": "workspace::ToggleRightDock",
     },
   },
+  // git
   {
     "context": "Editor",
     "bindings": {
@@ -47,6 +49,7 @@
     "bindings": {
       "ctrl-f4": "workspace::ToggleRightDock",
       "ctrl-shift-?": "workspace::ToggleRightDock",
+      // doesnt work due to precedence :(
       "ctrl-d": "workspace::ToggleRightDock",
     },
   },
@@ -54,12 +57,6 @@
     "context": "KeymapEditor",
     "bindings": {
       "ctrl-k ctrl-s": "zed::OpenKeymapFile",
-    },
-  },
-  {
-    "context": "AgentPanel",
-    "bindings": {
-      "ctrl-p": "file_finder::Toggle",
     },
   },
 
@@ -122,6 +119,9 @@
       "ctrl-o": null,
       "ctrl-a": "editor::SelectAll",
       "ctrl-y": "agent::Keep", // todo doesn't work
+      "ctrl-e": null,
+      // "pageup": "editor::HalfPageUp",
+      // "pagedown": "editor::HalfPageDown",
     },
   },
   {
@@ -231,6 +231,8 @@
   {
     "bindings": {
       ", l r": "editor::RestartLanguageServer",
+      ", l m": "lsp_tool::ToggleMenu",
+      ", l l": "dev::OpenLanguageServerLogs",
     },
   },
 ]
