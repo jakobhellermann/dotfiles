@@ -1,3 +1,5 @@
 window-width = 116
 window-height = 28
 keybind = shift+enter=text:\x1b\r
+window-decoration = none
+
