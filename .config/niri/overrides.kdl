@@ -1,0 +1,20 @@
+// https://yalter.github.io/niri/Configuration:-Window-Rules
+
+// Floating
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id=r#"zen$"# title="^Picture-in-Picture$"
+
+    match app-id="wev"
+
+    match app-id="float"
+
+    open-floating true
+}
+
+// Hide from capture
+window-rule {
+    match app-id="Bitwarden"
+
+    block-out-from "screen-capture"
+}
