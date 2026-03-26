@@ -73,6 +73,7 @@
     "**/.settings",
     "**/.venv",
     "**/.jj",
+    "**/__pycache__",
     "**/.idea",
   ],
 
