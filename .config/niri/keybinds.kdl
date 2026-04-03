@@ -15,7 +15,10 @@ binds {
     Mod+Return       { spawn "foot"; }
     Mod+Shift+Return { spawn "foot" "--app-id" "float"; }
 
-    Mod+D { spawn "fuzzel"; }
+    // Mod+D { spawn "fuzzel"; }
+    Super+Space    repeat=false { spawn "vicinae" "toggle"; }
+    Mod+Space    repeat=false { spawn "vicinae" "toggle"; }
+    Mod+D        repeat=false { spawn "vicinae" "toggle"; }
     Mod+B { spawn "zen-browser"; }
 
     Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
@@ -36,14 +39,14 @@ binds {
     Mod+Q hotkey-overlay-title=null repeat=false { close-window; }
 
     // Focus
-    Mod+Left    hotkey-overlay-title=null { focus-column-left; }
+    Mod+Left    hotkey-overlay-title=null { focus-column-or-monitor-left; }
     Mod+Down    hotkey-overlay-title=null { focus-window-or-workspace-down; }
     Mod+Up        hotkey-overlay-title=null { focus-window-or-workspace-up; }
-    Mod+Right    hotkey-overlay-title=null { focus-column-right; }
+    Mod+Right    hotkey-overlay-title=null { focus-column-or-monitor-right; }
     Mod+J        hotkey-overlay-title=null { focus-window-or-workspace-down; }
     Mod+K        hotkey-overlay-title=null { focus-window-or-workspace-up; }
-    Mod+H        hotkey-overlay-title=null { focus-column-left; }
-    Mod+L        hotkey-overlay-title=null { focus-column-right; }
+    Mod+H        hotkey-overlay-title=null { focus-column-or-monitor-left; }
+    Mod+L        hotkey-overlay-title=null { focus-column-or-monitor-right; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
@@ -107,8 +110,8 @@ binds {
     Mod+Shift+WheelScrollDown hotkey-overlay-title=null cooldown-ms=150 { move-column-to-workspace-down; }
     Mod+Shift+WheelScrollUp hotkey-overlay-title=null   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+WheelScrollRight    hotkey-overlay-title=null { focus-column-right; }
+    Mod+WheelScrollLeft        hotkey-overlay-title=null { focus-column-left; }
     Mod+Shift+WheelScrollRight { move-column-right; }
     Mod+Shift+WheelScrollLeft  { move-column-left; }
 
@@ -164,13 +167,13 @@ binds {
     // If the window is already in a column, they will expel it out.
     // Mod+BracketLeft  { consume-or-expel-window-left; }
     // Mod+BracketRight { consume-or-expel-window-right; }
-    Mod+odiaeresis  { consume-or-expel-window-left; }
+    Mod+odiaeresis { consume-or-expel-window-left; }
     Mod+adiaeresis { consume-or-expel-window-right; }
 
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
+    Mod+Comma hotkey-overlay-title="Consume right window to column"  { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    Mod+Period hotkey-overlay-title="Expel window to right" { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
     // Cycling through the presets in reverse order is also possible.

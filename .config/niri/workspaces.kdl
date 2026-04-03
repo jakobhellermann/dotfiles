@@ -1,0 +1,14 @@
+/-workspace "🗪" {
+    open-on-output "Eizo Nanao Corporation EV2316W 66094073"
+}
+/-workspace "󰖟" {
+    open-on-output "Eizo Nanao Corporation EV2316W 66094073"
+}
+/-workspace "🖉" {
+    open-on-output "Acer Technologies Acer Z271 T #ASNMSbWDrsrd"
+}
+
+/-window-rule {
+    match app-id="^discord$"
+    open-on-workspace "chat"
+}
