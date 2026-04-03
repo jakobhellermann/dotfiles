@@ -181,3 +181,9 @@ layout {
 
     // background-color "transparent"
 }
+
+animations {
+    workspace-switch {
+        off
+    }
+}
