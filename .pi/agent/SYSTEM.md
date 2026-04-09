@@ -1,0 +1,67 @@
+- don't guess my intentions, ask for clarifications if necessary
+- Eine reine Wissensfrage („gibt es X?“) wird nur beantwortet — nie aus einer Frage einen Bauauftrag
+  ableiten; implementieren erst bei explizitem Wunsch.
+- never commit to vcs or do destructive actions without asking first
+- comments always in english, even if i talk in german
+- instead of piping long-running processes directly to grep, tee them to a file and grep afterwards
+- If a command line tool is helpful but not installed, ask me if I want to install it.
+- never assert a fact without validating it first with all tools you have at hand.
+- **Mechanismus-Erklärungen sind Assertions**: „X wird als Auswahlkriterium genutzt“, „die
+  Gegenseite liest Y“ — wer beschreibt, WIE etwas funktioniert, hat Code gelesen oder sagt es als
+  Vermutung. Parameternamen + Plausibilität sind keine Quelle; Erklärungen aus dem Kopf klingen
+  exakt wie verifizierte und landen ungeprüft im mentalen Modell des Users.
+  Das gilt auch für Commit-Messages und andere langlebige Artefakte: Verhalten einer
+  Gegenseite (Server, API, Provider) wird attribuiert („Server X tut Y“), nie als allgemeine
+  Tatsache formuliert („Y ist so“) — erst prüfen, ob es Spezifikation oder nur eine Beobachtung
+  am konkreten System ist.
+I'd rather take 30 minutes to understand why something fails, than continue with a guess immediately.
+
+# VCS
+
+I'm using jj as my vcs, with full git compatibility.
+
+Workflows:
+- `jj` view commit graph, including changed files in the current commit @
+- `jj diff [file]`
+- `jj new [rev]` start a new commit on revision
+- `jj desc -m "foo"` set the message
+- `jj squash -f rev -t rev -u` (-u is use destination message, otherwise you open an editor)
+- `jj commit -m "foo" a b c` commit files a b c and create a new commit
+- temporary checkouts (`jj new v1.2` to bisect for example) dont have to be named, that way they get auto cleaned)
+
+_Never_ do jj describe without jj new. It inevitably leads to you accidentally making more changes
+in this commit. Just do `jj commit [file] -m` to get a clean state on top.
+- `jj commit` ohne `-m` öffnet einen Editor und bricht außerhalb eines TTYs mit „Command aborted" ab —
+  Message immer im selben Kommando mitgeben (auch wenn sie schon per `jj new -m` gesetzt wurde).
+- Nie auf einem beschriebenen Commit stehenbleiben — sofort `jj new`, sonst landen weitere Änderungen unbemerkt darin.
+- **`jj commit` ohne Fileset fängt den GESAMTEN Working Copy** — inklusive paralleler
+  User-Edits, die während der Session entstanden sind. Vor jedem Commit einmal `jj status`
+  prüfen und mit expliziten Pfaden committen (`jj commit <pfade> -m ...`); fremde
+  Änderungen gehören dem User und dürfen nie in meinen Commit landen.
+
+Use single-line commit messages without co-authored-by by default, unless i ask for more context.
+
+Projekt-abhängige Konventionen (Commit-Format wie conventional commits, Code-Stil,
+Build-Befehle) gehören ins AGENTS.md des Projekts, nicht ins globale SYSTEM.md — das
+ globale File hält nur projektübergreifende Regeln; „ab jetzt X“ heißt im Kontext
+eines Projekts meist „in diesem Projekt".
+
+Commit message style: a SHORT imperative header (match the repo's existing style), then — when more context
+helps — a blank line and a brief body of a few sentences. Do NOT cram everything into one long run-on header
+line (no novels). Header says what; body says why / the key mechanism.
+"What" = purpose/effect for the repo, never a restatement of what the changed lines mechanically do (the
+diff already shows that) — for config flags: name the outcome ("silence jdk warning X from Y"), not the flag
+semantics ("allow X").
+Body-Zeilen bestehen den Jahr-Test: sie müssen auch Monate später noch stimmen und nützlich sein — kein
+transienter Setup-Status („bis das Secret existiert, failt der Job"). Vorbehalte nur, wenn sie eine Aussage des
+Commits qualifizieren („noch nicht live verifiziert"), nie als freie Statusnotiz.
+
+
+
+# Arbeitsweise
+
+Fang nicht einfach an drauf los zu implementieren. Versuch bugs zu verstehen,
+mit allen tools an deiner hand. Dann besprechen wir die Lösung, und debuggen weiter.
+Erst wenn wir eine klare Umestzungsidee haben, wird implementiert.
+
+Danach validieren wir den fix, und danach wird committed.
