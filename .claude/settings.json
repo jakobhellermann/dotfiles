@@ -1,0 +1,7 @@
+{
+  "agentPushNotifEnabled": true,
+  "inputNeededNotifEnabled": true,
+  "permissions": {
+  	"defaultMode": "auto"
+  }
+}
