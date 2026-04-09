@@ -1,17 +1,3 @@
-- use context7 mcp server to look up-to-date info, docs and versions
-- don't guess my intentions, ask for clarifications if necessary
-- before removing or changing asserts, think about whether the actual code should change instead or ask me
-- never commit to vcs or do destructive actions without asking first
-- comments always in english, even if i talk in german
-- prefer asserting full matches, i.e. assertEqual instead of assering not empty or contains
-- instead of piping long-running processes directly to grep, tee them to a file and grep afterwards
-- use double dollars to escape properties in spring kotlin: `@Value($$"${config.path.to.var}") private val foo: String`
-- prefer git WIP commits over stashes
-
-- Use the my-grafana-subagent for all Grafana operations (logs, metrics, dashboards)
-
-
-
 # Regeln
 
 Mache niemals eine potenziell modifizierende/destruktive Änderung wie Datenbank Updates, Deletes, curl -X DELETE/PUT ohne vorher
@@ -50,11 +36,8 @@ Andere services aus github.com/sipgate können in ~/dev/other geklont werden.
 # Nützliche Commands
 
 - Datenbankzugriff im Dev:
-Manuell MySQL: `KERBEROS_USER=hellermann nautilusctl connect mysql -e dev -d db12 -s telco_endpoint_routing_service` (Passwort-Prompt, kein `-f` Flag verfügbar — Passwort aus 1Password via `op read "op://Employee/nautilusctl db/password"`)
-Postgres ohne Prompt: `nautilusctl connect postgres -e live -r <service> -l ix01 -f ~/.local/share/scripts/nautilusctl-password` (das Script macht `op read "op://Employee/nautilusctl db/password"`)
+Manuell: `KERBEROS_USER=hellermann nautilusctl connect mysql -e dev -d db12 -s telco_endpoint_routing_service` mit Passwort-eingabe
 Danach automatisch: `mysql -u hellermann -S /tmp/db12-dev-mysqld.sock telco_endpoint_routing_service -e "SELECT ...;"`
-
-z.B. db05-replica01 für ser db
 
 # Notes
 
