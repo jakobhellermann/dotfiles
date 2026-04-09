@@ -24,3 +24,6 @@ end
 # pnpm end
 
 direnv hook fish | source
+
+# Ensure nix packages have priority over system binaries
+fish_add_path --prepend --move ~/.nix-profile/bin

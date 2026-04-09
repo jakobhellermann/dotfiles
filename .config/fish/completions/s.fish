@@ -1,0 +1,1 @@
+/Users/sipgatejj/dev/claude-playground/s-completions.fish
