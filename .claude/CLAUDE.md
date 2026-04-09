@@ -8,3 +8,4 @@
 - use double dollars to escape properties in spring kotlin: `@Value($$"${config.path.to.var}") private val foo: String`
 - prefer git WIP commits over stashes
 
+- Use the my-grafana-subagent for all Grafana operations (logs, metrics, dashboards)
