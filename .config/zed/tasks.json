@@ -8,4 +8,10 @@
     "reveal_target": "center",
     "hide": "on_success",
   },
+  {
+    "label": "k9s",
+    "command": "k9s",
+    "reveal_target": "center",
+    "hide": "on_success",
+  },
 ]
