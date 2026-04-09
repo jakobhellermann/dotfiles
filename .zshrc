@@ -54,3 +54,4 @@ TRAPUSR1() { rehash; }
 true
 
 }
+source ~/.local/share/mill/completion/mill-completion.sh # MILL_SOURCE_COMPLETION_LINE

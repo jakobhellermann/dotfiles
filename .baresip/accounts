@@ -1,25 +1,32 @@
 # teamdev
-# SCS 7 <sip:1109964e7@proxy.dev.sipgate.de>;auth_pass=GnsM6nNcXxvb;audio_codecs=pcma
-# SCS 8 <sip:1109964e8@proxy.dev.sipgate.de>;auth_pass=1ZTcGDz3TJ6N;audio_codecs=pcma
-# Voiza 1 <sip:1109964e5@proxy.dev.sipgate.de>;auth_pass=M1tUjHaXjPmh;audio_codecs=pcma
-# NonITI <sip:1109964e9@proxy.dev.sipgate.de>;auth_pass=cj5pFbkxE8wV;audio_codecs=pcma
+# SCS 7 <sip:1109964e7@proxy.dev.sipgate.de>;auth_pass=GnsM6nNcXxvb;audio_codecs=pcma;regint=0
+# SCS 8 <sip:1109964e8@proxy.dev.sipgate.de>;auth_pass=1ZTcGDz3TJ6N;audio_codecs=pcma;regint=0
+# Voiza 1 <sip:1109964e5@proxy.dev.sipgate.de>;auth_pass=M1tUjHaXjPmh;audio_codecs=pcma;regint=0
+# NonITI <sip:1109964e9@proxy.dev.sipgate.de>;auth_pass=cj5pFbkxE8wV;audio_codecs=pcma;regint=0
 #
-# dev trunk david <sip:1125996t0@sipconnect.sipgate.de>;auth_user=1125996t0;auth_pass=TwcNSPLMkPkd;stunserver=stun:stun.sipgate.net;outbound=sip:sipconnect.dev.sipgate.de
+# dev trunk david <sip:1125996t0@sipconnect.sipgate.de>;auth_user=1125996t0;auth_pass=TwcNSPLMkPkd;stunserver=stun:stun.sipgate.net;outbound=sip:sipconnect.dev.sipgate.de;regint=0
 
-Voiza 1 neopbx <sip:1126226e1@proxy.dev.sipgate.de>;auth_pass=JNEiRNxiuXgv;audio_codecs=pcma
+# Voiza 1 neopbx <sip:1126226e1@dev.sipgate.de>;auth_pass=FnLq5XsTbDow;audio_codecs=pcma;regint=0
+Voiza 1 neopbx <sip:1126226e1@dev.sipgate.de>;auth_pass=FnLq5XsTbDow;audio_codecs=pcma
 
+# ai-playground-account 1127298 (dev)
+# Playground Voiza 1 <sip:1127298e1@proxy.dev.sipgate.de>;auth_pass=HmqRp3n3ctkw;audio_codecs=pcma;regint=0
+# Playground Voiza 2 <sip:1127298e2@sip.dev.sipgate.de;transport=tcp>;auth_pass=zEHgt5BsMCVK;audio_codecs=pcma;regint=0
+# Playground Voiza 3 <sip:1127298e3@proxy.dev.sipgate.de;transport=tcp>;auth_pass=nVtYuUbQy3mW;audio_codecs=pcma
+# Playground Trunk 1 <sip:1127298t0@sipconnect.sipgate.de;transport=tcp>;auth_user=1127298t0;auth_pass=gFA4ABNjafHE;stunserver=stun:stun.sipgate.net;outbound=sip:sipconnect.dev.sipgate.de;regint=0
+# Playground Trunk 2 <sip:1127298t1@sipconnect.sipgate.de;transport=tcp>;auth_user=1127298t1;auth_pass=5UtptLBzAG8o;stunserver=stun:stun.sipgate.net;outbound=sip:sipconnect.dev.sipgate.de;regint=0
 
 # teamdev2
 # 1123627e2
-# trunk <sip:1109964t0@sipconnect.dev.sipgate.de>;auth_pass=kDgkV3TQ3aJK;audio_codecs=pcma
+# trunk <sip:1109964t0@sipconnect.dev.sipgate.de>;auth_pass=kDgkV3TQ3aJK;audio_codecs=pcma;regint=0
 
 # zeitansage 01804100100
 
 # live
-# SCS Live <sip:3536797e5@sipgate.de>;auth_pass=ZBzjjpUsxqpe # 015678662900
-# Nonverified Live <sip:3782997e0@sipgate.de>;auth_pass=GNKSbaTfWN3b
-# Nonverified Live <sip:3782997e1@sipgate.de>;auth_pass=BNYYsBA3uHas
+# SCS Live <sip:3536797e5@sipgate.de>;auth_pass=ZBzjjpUsxqpe;regint=0 # 015678662900
+# Nonverified Live <sip:3782997e0@sipgate.de>;auth_pass=GNKSbaTfWN3b;regint=0
+# Nonverified Live <sip:3782997e1@sipgate.de>;auth_pass=BNYYsBA3uHas;regint=0
 
-# neopbx voip <sip:3880938e0@sipgate.de>;auth_pass=MuykvKF3EdDQ
+# neopbx voip <sip:3880938e0@sipgate.de>;auth_pass=MuykvKF3EdDQ;regint=0
 #
-# trunk 1 <sip:3880938t0@sipconnect.sipgate.de>;auth_pass=xwon12obnWmD
+# trunk 1 <sip:3880938t0@sipconnect.sipgate.de>;auth_pass=xwon12obnWmD;regint=0
