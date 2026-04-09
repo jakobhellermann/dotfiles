@@ -1,0 +1,4 @@
+[[--scope]]
+--when.repositories = ["~/dev"]
+[--scope.user]
+email = "hellermann@sipgate.de"
