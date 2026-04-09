@@ -34,3 +34,6 @@ elif [ -f /etc/bash_completion ]; then
 fi
 
 eval "$(direnv hook bash)"
+
+source /Users/sipgatejj/.sdkman/bin/sdkman-init.sh
+source ~/.local/share/mill/completion/mill-completion.sh # MILL_SOURCE_COMPLETION_LINE
