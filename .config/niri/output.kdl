@@ -8,3 +8,8 @@ output "DP-1" {
 	position x=0 y=0
 	mode "1920x1080"
 }
+
+// mac laptop
+output "eDP-1" {
+	position x=-1920 y=1080
+}
