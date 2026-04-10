@@ -12,3 +12,8 @@ output "DP-1" {
 	mode "1920x1080@143.981"
 	global-workspace-index-base 3
 }
+
+// mac laptop
+output "eDP-1" {
+    position x=-1920 y=1080
+}
