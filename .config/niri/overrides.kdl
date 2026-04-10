@@ -5,9 +5,9 @@ window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"zen$"# title="^Picture-in-Picture$"
 
-    match app-id="wev"
-
+	match app-id="com.saivert.pwvucontrol"
     match app-id="float"
+    match app-id="wev"
 
     open-floating true
 }
