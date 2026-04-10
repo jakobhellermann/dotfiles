@@ -4,6 +4,7 @@ gestures {
 	hot-corners {
 		top-left
 		top-right
+		bottom-right
 	}
 }
 

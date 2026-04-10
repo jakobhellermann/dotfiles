@@ -99,3 +99,7 @@ patterns = ["glob:'**/*.tf'"]
 command = ["yamlfmt", "-in"]
 patterns = ["glob:'**/*.yml'", "glob:'**/*.yaml'"]
 enabled = false
+
+[fix.tools.indent2tabs]
+command = ["sed", "s/    /\t/g"]
+patterns = ["glob:'**/*.kdl'"]
