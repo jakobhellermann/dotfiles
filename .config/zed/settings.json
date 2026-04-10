@@ -95,6 +95,8 @@
       "format_on_save": "off",
     },
     "Java": { "format_on_save": "off" },
+    "C": { "format_on_save": "off" },
+    "C++": { "format_on_save": "off" },
 
     // specify lsp
     "Nix": {
