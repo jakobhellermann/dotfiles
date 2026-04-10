@@ -9,7 +9,7 @@ max-new-file-size = "10MiB"
 
 [ui]
 default-command = "log"
-color = "always"
+# color = "always"
 conflict-marker-style = "git"
 movement.edit = true
 
