@@ -1,11 +1,10 @@
-fish_add_path ~/.local/bin
-fish_add_path ~/.cargo/bin
-fish_add_path ~/.nix-profile/bin
-fish_add_path ~/.local/npm/bin
-fish_add_path ~/.bun/bin
-fish_add_path ~/.dotnet/tools
+fish_add_path -g ~/.local/bin
+fish_add_path -g ~/.cargo/bin
+fish_add_path -g ~/.local/npm/bin
+fish_add_path -g ~/.bun/bin
+fish_add_path -g ~/.dotnet/tools
 
 set -gx GOPATH ~/.local/share/go
-fish_add_path $GOPATH/bin
+fish_add_path -g $GOPATH/bin
 
-test -d /usr/lib/qt6/bin && fish_add_path /usr/lib/qt6/bin
+test -d /usr/lib/qt6/bin && fish_add_path -g /usr/lib/qt6/bin
