@@ -1,0 +1,28 @@
+[[bindings]]
+action = "advance-bookmark"
+key = "t"
+scope = "revisions"
+
+[[bindings]]
+action = "new-insert-after"
+key = "N"
+scope = "revisions"
+
+[[actions]]
+name = "advance-bookmark"
+desc = "advance bookmark"
+lua = '''
+jj("bookmark", "advance", "--to", context.change_id())
+revisions.refresh()
+'''
+
+[[actions]]
+name = "new-insert-after"
+desc = "New after"
+lua = '''
+jj("new", "-A", context.change_id())
+revisions.refresh()
+
+local new_change_id = jj("log", "-r", "@", "-T", "change_id.shortest()", "--no-graph")
+revisions.navigate{to=new_change_id}
+'''
