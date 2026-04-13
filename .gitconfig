@@ -19,7 +19,7 @@
 	command = /bin/true
 
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.config/git/ignore
 	quotepath = false
 	autocrlf = input
 	editor = nvim
