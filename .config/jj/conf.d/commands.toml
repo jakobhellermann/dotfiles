@@ -5,16 +5,48 @@ ab = ['abandon']
 fixme = ['fix', '-s@', '--include-unchanged-files']
 
 # commands
-tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
+# tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
 swap = ['rebase', '-r', '@', '-B', '@-']
 swap- = ['rebase', '-r', '@-', '-B', '@--']
-'tug^' = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@--']
+tug = ['bookmark', 'advance']
+'tug^' = ['bookmark', 'advance', '--to', '@--']
 tug-2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1-"', '']
 tug-1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1-"', '']
 tug1 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+"', '']
 tug2 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1++"', '']
 tug3 = ['util', 'exec', 'sh', '--', '-c', 'jj bookmark move "$1" --to "$1+++"', '']
 git-checkout = ['util', 'exec', 'sh', '--', '-c', 'git checkout $(jj current-bookmark)']
+gitmerge = ['util', 'exec', 'sh', '--', '-c', '''
+set -euo pipefail
+
+if test $# -eq 0; then
+  echo "Usage: jj gitmerge <branch>"
+  exit 1
+fi
+source_branch="$1"
+
+bookmark=$(jj current-bookmark)
+if test -z "$bookmark"; then
+  echo "Error: no tracked bookmark found on @-"
+  exit 1
+fi
+
+echo "Merging $source_branch into $bookmark"
+
+# Export jj state to git and switch to the bookmark branch
+jj git export
+git checkout "$bookmark" || { echo "Error: git checkout failed"; exit 1; }
+
+# Merge the source branch into the bookmark branch
+if ! git merge --no-edit "$source_branch"; then
+  echo "Error: git merge $source_branch failed — resolve conflicts in git, then run 'jj git import'"
+  exit 1
+fi
+
+# Import the merge result back into jj
+jj git import
+echo "Successfully merged $source_branch into $bookmark"
+''', '']
 unconflict-bookmark-git = [
   'util',
   'exec',
