@@ -77,3 +77,10 @@ edit-args = [
 ]
 merge-args = ["-c", "echo gitpatch cannot be used as a merge tool"]
 diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
+
+[[--scope]]
+--when.environments = ["CLAUDECODE"]
+[--scope.ui]
+color = "never"
+diff-formatter = ":git"
+

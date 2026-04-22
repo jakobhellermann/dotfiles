@@ -2,7 +2,7 @@
 # shortcuts
 sq = ['squash']
 ab = ['abandon']
-fixme = ['fix', '-s@', '--include-unchanged-files']
+fixme = ['fix', '-s@']
 
 # commands
 # tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
