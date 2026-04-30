@@ -6,6 +6,9 @@ abbr --add jp 'jj git push'
 abbr --add ju jjui
 abbr --add jdr 'jj interdiff --from (jj_current_bookmark)@origin'
 
+abbr --add qjj jj
+abbr --add qjl 'jj git fetch'
+
 abbr --add wo 'cd (jj workspace-path)'
 
 abbr --add dcup 'docker compose up -d'
