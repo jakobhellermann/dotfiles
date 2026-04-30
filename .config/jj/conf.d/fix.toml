@@ -49,7 +49,7 @@ patterns = [
   # "glob:'**/*.jsonc'",
   "glob:'**/*.jsx'",
   "glob:'**/*.scss'",
-  "glob:'**/*.toml'",
+  # "glob:'**/*.toml'",
   "glob:'**/*.ts'",
   "glob:'**/*.tsx'",
   "glob:'**/*.vue'",
