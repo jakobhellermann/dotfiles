@@ -43,5 +43,8 @@ jj git remote rename origin upstream 2>/dev/null
 jj config get "revset-aliases.'trunk()'" | sed 's/origin/upstream/' | xargs jj config set --repo "revset-aliases.'trunk()'"
 
 jj git remote add origin "$fork"
+
+fork_slug=$(echo "$fork" | sed -r 's|git@github.com:||; s|\.git$||')
+gh repo set-default "$fork_slug"
 ''',
 ]
