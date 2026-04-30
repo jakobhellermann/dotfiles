@@ -13,9 +13,8 @@ binds {
     // Start applications
     Mod+T            { spawn "foot"; }
     Mod+Return       { spawn "foot"; }
-    Mod+Shift+Return { spawn "foot" "--app-id" "float"; }
+    Mod+Shift+Return { spawn "foot" "--app-id" "float-foot"; }
 
-    // Mod+D { spawn "fuzzel"; }
     Super+Space    repeat=false { spawn "vicinae" "toggle"; }
     Mod+Space    repeat=false { spawn "vicinae" "toggle"; }
     Mod+D        repeat=false { spawn "vicinae" "toggle"; }
@@ -110,8 +109,8 @@ binds {
     Mod+Shift+WheelScrollDown hotkey-overlay-title=null cooldown-ms=150 { move-column-to-workspace-down; }
     Mod+Shift+WheelScrollUp hotkey-overlay-title=null   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollRight    hotkey-overlay-title=null { focus-column-right; }
-    Mod+WheelScrollLeft        hotkey-overlay-title=null { focus-column-left; }
+    Mod+WheelScrollRight      { focus-column-right; }
+    Mod+WheelScrollLeft       { focus-column-left; }
     Mod+Shift+WheelScrollRight { move-column-right; }
     Mod+Shift+WheelScrollLeft  { move-column-left; }
 
@@ -146,15 +145,15 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
-    Mod+Shift+3 { move-column-to-workspace 3; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
-    Mod+Shift+6 { move-column-to-workspace 6; }
-    Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+1 { move-window-to-workspace 1; }
+    Mod+Shift+2 { move-window-to-workspace 2; }
+    Mod+Shift+3 { move-window-to-workspace 3; }
+    Mod+Shift+4 { move-window-to-workspace 4; }
+    Mod+Shift+5 { move-window-to-workspace 5; }
+    Mod+Shift+6 { move-window-to-workspace 6; }
+    Mod+Shift+7 { move-window-to-workspace 7; }
+    Mod+Shift+8 { move-window-to-workspace 8; }
+    Mod+Shift+9 { move-window-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -167,13 +166,13 @@ binds {
     // If the window is already in a column, they will expel it out.
     // Mod+BracketLeft  { consume-or-expel-window-left; }
     // Mod+BracketRight { consume-or-expel-window-right; }
-    Mod+odiaeresis { consume-or-expel-window-left; }
+    Mod+odiaeresis  { consume-or-expel-window-left; }
     Mod+adiaeresis { consume-or-expel-window-right; }
 
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma hotkey-overlay-title="Consume right window to column"  { consume-window-into-column; }
+    Mod+Comma  { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period hotkey-overlay-title="Expel window to right" { expel-window-from-column; }
+    Mod+Period { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
     // Cycling through the presets in reverse order is also possible.
@@ -200,7 +199,8 @@ binds {
 
     // Move the focused window between the floating and the tiling layout.
     Mod+Shift+Space    { toggle-window-floating; }
-    Mod+Ctrl+Shift+Space { switch-focus-between-floating-and-tiling; }
+    Mod+V            { toggle-window-floating; }
+    Mod+Shift+V        { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,

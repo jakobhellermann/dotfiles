@@ -9,7 +9,7 @@
     "sway/scratchpad",
     "niri/workspaces",
   ],
-  "modules-center": ["sway/window"],
+  "modules-center": ["sway/window", "niri/window"],
   "modules-right": ["tray", "clock"],
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>",

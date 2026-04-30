@@ -8,7 +8,7 @@ gestures {
 }
 
 input {
-    workspace-auto-back-and-forth // go to previous workspace on double press
+    // workspace-auto-back-and-forth
 
     keyboard {
         xkb {

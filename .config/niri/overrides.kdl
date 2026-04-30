@@ -5,9 +5,9 @@ window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"zen$"# title="^Picture-in-Picture$"
 
-    match app-id="com.saivert.pwvucontrol"
-    match app-id="float"
     match app-id="wev"
+
+    match app-id="float"
 
     open-floating true
 }
@@ -17,4 +17,22 @@ window-rule {
     match app-id="Bitwarden"
 
     block-out-from "screen-capture"
+}
+
+// Default to full-width
+window-rule {
+    match app-id="^Spotify$"
+    match app-id="^zen$"
+    match app-id="^discord$"
+    match app-id="^steam$"
+    match app-id="^dev.zed.Zed$"
+
+    default-column-width { proportion 1.0; }
+}
+
+// Default to full-screen
+window-rule {
+    match app-id="^factorio$"
+
+    // disable-mod-mouse-actions true
 }
