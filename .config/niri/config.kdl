@@ -12,5 +12,9 @@ screenshot-path "~/Pictures/Screenshots/%Y-%m-%d %H:%M:%S.png"
 spawn-at-startup "awww-daemon"
 spawn-at-startup "awww-daemon" "-n" "backdrop"
 spawn-at-startup "swayosd-server"
-spawn-at-startup "vicinae" "server"
-spawn-at-startup "waybar"
+spawn-at-startup "~/.local/share/scripts/launch-waybar"
+spawn-sh-at-startup "~/.local/share/scripts/niri_tile_to_n -n3 -x false -xc false"
+
+// TODO
+// - screenshot window
+// - toggle column for next window
