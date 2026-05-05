@@ -14,6 +14,7 @@ abbr --add wo 'cd (jj workspace-path)'
 abbr --add dcup 'docker compose up -d'
 abbr --add dcd 'docker compose down'
 abbr --add dcs 'docker compose ps'
+abbr --add ddstoprunning 'docker ps -q | xargs sudo docker stop'
 
 function last_history_item
     echo $history[1]
