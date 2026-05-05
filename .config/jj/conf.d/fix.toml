@@ -27,8 +27,8 @@ command = ["fish_indent"]
 patterns = ["glob:'**/*.fish'"]
 
 [fix.tools.gofmt]
-patterns = ["glob:'**/*.go'"]
 command = ["gofmt"]
+patterns = ["glob:'**/*.go'"]
 
 [fix.tools.ktfmt]
 command = ["ktfmt", "--kotlinlang-style", "--stdin-name=$path", "-"]
@@ -100,7 +100,17 @@ command = ["yamlfmt", "-in"]
 patterns = ["glob:'**/*.yml'", "glob:'**/*.yaml'"]
 enabled = false
 
-[fix.tools.spaces2tabs]
-command = ["sed", "s/    /\t/g"]
+[fix.tools.kdlfmt]
+command = ["kdlfmt", "format", "-", "--kdl-version=v1"]
 patterns = ["glob:'**/*.kdl'"]
 
+# [fix.tools.spaces2tabs]
+# command = ["sed", "s/    /\t/g"]
+# patterns = ["glob:'**/*.kdl'"]
+
+[fix.tools.jq-json]
+command = ["jq"]
+patterns = [
+  "glob:'**/*.json'",
+]
+enabled = false

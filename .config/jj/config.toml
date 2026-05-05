@@ -21,6 +21,7 @@ pager = "less -FRX --wordwrap"
 
 [git]
 private-commits = "private"
+fetch = ["*"]
 
 [revsets]
 log-graph-prioritize = "coalesce(dev, @)"
