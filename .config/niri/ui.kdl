@@ -38,7 +38,6 @@ window-rule {
     }
 }
 
-
 hotkey-overlay {
     skip-at-startup
 }

@@ -2,8 +2,8 @@
 
 // Floating
 window-rule {
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    match app-id=r#"zen$"# title="^Picture-in-Picture$"
+    match app-id="firefox$" title="^Picture-in-Picture$"
+    match app-id="zen$" title="^Picture-in-Picture$"
 
     match app-id="wev"
 
