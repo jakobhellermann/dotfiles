@@ -40,3 +40,5 @@ Test Results*.xml
 
 mutants.out
 mutants.out.old
+
+/rustc-ice*
