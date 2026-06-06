@@ -21,6 +21,7 @@ enabled = false
 [fix.tools.csharpier]
 command = ["dotnet", "csharpier", "--write-stdout"]
 patterns = ["root-glob:'**/*.cs'"]
+enabled = false
 
 [fix.tools.fish_indent]
 command = ["fish_indent"]
