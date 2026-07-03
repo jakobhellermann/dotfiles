@@ -80,10 +80,15 @@ makemut = [
 sq- = ['squash', '-f', '@-', '-t', '@--']
 squash- = ['squash', '-f', '@-', '-t', '@--']
 new- = ['new', '@-']
+new-- = ['new', '@--']
 show- = ['show', '-r', '@-']
+show-- = ['show', '-r', '@--']
 desc- = ['desc', '-r', '@-']
+desc-- = ['desc', '-r', '@--']
 diff- = ['new', '-r', '@-']
+diff-- = ['new', '-r', '@--']
 rebase- = ['rebase', '-r', '@-']
+rebase-- = ['rebase', '-r', '@--']
 
 rebaseme = ['rebase', '-r', '@']
 

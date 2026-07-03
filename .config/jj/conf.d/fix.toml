@@ -36,7 +36,7 @@ command = ["ktfmt", "--kotlinlang-style", "--stdin-name=$path", "-"]
 patterns = ["glob:'**/*.kt'"]
 
 [fix.tools.nixfmt]
-command = ["nixfmt"]
+command = ["nixfmt", "-"]
 patterns = ["glob:'**/*.nix'"]
 
 [fix.tools.oxfmt]
