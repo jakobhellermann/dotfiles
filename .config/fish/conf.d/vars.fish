@@ -3,3 +3,5 @@ set -g RUSTUP_TOOLCHAIN nightly
 
 set -xg FZF_DEFAULT_OPTS '--reverse --info hidden'
 set -xg ANDROID_HOME "$HOME/.android/sdk"
+
+set -g DOTNET_CLI_TELEMETRY_OPTOUT false
