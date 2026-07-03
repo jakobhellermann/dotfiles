@@ -4,41 +4,53 @@ function lnswap --description "Swap a symlink with its target"
         return 1
     end
 
-    set link $argv[1]
+    # Strip trailing slash from argument so test -L doesn't follow the link
+    set link (string trim --right --chars=/ -- $argv[1])
 
-    # Check if it's a symlink
     if not test -L $link
         echo "Error: $link is not a symlink"
         return 1
     end
 
-    # Get the target (resolved path)
-    set target (readlink $link)
+    # Absolute path of the symlink itself.
+    # Use realpath instead of `cd`, because fish command substitution shares
+    # the shell's cwd — `(cd … ; and pwd)` would leak and break later commands.
+    set link_dir (realpath -- (dirname $link))
+    set link_base (basename $link)
+    set link_abs "$link_dir/$link_base"
 
-    # Check if target exists
-    if not test -e $target
-        echo "Error: target $target does not exist"
+    # Resolve the symlink target. readlink returns the literal target (may be
+    # relative and may carry a trailing slash from the original ln invocation).
+    set target_raw (readlink $link)
+    set target_raw (string trim --right --chars=/ -- $target_raw)
+    if string match -qr '^/' -- $target_raw
+        set target_abs $target_raw
+    else
+        set target_abs (realpath -m -- "$link_dir/$target_raw")
+    end
+
+    if not test -e $target_abs
+        echo "Error: target $target_abs does not exist"
         return 1
     end
 
-    # Get absolute path of the link's location (without following the symlink)
-    set link_dir (cd (dirname $link); and pwd)
-    set link_abs "$link_dir/"(basename $link)
+    set temp_name "$link_abs.lnswap.tmp"
 
-    # Use a temporary name to avoid conflicts
-    set temp_name "$link.lnswap.tmp"
+    mv $link_abs $temp_name
+    or return 1
 
-    # Move the symlink to temp name
-    mv $link $temp_name
+    if not mv $target_abs $link_abs
+        mv $temp_name $link_abs
+        return 1
+    end
 
-    # Move target to link's original name
-    mv $target $link
+    if not ln -s $link_abs $target_abs
+        mv $link_abs $target_abs
+        mv $temp_name $link_abs
+        return 1
+    end
 
-    # Create new symlink from old target location pointing to the absolute path
-    ln -s $link_abs $target
-
-    # Remove temp
     rm $temp_name
 
-    echo "Swapped: $target -> $link_abs"
+    echo "Swapped: $target_abs -> $link_abs"
 end
