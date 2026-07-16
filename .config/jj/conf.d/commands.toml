@@ -2,6 +2,8 @@
 # shortcuts
 sq = ['squash']
 ab = ['abandon']
+ab- = ['abandon', '-r', '@-']
+ab-- = ['abandon', '-r', '@--']
 fixme = ['fix', '-s@']
 
 # commands
@@ -89,6 +91,8 @@ diff- = ['new', '-r', '@-']
 diff-- = ['new', '-r', '@--']
 rebase- = ['rebase', '-r', '@-']
 rebase-- = ['rebase', '-r', '@--']
+diffedit- = ['diffedit', '-r', '@-']
+diffedit-- = ['diffedit', '-r', '@--']
 
 rebaseme = ['rebase', '-r', '@']
 
