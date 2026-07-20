@@ -33,7 +33,7 @@ concat(
 separate(" ",
   format_short_operation_id(op.id()), op.time().end().ago(),
   clean_operation_message(op.description().first_line()),
-  op.tags(),
+  op.attributes(),
 ) ++ "\n"
 '''
 'clean_operation_message(msg)' = '''

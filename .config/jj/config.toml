@@ -80,7 +80,7 @@ merge-args = ["-c", "echo gitpatch cannot be used as a merge tool"]
 diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
 
 [[--scope]]
---when.environments = ["CLAUDECODE"]
+--when.environments = ["CLAUDECODE", "PI_CODING_AGENT"]
 --when.commands = ["squash"]
 [--scope.ui]
 editor = ["sh", "-c", '''
@@ -94,7 +94,7 @@ exit 1
 ''']
 
 [[--scope]]
---when.environments = ["CLAUDECODE"]
+--when.environments = ["CLAUDECODE", "PI_CODING_AGENT"]
 [--scope.ui]
 color = "never"
 diff-formatter = ":git"
