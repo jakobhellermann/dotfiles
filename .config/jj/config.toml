@@ -81,6 +81,20 @@ diff-args = ["-c", "echo gitpatch cannot be used as a diff tool"]
 
 [[--scope]]
 --when.environments = ["CLAUDECODE"]
+--when.commands = ["squash"]
+[--scope.ui]
+editor = ["sh", "-c", '''
+echo >&2
+echo "jj wants to open an editor for a commit message, but interactive editors are disabled under Claude Code." >&2
+echo "Re-run non-interactively with one of:" >&2
+echo "  -m <message>                     set the message explicitly" >&2
+echo "  -u / --use-destination-message   reuse the destination message (jj squash)" >&2
+echo >&2
+exit 1
+''']
+
+[[--scope]]
+--when.environments = ["CLAUDECODE"]
 [--scope.ui]
 color = "never"
 diff-formatter = ":git"
