@@ -1,5 +1,5 @@
 function craterepo --description 'alias cargofind cargo tree -i'
-    set response (curl -s "https://crates.io/api/v1/crates/$argv[1]")
+    set response (curl -s -H "User-Agent: craterepo (jakob.hellermann@protonmail.com)" "https://crates.io/api/v1/crates/$argv[1]")
     set errors (echo "$response" | jq '.errors[]?.detail' -r)
     set repo (echo "$response" | jq .crate.repository -r)
 
