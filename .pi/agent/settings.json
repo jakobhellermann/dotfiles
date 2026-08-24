@@ -1,0 +1,14 @@
+{
+  "lastChangelogVersion": "0.84.4",
+  "defaultThinkingLevel": "medium",
+  "hideThinkingBlock": true,
+  "packages": [
+    "npm:pi-notify",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:pi-mcp-adapter"
+  ],
+  "theme": "dark",
+  "defaultProvider": "sipgate",
+  "defaultModel": "zai-org/GLM-5.3-verda"
+}
