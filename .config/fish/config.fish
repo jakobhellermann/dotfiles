@@ -27,3 +27,6 @@ direnv hook fish | source
 
 # Ensure nix packages have priority over system binaries
 fish_add_path --prepend --move ~/.nix-profile/bin
+
+# Slack MCP OAuth callback port (pi-mcp-adapter defaults to 19876, Slack rejects that)
+set -gx MCP_OAUTH_CALLBACK_PORT 3118
