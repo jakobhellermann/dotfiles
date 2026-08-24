@@ -51,6 +51,7 @@ require("ui")
 -- AUTOCMDS
 utils.associate(".aliases", "sh")
 utils.associate("ModLog.txt", "modlog")
+utils.associate("*.props", "xml")
 utils.associate("*.log", "log")
 
 -- restore position
