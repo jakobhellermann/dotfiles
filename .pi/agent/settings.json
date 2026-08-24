@@ -3,18 +3,126 @@
   "defaultThinkingLevel": "medium",
   "hideThinkingBlock": true,
   "packages": [
+    "npm:@eko24ive/pi-ask",
+    {
+      "source": "npm:@juicesharp/rpiv-todo",
+      "extensions": [
+        "-index.ts"
+      ]
+    },
+    {
+      "source": "npm:pi-goal",
+      "skills": [
+        "-skills/pi-goal-writer/SKILL.md"
+      ],
+      "extensions": [
+        "-.pi/extensions/pi-goal/index.ts"
+      ]
+    },
     "npm:pi-notify",
-    "npm:@juicesharp/rpiv-todo",
-    "npm:pi-mcp-adapter",
-    "npm:pi-goal",
-    "npm:remote-pi",
-    "npm:@eko24ive/pi-ask"
+    {
+      "source": "npm:remote-pi",
+      "extensions": [
+        "-dist/index.js"
+      ]
+    },
+    {
+      "source": "~/.config/nono/packages/nolabs-ai/pi"
+    },
+    "npm:pi-subagents"
   ],
   "theme": "dark",
-  "defaultProvider": "sipgate",
-  "defaultModel": "sipgate-coding-pro",
+  "defaultProvider": "cliproxyapi",
+  "defaultModel": "claude-opus-5-5",
+  "subagents": {
+    "defaultModel": "cliproxyapi/claude-opus-5-5",
+    "agentOverrides": {
+      "worker": {
+        "model": "sipgate/sipgate-coding-pro",
+        "inheritGlobalContext": true,
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "contact_supervisor",
+          "mcp:datapls"
+        ]
+      },
+      "scout": {
+        "model": "sipgate/sipgate-coding-flash",
+        "inheritGlobalContext": true,
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "contact_supervisor",
+          "mcp:datapls"
+        ]
+      },
+      "delegate": {
+        "inheritGlobalContext": true,
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "contact_supervisor",
+          "mcp:datapls"
+        ]
+      },
+      "researcher": {
+        "inheritGlobalContext": true,
+        "tools": [
+          "read",
+          "write",
+          "contact_supervisor",
+          "mcp:exa"
+        ]
+      },
+      "reviewer": {
+        "inheritGlobalContext": true
+      },
+      "oracle": {
+        "inheritGlobalContext": true
+      },
+      "evidence-auditor": {
+        "inheritGlobalContext": true
+      }
+    }
+  },
   "quietStartup": true,
+  "compaction": {
+    "reserveTokens": 70000,
+    "keepRecentTokens": 20000,
+    "modelOverrides": {
+      "sipgate/sipgate-coding-flash": {
+        "reserveTokens": 70000
+      },
+      "sipgate/sipgate-coding-pro": {
+        "reserveTokens": 70000
+      },
+      "sipgate/sipgate-coding-vision": {
+        "reserveTokens": 85000
+      },
+      "Qwen/Qwen3.8-27B-GAIN-jochen": {
+        "reserveTokens": 70000
+      }
+    }
+  },
   "enableInstallTelemetry": false,
   "defaultProjectTrust": "always",
-  "treeFilterMode": "user-only"
+  "treeFilterMode": "user-only",
+  "extensions": [
+    "-builtin:llama.cpp"
+  ]
 }
