@@ -10,6 +10,7 @@ if status is-interactive
     type -q pay-respects && pay-respects fish --alias --nocnf | source
 
     complete -c './mvnw' -w mvn
+    complete -c './gradlew' -w gradle
 end
 
 # pnpm
