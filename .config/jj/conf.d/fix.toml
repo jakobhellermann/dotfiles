@@ -12,7 +12,7 @@ command = ["bunx", "@biomejs/biome", "check", "--stdin-file-path=$path", "--writ
 patterns = [
   "glob:'**/*.js'",
   "glob:'**/*.jsx'",
-  "glob:'**/*.ts'",
+  "glob:'**/*.ts' ~ glob:'**/*/routeTree.gen.ts'",
   "glob:'**/*.tsx'",
   # "glob:'**/*.json'",
 ]
@@ -43,7 +43,7 @@ patterns = ["glob:'**/*.nix'"]
 command = ["oxfmt", "--stdin-filepath=$path"]
 patterns = [
   "glob:'**/*.css'",
-  "glob:'**/*.html'",
+  "glob:'**/*.html' ~ 'THIRD-PARTY-NOTICES.html'",
   "glob:'**/*.js'",
   # "glob:'**/*.json' ~ glob:'**/package-lock.json'",
   "glob:'**/*.json5'",
@@ -51,7 +51,7 @@ patterns = [
   "glob:'**/*.jsx'",
   "glob:'**/*.scss'",
   # "glob:'**/*.toml'",
-  "glob:'**/*.ts'",
+  "glob:'**/*.ts' ~ glob:'**/*/routeTree.gen.ts'",
   "glob:'**/*.tsx'",
   "glob:'**/*.vue'",
 ]
