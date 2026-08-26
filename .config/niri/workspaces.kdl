@@ -12,3 +12,8 @@
     match app-id="^discord$"
     open-on-workspace "chat"
 }
+
+/-workspace "1" {
+    // open-on-output "Eizo Nanao Corporation EV2316W 66094073"
+    // open-on-output "Acer Technologies Acer Z271 T #ASNMSbWDrsrd"
+}

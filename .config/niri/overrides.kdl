@@ -5,11 +5,41 @@ window-rule {
     match app-id="firefox$" title="^Picture-in-Picture$"
     match app-id="zen$" title="^Picture-in-Picture$"
 
-    match app-id="wev"
+    match app-id="^libTAS$"
+    match title="^uniscan$"
+    match app-id="^logsnap-ui$"
+    match app-id="^Lumafly$"
 
     match app-id="float"
+    match title="^Edit Info-Template$"
+    match app-id="^org.freedesktop.impl.portal.desktop.kde$"
 
     open-floating true
+}
+
+window-rule {
+    match app-id="^hollow_knight.x86_64$"
+    match app-id="^Hollow Knight Silksong$"
+    open-fullscreen false
+
+    // open-floating true
+    open-focused false
+    open-on-output "HDMI-A-1"
+    default-column-width { proportion 1.0; }
+    default-window-height { proportion 1.0; }
+}
+window-rule {
+    match app-id="^Hollow Knight Silksong$"
+    open-focused false
+}
+
+
+window-rule {
+    match app-id="^livesplit-one-druid$"
+    match title="^LiveSplit One"
+    open-floating true
+    open-focused false
+    open-on-output "HDMI-A-1"
 }
 
 // Hide from capture
@@ -32,7 +62,19 @@ window-rule {
 
 // Default to full-screen
 window-rule {
-    match app-id="^factorio$"
+    match app-id="^Celeste$"
+    match app-id="^Hollow Knight Silksong$"
+    match app-id="^steam_app_"
 
-    // disable-mod-mouse-actions true
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id="^CelesteStudio.GTK$"
+    default-column-width { fixed 200; }
+}
+
+window-rule {
+    match app-id="^factorio$"
+    disable-mod-mouse-actions true
 }
