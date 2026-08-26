@@ -2,12 +2,37 @@
 
 default="$HOME"
 
-pid=$(swaymsg -t get_tree | jq '.. | select(.type?) | select(.type=="con") | select(.focused==true).pid')
-ppid=$(pgrep --newest --parent ${pid})
-path=$(readlink /proc/${ppid}/cwd || echo "$default")
+# Print the cwd of the shell running in the currently focused window, falling
+# back to $default whenever anything along the way is unavailable. Supports
+# both sway and niri.
 
-if test -d "$path"; then
-	echo "$path"
-else
-	echo "$default"
+emit() {
+	if test -d "$1"; then
+		echo "$1"
+	else
+		echo "$default"
+	fi
+	exit 0
+}
+
+# PID of the process owning the focused window, per compositor.
+focused_pid=""
+if test -n "$SWAYSOCK" && command -v swaymsg >/dev/null 2>&1; then
+	focused_pid=$(swaymsg -t get_tree 2>/dev/null \
+		| jq 'recurse | select(.type? == "con" and .focused == true).pid' 2>/dev/null)
+elif test -n "$NIRI_SOCKET" && command -v niri >/dev/null 2>&1; then
+	focused_pid=$(niri msg --json focused-window 2>/dev/null \
+		| jq '.pid' 2>/dev/null)
 fi
+
+# Bail out to the default if we couldn't resolve a usable PID.
+case "$focused_pid" in
+	'' | null | *[!0-9]*) emit "$default" ;;
+esac
+
+# The window's process is usually the terminal; the shell is its newest child.
+ppid=$(pgrep --newest --parent "$focused_pid" 2>/dev/null)
+test -n "$ppid" || ppid="$focused_pid"
+
+path=$(readlink "/proc/${ppid}/cwd" 2>/dev/null)
+emit "$path"

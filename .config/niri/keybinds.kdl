@@ -11,9 +11,9 @@ binds {
     Mod+Shift+ssharp hotkey-overlay-title=null { show-hotkey-overlay; }
 
     // Start applications
-    Mod+T            { spawn "foot"; }
-    Mod+Return       { spawn "foot"; }
-    Mod+Shift+Return { spawn "foot" "--app-id" "float-foot"; }
+    Mod+T            { spawn-sh "foot -D \"$(~/.local/share/scripts/focusedpwd)\""; }
+    Mod+Return       { spawn-sh "foot -D \"$(~/.local/share/scripts/focusedpwd)\""; }
+    Mod+Shift+Return { spawn-sh "foot --app-id float-foot -D \"$(~/.local/share/scripts/focusedpwd)\""; }
 
     Super+Space    repeat=false { spawn "vicinae" "toggle"; }
     Mod+Space    repeat=false { spawn "vicinae" "toggle"; }
