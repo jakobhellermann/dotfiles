@@ -201,3 +201,9 @@ if [ -n "$ZSH_VERSION" ]; then
 	zle -N _widget_find_matching
 	bindkey "^Q" _widget_find_matching
 fi
+
+alias srabex='rabex --steam-game silk'
+alias hrabex='rabex --steam-game hollow'
+
+alias slogsnap='LOGSNAP_STATE=/home/jakob/.local/state/logsnap/silksong logsnap'
+
