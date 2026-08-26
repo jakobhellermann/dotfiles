@@ -9,11 +9,17 @@ include "workspaces.kdl"
 
 screenshot-path "~/Pictures/Screenshots/%Y-%m-%d %H:%M:%S.png"
 
+debug {
+    // strict-new-window-focus-policy
+}
+
 spawn-at-startup "awww-daemon"
 spawn-at-startup "awww-daemon" "-n" "backdrop"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "~/.local/share/scripts/launch-waybar"
-spawn-sh-at-startup "~/.local/share/scripts/niri_tile_to_n -n3 -x false -xc false"
+// ScreenCast backend for OBS (wlroots screencopy); D-Bus activation alone proved unreliable
+spawn-at-startup "systemctl" "--user" "start" "xdg-desktop-portal-wlr.service"
+// spawn-sh-at-startup "~/.local/share/scripts/niri_tile_to_n -n3 -x false -xc false"
 
 // TODO
 // - screenshot window

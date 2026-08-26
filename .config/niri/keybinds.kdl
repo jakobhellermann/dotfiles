@@ -1,6 +1,6 @@
 input {
-    mod-key "Alt"
-    mod-key-nested "Super"
+    mod-key "Super"
+    // mod-key-nested "Super"
 }
 
 binds {
