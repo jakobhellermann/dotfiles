@@ -80,7 +80,18 @@ makemut = [
 
 # parent aliases
 sq- = ['squash', '-f', '@-', '-t', '@--']
+sq-- = ['squash', '-f', '@-', '-t', '@---']
 squash- = ['squash', '-f', '@-', '-t', '@--']
+squash-- = ['squash', '-f', '@-', '-t', '@---']
+
+# squash-all <file> [args...]: squash a file's changes from every commit that
+# touches it. First arg is the file; remaining args pass through (e.g. -t a).
+squash-all = ['util', 'exec', 'sh', '--', '-c', '''
+	set -eu
+	file="$1"
+	shift
+	jj squash "$file" -f "files(\"$file\")" "$@"
+''', '']
 new- = ['new', '@-']
 new-- = ['new', '@--']
 show- = ['show', '-r', '@-']

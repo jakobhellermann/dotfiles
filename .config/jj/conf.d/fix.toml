@@ -101,17 +101,24 @@ command = ["yamlfmt", "-in"]
 patterns = ["glob:'**/*.yml'", "glob:'**/*.yaml'"]
 enabled = false
 
-[fix.tools.kdlfmt]
-command = ["kdlfmt", "format", "-", "--kdl-version=v1"]
+[fix.tools.spaces2tabs]
+command = ["sed", "s/    /\t/g"]
+enabled = false
 patterns = ["glob:'**/*.kdl'"]
 
-# [fix.tools.spaces2tabs]
-# command = ["sed", "s/    /\t/g"]
-# patterns = ["glob:'**/*.kdl'"]
+[fix.tools.tabs2spaces]
+command = ["sed", "s/\t/    /g"]
+patterns = ["glob:'**/*.kdl'"]
+enabled = false
 
 [fix.tools.jq-json]
 command = ["jq"]
 patterns = [
   "glob:'**/*.json'",
 ]
+enabled = false
+
+[fix.tools.kdlfmt]
+command = ["kdlfmt", "format", "-", "--kdl-version=v1"]
+patterns = ["glob:'**/*.kdl'"]
 enabled = false
