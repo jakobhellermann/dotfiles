@@ -21,30 +21,39 @@ fork = [
   '''
 set -euo pipefail
 
-if ! gh auth status>/dev/null; then
-echo "Run gh auth login"
-exit
+if ! gh auth status >/dev/null; then
+echo "Run gh auth login" >&2
+exit 1
 fi
 
-if jj git remote list | grep 'upstream' >/dev/null; then
+if jj git remote list | grep -q 'upstream'; then
 echo "remote 'upstream' already exists"
-exit
+exit 0
 fi
 origin=$(jj git remote list | grep 'origin' | cut -d' ' -f2)
 
-fork=$(yes no | gh repo fork "$origin" 2>&1 || true)
-fork=$(echo "$fork" \
+# gh exits nonzero when the fork already exists
+if ! fork_out=$(yes no | gh repo fork "$origin" 2>&1); then
+echo "$fork_out" | grep -q 'already exists' || { echo "$fork_out" >&2; exit 1; }
+fi
+fork=$(echo "$fork_out" \
 | sed -r 's|https://github.com/|git@github.com:|' \
 | sed -r 's|(.*) already exists|git@github.com:\1|')
 
 echo "$fork"
 
-jj git remote rename origin upstream 2>/dev/null
+# jj refuses to rename a remote with a nonstandard fetch refspec
+# (e.g. a single-branch clone '+refs/heads/master:...')
+if ! git config --get remote.origin.fetch | grep -qF '+refs/heads/*:refs/remotes/origin/*'; then
+git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+fi
+
+jj git remote rename origin upstream
 jj config get "revset-aliases.'trunk()'" | sed 's/origin/upstream/' | xargs jj config set --repo "revset-aliases.'trunk()'"
 
 jj git remote add origin "$fork"
 
-fork_slug=$(echo "$fork" | sed -r 's|git@github.com:||; s|\.git$||')
-gh repo set-default "$fork_slug"
+upstream_slug=$(echo "$origin" | sed -r 's|https://github.com/||; s|git@github.com:||; s|\.git$||')
+gh repo set-default "$upstream_slug"
 ''',
 ]
