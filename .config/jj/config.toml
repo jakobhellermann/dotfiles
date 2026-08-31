@@ -13,7 +13,7 @@ default-command = "log"
 conflict-marker-style = "git"
 movement.edit = true
 
-editor = "nvim"
+editor = "notepad"
 diff-editor = "diffpatch"
 merge-editor = "vscode"
 pager = "less -FRX --wordwrap"
