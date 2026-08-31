@@ -268,9 +268,15 @@
     },
   },
   {
-    "context": "VimControl && !menu",
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-alt-o": "projects::OpenRecent",
+    },
+  },
+  {
+    "context": "Workspace",
     "unbind": {
-      "ctrl-t": "pane::GoToOlderTag"
-    }
-  }
+      "ctrl-r": "projects::OpenRecent",
+    },
+  },
 ]
