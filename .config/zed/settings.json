@@ -1,5 +1,10 @@
 {
   // theme
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
   "project_panel": {
     "dock": "left",
   },
@@ -9,7 +14,11 @@
   "git_panel": {
     "dock": "left",
   },
-  "theme": "VSCode Dark Modern",
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "VSCode Dark Modern"
+  },
   "ui_font_family": ".ZedSans", // default
   "buffer_font_family": "Recursive Mono Linear Static",
 

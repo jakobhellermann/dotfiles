@@ -22,14 +22,13 @@
 	excludesfile = ~/.config/git/ignore
 	quotepath = false
 	autocrlf = input
-	editor = nvim
+	# editor = nvim
 
 [interactive]
     singlekey = true
 
 [init]
 	defaultBranch = main
-
 [push]
 	autoSetupRemote = true
 
@@ -37,3 +36,14 @@
 	insteadOf = kde:
 [url "ssh://git@invent.kde.org/"]
 	pushInsteadOf = kde:
+
+[credential]
+	helper = wincred
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[safe]
+	directory = D:/@home/jakob
