@@ -1,7 +1,7 @@
 -- Format on save configuration
 local format_on_save = {
 	enabled = true,
-	disabled_filetypes = { 'xml' },
+	disabled_filetypes = { 'xml', 'toml' },
 }
 
 -- Toggle format on save globally
