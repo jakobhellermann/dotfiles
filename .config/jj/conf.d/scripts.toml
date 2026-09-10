@@ -32,9 +32,10 @@ exit 0
 fi
 origin=$(jj git remote list | grep 'origin' | cut -d' ' -f2)
 
-# gh exits nonzero when the fork already exists
+# gh exits 1 with just the fork URL when it creates a fork non-interactively,
+# and exits 0 with "<owner>/<repo> already exists" when the fork already exists
 if ! fork_out=$(yes no | gh repo fork "$origin" 2>&1); then
-echo "$fork_out" | grep -q 'already exists' || { echo "$fork_out" >&2; exit 1; }
+echo "$fork_out" | grep -qE 'already exists|https://github\.com/' || { echo "$fork_out" >&2; exit 1; }
 fi
 fork=$(echo "$fork_out" \
 | sed -r 's|https://github.com/|git@github.com:|' \
