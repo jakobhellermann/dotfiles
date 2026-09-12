@@ -4,7 +4,7 @@ param([string]$ApiKey)
 
 $ErrorActionPreference = "Stop"
 $ca = Join-Path $PSScriptRoot "sipgate-ca-root_2018-06-01.crt"
-$proxyHost = "coding-proxy.nautilus-tooling01.live.ix01.sipgate.net"
+$proxyHost = "coding.sipgate.ai"
 
 if (-not (Test-Path $ca)) { throw "CA not found: $ca" }
 
