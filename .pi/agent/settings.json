@@ -4,10 +4,11 @@
   "hideThinkingBlock": true,
   "packages": [
     "npm:pi-notify",
-    "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-mcp-adapter",
-    "npm:pi-goal"
+    "npm:pi-goal",
+    "npm:remote-pi",
+    "npm:@eko24ive/pi-ask"
   ],
   "theme": "dark",
   "defaultProvider": "sipgate",
