@@ -47,3 +47,5 @@ mutants.out.old
 /rustc-ice*
 
 /.todo
+
+/.pi
