@@ -73,12 +73,12 @@ function tieredCosts(mi: LitellmModelEntry["model_info"]): DiscoveredModel["cost
   return base;
 }
 
-// TODO: remove once coding-proxy advertises output caps that fit its own max_model_len
-// (litellm rejects max_completion_tokens > max_model_len; /model/info still says 1M/1048576, see Slack #sipgateos-support 2026-09-09)
+// Output budget: caps max_tokens so pi's clamp doesn't fill the whole context window
+// (token-estimate drift would tip requests over the limit). Keep below the proxy's max_model_len.
 const MODEL_OVERRIDES: Record<string, Partial<DiscoveredModel>> = {
-  "zai-org/GLM-5.3-verda": { maxTokens: 256000 },
-  "sipgate-coding-pro": { maxTokens: 256000 },
-  "zai-org/GLM-5.2-FP8": { maxTokens: 131072 },
+  "zai-org/GLM-5.3-verda": { maxTokens: 65000 },
+  "sipgate-coding-pro": { maxTokens: 65000 },
+  "zai-org/GLM-5.2-FP8": { maxTokens: 65000 },
 };
 
 function mapModel(entry: LitellmModelEntry): DiscoveredModel {
