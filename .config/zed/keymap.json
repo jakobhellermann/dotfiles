@@ -11,7 +11,6 @@
       "ctrl-shift-enter": "workspace::NewTerminal",
       "ctrl-shift-w": null,
       "ctrl-shift-ö": "terminal_panel::ToggleFocus",
-      "ctrl-t": "project_symbols::Toggle",
       "ctrl-ö": "terminal_panel::ToggleFocus",
       "f1": "command_palette::Toggle",
       "ctrl-w": "pane::CloseActiveItem",
@@ -40,8 +39,20 @@
     "bindings": {
       // "ctrl-alt-y": "workspace::ToggleAllDocks",
       "ctrl-alt-y": "agent::KeepAll",
+      "ctrl-shift-d": null,
+      "ctrl-tab": "pane::ActivateNextItem",
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
 
       "alt-t": ["task::Rerun", { "reevaluate_context": true }],
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-s": null,
+      "ctrl-t": null,
+      "f2": "terminal::RenameTerminal",
+      "ctrl-shift-t": "workspace::NewTerminal",
     },
   },
   {
@@ -50,7 +61,7 @@
       "ctrl-f4": "workspace::ToggleRightDock",
       "ctrl-shift-?": "workspace::ToggleRightDock",
       // doesnt work due to precedence :(
-      "ctrl-d": "workspace::ToggleRightDock",
+      "ctrl-shift-d": "workspace::ToggleRightDock",
     },
   },
   {
@@ -233,6 +244,27 @@
       ", l r": "editor::RestartLanguageServer",
       ", l m": "lsp_tool::ToggleMenu",
       ", l l": "dev::OpenLanguageServerLogs",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-shift-d": "pane::SplitRight",
+    },
+    "unbind": {
+      "ctrl-shift-5": "pane::SplitRight",
+    },
+  },
+  {
+    "context": "!Terminal",
+    "unbind": {
+      "ctrl-shift-c": "collab_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "CollabPanel",
+    "unbind": {
+      "shift-enter": "collab_panel::ToggleSelectedChannelFavorite",
     },
   },
 ]
