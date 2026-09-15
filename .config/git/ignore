@@ -1,51 +1,48 @@
-TODO.md
-todo.md
-playground
+# personal dirs
 /.personal
 /.scratch
+/.todo
+/playground
+/testfiles
+TODO.md
+todo.md
 
+# IDE
+*.sln.DotSettings.user
 /.idea
-/target_*
+Test Results*.xml
 
+# os
+.DS_Store
+
+# build
+/target_*
+/target_web
+
+# tooling
+.venv
+rustc-ice*
+mutants.out
+mutants.out.old
 pnpm-lock.yaml
 
-/target_web
+# vcs
 /.jj
 
-/testfiles
-.venv
-
-*.sln.DotSettings.user
-
+# perf
+*.buildprof
+*.mm_profdata
+*.xxd
+*trace*.json
+baseline
+dhat-heap.json
+flamegraph.svg
 perf.data
 perf.data.old
 profile.json
 profile.json.gz
-flamegraph.svg
-dhat-heap.json
-*.mm_profdata
-*trace*.json
 
-cmp-*.sh
-
-out.svg
-
-baseline
-
-*.xxd
-*.jar
-
-/.claude/settings.local.json
+# ai
 /.claude/scheduled_tasks.lock
-.DS_Store
-
-Test Results*.xml
-
-mutants.out
-mutants.out.old
-
-/rustc-ice*
-
-/.todo
-
+/.claude/settings.local.json
 /.pi
