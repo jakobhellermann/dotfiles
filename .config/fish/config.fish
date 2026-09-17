@@ -15,9 +15,7 @@ end
 
 # pnpm
 set -gx PNPM_HOME "$HOME/.cache/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $PATH
-end
+fish_add_path --move "$PNPM_HOME/bin" "$PNPM_HOME"
 # pnpm end
 
 direnv hook fish | source
