@@ -267,4 +267,10 @@
       "shift-enter": "collab_panel::ToggleSelectedChannelFavorite",
     },
   },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "ctrl-t": "pane::GoToOlderTag",
+    },
+  },
 ]
