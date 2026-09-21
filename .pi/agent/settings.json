@@ -3,12 +3,15 @@
   "defaultThinkingLevel": "medium",
   "hideThinkingBlock": true,
   "packages": [
-    "npm:pi-notify",
+    "npm:@eko24ive/pi-ask",
     "npm:@juicesharp/rpiv-todo",
-    "npm:pi-mcp-adapter",
     "npm:pi-goal",
+    "npm:pi-mcp-adapter",
+    "npm:pi-notify",
     "npm:remote-pi",
-    "npm:@eko24ive/pi-ask"
+    {
+      "source": "~/.config/nono/packages/nolabs-ai/pi"
+    }
   ],
   "theme": "dark",
   "defaultProvider": "sipgate",
