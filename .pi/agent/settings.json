@@ -12,5 +12,9 @@
   ],
   "theme": "dark",
   "defaultProvider": "sipgate",
-  "defaultModel": "sipgate-coding-pro"
+  "defaultModel": "sipgate-coding-pro",
+  "quietStartup": true,
+  "enableInstallTelemetry": false,
+  "defaultProjectTrust": "always",
+  "treeFilterMode": "user-only"
 }
