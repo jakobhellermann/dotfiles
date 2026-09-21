@@ -12,5 +12,5 @@
   ],
   "theme": "dark",
   "defaultProvider": "sipgate",
-  "defaultModel": "zai-org/GLM-5.3-verda"
+  "defaultModel": "sipgate-coding-pro"
 }
