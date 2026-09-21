@@ -5,3 +5,5 @@ set -xg FZF_DEFAULT_OPTS '--reverse --info hidden'
 set -xg ANDROID_HOME "$HOME/.android/sdk"
 
 set -xg DOTNET_CLI_TELEMETRY_OPTOUT false
+
+set -xg KOTLIN_CLI_NO_WELCOME_BANNER 1
