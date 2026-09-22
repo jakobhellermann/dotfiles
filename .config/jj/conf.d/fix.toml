@@ -109,7 +109,7 @@ patterns = ["glob:'**/*.kdl'"]
 [fix.tools.tabs2spaces]
 command = ["sed", "s/\t/    /g"]
 patterns = ["glob:'**/*.kdl'"]
-enabled = false
+enabled = true
 
 [fix.tools.jq-json]
 command = ["jq"]
