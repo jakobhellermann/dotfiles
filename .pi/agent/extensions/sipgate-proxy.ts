@@ -147,7 +147,7 @@ function mapModel(entry: LitellmModelEntry): ProviderModelConfig {
 
 async function fetchJson(path: string, signal: AbortSignal): Promise<unknown> {
   const response = await fetch(`${BASE_URL}${path}`, {
-    headers: { Authorization: `Bearer ${process.env.SIPGATE_CODING_PROXY_KEY ?? ""}` },
+    headers: { Authorization: `Bearer ${process.env.CODING_PROXY_LLM_KEY ?? ""}` },
     signal: AbortSignal.any([signal, AbortSignal.timeout(REQUEST_TIMEOUT_MS)]),
   });
   if (!response.ok) {
@@ -173,7 +173,7 @@ export default function (pi: ExtensionAPI) {
   pi.registerProvider(PROVIDER_ID, {
     name: "sipgate coding proxy",
     baseUrl: BASE_URL,
-    apiKey: "$SIPGATE_CODING_PROXY_KEY",
+    apiKey: "$CODING_PROXY_LLM_KEY",
     api: "openai-completions",
     models: [],
     refreshModels: async (context) => {
@@ -187,7 +187,7 @@ export default function (pi: ExtensionAPI) {
         !context.allowNetwork &&
         (storedModels.length > 0 ||
           process.env.PI_OFFLINE !== undefined ||
-          !process.env.SIPGATE_CODING_PROXY_KEY)
+          !process.env.CODING_PROXY_LLM_KEY)
       ) {
         return storedModels;
       }
