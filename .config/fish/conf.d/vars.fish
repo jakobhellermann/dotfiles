@@ -4,6 +4,6 @@ set -g RUSTUP_TOOLCHAIN nightly
 set -xg FZF_DEFAULT_OPTS '--reverse --info hidden'
 set -xg ANDROID_HOME "$HOME/.android/sdk"
 
-set -xg DOTNET_CLI_TELEMETRY_OPTOUT false
+set -xg DOTNET_CLI_TELEMETRY_OPTOUT true
 
 set -xg KOTLIN_CLI_NO_WELCOME_BANNER 1
