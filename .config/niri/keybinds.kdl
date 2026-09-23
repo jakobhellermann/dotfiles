@@ -18,7 +18,7 @@ binds {
     // Super+Space    repeat=false { spawn "vicinae" "toggle"; }
     // Mod+Space    repeat=false { spawn "vicinae" "toggle"; }
     Mod+D        repeat=false { spawn "vicinae" "toggle"; }
-    Mod+B { spawn "zen-browser"; }
+    Mod+B { spawn "zen"; }
 
     Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
 
