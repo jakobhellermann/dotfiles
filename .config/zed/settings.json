@@ -3,7 +3,7 @@
   "vim": {
     "use_system_clipboard": "on_yank",
   },
-  "diff_view_style": "unified",
+  "diff_view_style": "split",
   "theme": "VSCode Dark Modern",
   "ui_font_family": ".ZedSans", // default
   "buffer_font_family": "Recursive Mono Linear Static",
