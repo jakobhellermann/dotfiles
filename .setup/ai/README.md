@@ -26,10 +26,8 @@ The `sipgate` provider is NOT a static models.json — it is registered by
   re-runs the discovery manually
 - works offline from the cached snapshot (no network at pi startup)
 
-Linux still runs the OLD setup (static models.json with
-coding-proxy.nautilus-tooling01.live.ix01.sipgate.net as baseUrl) — it has no
-hosts entry for coding.sipgate.ai. Migrating it to the extension means:
-hosts entry + tunnel service target → coding.sipgate.ai, remove models.json.
+Linux uses the extension as well: hosts entry + user tunnel service point at
+coding.sipgate.ai, no static models.json.
 
 ## windows (one-time, elevated powershell)
 
@@ -57,22 +55,6 @@ uses `%USERPROFILE%\.ssh\id_ed25519` (default identity), authorized in the
 mac's `~/.ssh/authorized_keys`; the mac's host key is accepted once on first
 connect.
 
-## linux: linux pulls the tunnel (one-time, on the linux machine)
-
-```
-linux (pi/curl) -> 127.0.0.1:443 -> ssh -L -> mac (sshd) -> OpenVPN -> coding-proxy
-```
-
-No sshd on the linux machine; a root systemd service binds 443, autostarts at
-boot and reconnects when the mac is back:
-
-```sh
-./setup-coding-proxy-linux.sh [sk-...]   # hosts entry, CA, env vars, service
-sudo ssh-copy-id -i /root/.ssh/id_ed25519_mac_forward.pub sipgatejj@100.88.82.118
-journalctl -u coding-proxy-tunnel -f     # tunnel logs
-```
-
-`.pi` syncs via the dotfiles repo, same as windows.
 
 ## mac (gateway)
 
@@ -84,8 +66,6 @@ Only works while the mac is on and connected to the VPN.
 
 - `curl` on windows needs `--ssl-no-revoke` (the internal CA's CRL/OCSP is
   unreachable from outside); linux curl and node/pi do no revocation checking
-- models refresh: `/sipgate-refresh` in pi (extension machines); on linux
-  (static models.json) run `update-sipgate-models` (needs
-  `SIPGATE_CODING_PROXY_KEY`)
+- models refresh: `/sipgate-refresh` in pi (extension machines)
 - the proxy serves both names, old and new, with certs from the same internal
   CA chain; the old name (coding-proxy.nautilus-tooling01...) keeps working
