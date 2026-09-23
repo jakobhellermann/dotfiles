@@ -6,13 +6,16 @@ window-rule {
     match app-id="zen$" title="^Picture-in-Picture$"
 
     match app-id="^libTAS$"
-    match title="^uniscan$"
     match app-id="^logsnap-ui$"
     match app-id="^Lumafly$"
 
     match app-id="float"
-    match title="^Edit Info-Template$"
     match app-id="^org.freedesktop.impl.portal.desktop.kde$"
+
+    match title="^uniscan$"
+    match title="^Edit Info-Template$"
+    match title="^Welcome to IntelliJ IDEA$"
+    match title="^Welcome to JetBrains"
 
     open-floating true
 }
