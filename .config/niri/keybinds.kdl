@@ -15,8 +15,8 @@ binds {
     Mod+Return       { spawn-sh "foot -D \"$(~/.local/share/scripts/focusedpwd)\""; }
     Mod+Shift+Return { spawn-sh "foot --app-id float-foot -D \"$(~/.local/share/scripts/focusedpwd)\""; }
 
-    Super+Space    repeat=false { spawn "vicinae" "toggle"; }
-    Mod+Space    repeat=false { spawn "vicinae" "toggle"; }
+    // Super+Space    repeat=false { spawn "vicinae" "toggle"; }
+    // Mod+Space    repeat=false { spawn "vicinae" "toggle"; }
     Mod+D        repeat=false { spawn "vicinae" "toggle"; }
     Mod+B { spawn "zen-browser"; }
 

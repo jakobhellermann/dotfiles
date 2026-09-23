@@ -1,0 +1,5 @@
+[dock]
+enabled = true
+pinned = [ "firefox", "spotify", "foot" ]
+reserve_space = false
+smart_auto_hide = true

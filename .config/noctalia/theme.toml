@@ -1,0 +1,10 @@
+[theme]
+source = "builtin"
+builtin = "Gruvbox"
+mode = "dark"
+
+[backdrop]
+enabled = true
+
+[shell]
+font_family = "Inter"

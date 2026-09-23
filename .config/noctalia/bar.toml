@@ -1,0 +1,25 @@
+[bar.default]
+background_opacity = 0.5
+
+[widget.media]
+album_art_only = true
+hide_when_no_media = true
+
+[widget.network]
+show_label = false
+vpn_status = "hidden"
+
+[widget.brightness]
+show_label = false
+
+[widget.control-center]
+enabled = false
+
+[widget.volume]
+show_label = false
+
+[widget.clock.actions]
+left = "panel-toggle control-center notifications"
+
+[widget.tray]
+hidden = [ "slack" ]
