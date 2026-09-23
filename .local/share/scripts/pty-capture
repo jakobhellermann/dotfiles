@@ -1,0 +1,29 @@
+#!/bin/sh
+# pty-capture <outfile> <command...>: run COMMAND in a pty, capture output to FILE.
+# The child sees a tty, so tools colorize as if run interactively.
+
+if [ $# -lt 2 ]; then
+    echo "Usage: pty-capture <outfile> <command...>" >&2
+    exit 2
+fi
+
+outfile=$1
+shift
+
+# build a POSIX-quoted command string for sh -c
+cmd=
+for arg in "$@"; do
+    cmd="$cmd '"
+    while :; do
+        case $arg in
+            *\'*) cmd="$cmd${arg%%\'*}'\\''"; arg=${arg#*\'} ;;
+            *)    cmd="$cmd$arg"; break ;;
+        esac
+    done
+    cmd="$cmd'"
+done
+
+SHELL=/bin/sh script -qec "$cmd" /dev/null >"$outfile"
+status=$?
+sed -i 's/\r$//' "$outfile"
+exit $status
