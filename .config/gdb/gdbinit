@@ -1,0 +1,14 @@
+handle SIG34 nostop noprint pass noignore
+handle SIGXFSZ nostop noprint pass noignore
+handle SIGPWR nostop noprint pass noignore
+handle SIGXCPU nostop noprint pass noignore
+
+set pagination off
+set history save on
+set history filename ~/.gdb_history
+
+set auto-load local-gdbinit on
+set auto-load safe-path /
+add-auto-load-safe-path /home/jakob/dev/contrib/libTAS-cmake/.gdbinit
+
+set debuginfod enabled on
