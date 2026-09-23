@@ -1,0 +1,155 @@
+#!/usr/bin/env fish
+
+switch $argv[1]
+    case update-from-slack
+        paste | rg '(.*): (https://.*)' --replace '$1,$2' -o >services.csv
+    case for-each
+        set -l cmd $argv[2..-1]
+        if test (count $cmd) -eq 0
+            echo "Usage: maintenance for-each <command...>"
+            return 1
+        end
+        set -l base_dir (dirname (status filename))
+        for line in (cat $base_dir/services.csv)
+            set -l name (string split ',' $line)[1]
+            set -l dir $base_dir/bauhaus/$name
+            if test -d $dir
+                echo "==> $name"
+                pushd $dir
+                eval $cmd
+                or begin
+                    popd
+                    return 1
+                end
+                popd
+            else
+                echo "$name not found at $dir"
+                return 1
+            end
+            echo
+        end
+    case for-each-parallel
+        set -l cmd $argv[2..-1]
+        if test (count $cmd) -eq 0
+            echo "Usage: maintenance for-each-parallel <command...>"
+            return 1
+        end
+        set -l base_dir (dirname (status filename))
+        set -l tmpdir (mktemp -d)
+        set -l names
+        set -l dirs
+        set -l outs
+        set -l statuses
+        for line in (cat $base_dir/services.csv)
+            set -l name (string split ',' $line)[1]
+            set -a names $name
+            set -a dirs $base_dir/bauhaus/$name
+            set -a outs $tmpdir/(count $names).out
+        end
+        set -l fifo $tmpdir/events
+        mkfifo $fifo
+        set -l rc 0
+        set -l expected 0
+        for i in (seq (count $names))
+            set -l dir $dirs[$i]
+            set -l out $outs[$i]
+            if test -d $dir
+                fish -c "cd $dir; $cmd; set -l s \$status; echo $i:\$s >$fifo; exit \$s" >$out 2>&1 &
+                set expected (math $expected + 1)
+            else
+                echo "$names[$i] not found at $dir" >$out
+                echo "==> $names[$i]"
+                cat $outs[$i]
+                echo
+                set rc 1
+            end
+        end
+        set -l received 0
+        fish -c "exec sleep 86400 >$fifo" &
+        set -l keeper $last_pid
+        begin
+            while test $received -lt $expected
+                read -l line
+                or break
+                set -l parts (string split ':' $line)
+                set -l i $parts[1]
+                test "$parts[2]" != 0; and set rc 1
+                echo "==> $names[$i]"
+                cat $outs[$i]
+                echo
+                set received (math $received + 1)
+            end
+        end <$fifo
+        kill $keeper 2>/dev/null
+        rm -rf $tmpdir
+        return $rc
+    case check
+        set -l base_dir (dirname (status filename))
+        set -l csv_repos
+        for line in (cat $base_dir/services.csv)
+            set -l name (string split ',' $line)[1]
+            if test -n "$name"
+                set -a csv_repos $name
+            end
+        end
+
+        set -l gh_repos (gh api --method GET search/code \
+            -f q='org:sipgate "owner: bauhaus" filename:nautilus.yaml' \
+            -f per_page=100 \
+            --jq '.items[].repository.name' | sort -u)
+
+        set -l only_csv
+        for repo in $csv_repos
+            if not contains $repo $gh_repos
+                set -a only_csv $repo
+            end
+        end
+
+        set -l only_gh
+        for repo in $gh_repos
+            if not contains $repo $csv_repos
+                set -a only_gh $repo
+            end
+        end
+
+        if test (count $only_csv) -gt 0
+            echo "Only in services.csv (no nautilus.yaml with owner: bauhaus):"
+            for repo in $only_csv
+                echo "  $repo"
+            end
+            echo
+        end
+
+        if test (count $only_gh) -gt 0
+            echo "Only in GitHub search (missing from services.csv):"
+            for repo in $only_gh
+                echo "  $repo"
+            end
+            echo
+        end
+
+        if test (count $only_csv) -eq 0 -a (count $only_gh) -eq 0
+            echo "services.csv and GitHub search are in sync."
+        end
+
+        set -l missing_local
+        for repo in $csv_repos
+            if not test -d $base_dir/bauhaus/$repo
+                set -a missing_local $repo
+            end
+        end
+
+        if test (count $missing_local) -gt 0
+            echo "Cloning (in services.csv but not under bauhaus/):"
+            for repo in $missing_local
+                echo "  $repo"
+                jj git clone --colocate git@github.com:sipgate/$repo.git $base_dir/bauhaus/$repo
+            end
+        end
+
+    case ''
+        echo "maintenance [update-from-slack | for-each | for-each-parallel | check]"
+    case '*'
+        echo "Unknown command: $argv[1]"
+        return 1
+end
