@@ -1,5 +1,13 @@
 abbr -a fish-reload-config 'source ~/.config/fish/**/*.fish'
 
+if status is-interactive
+    set fish_key_bindings fish_hybrid_key_bindings
+    set fish_cursor_unknown line
+    set fish_cursor_normal block
+    set fish_cursor_default block
+    set fish_greeting
+end
+
 bind -M insert \e\[A history-prefix-search-backward
 bind -M insert \e\[B history-prefix-search-forward
 

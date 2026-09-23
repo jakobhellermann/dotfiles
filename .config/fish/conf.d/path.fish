@@ -10,3 +10,6 @@ set -gx GOPATH ~/.local/share/go
 fish_add_path -g $GOPATH/bin
 
 test -d /usr/lib/qt6/bin && fish_add_path -g /usr/lib/qt6/bin
+
+# Ensure nix packages have priority over system binaries
+fish_add_path --prepend --move ~/.nix-profile/bin

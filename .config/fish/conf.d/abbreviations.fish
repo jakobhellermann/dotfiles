@@ -20,3 +20,5 @@ function last_history_item
     echo $history[1]
 end
 abbr -a !! --position anywhere --function last_history_item
+
+status is-interactive; and type -q pay-respects; and pay-respects fish --alias --nocnf | source

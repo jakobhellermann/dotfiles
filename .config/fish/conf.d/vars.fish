@@ -1,6 +1,8 @@
 set -g EDITOR nvim
 set -g RUSTUP_TOOLCHAIN nightly
 
+set -gx PNPM_HOME "$HOME/.cache/pnpm"
+
 set -xg FZF_DEFAULT_OPTS '--reverse --info hidden'
 set -xg ANDROID_HOME "$HOME/.android/sdk"
 
