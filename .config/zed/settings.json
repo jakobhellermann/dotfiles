@@ -1,5 +1,8 @@
 {
   // theme
+  "vim": {
+    "use_system_clipboard": "on_yank",
+  },
   "diff_view_style": "unified",
   "theme": "VSCode Dark Modern",
   "ui_font_family": ".ZedSans", // default
