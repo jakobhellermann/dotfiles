@@ -8,6 +8,7 @@ window-rule {
     match app-id="^libTAS$"
     match app-id="^logsnap-ui$"
     match app-id="^Lumafly$"
+    match app-id="^dev-ambershadow-cogfly-Cogfly$"
 
     match app-id="float"
     match app-id="^org.freedesktop.impl.portal.desktop.kde$"
