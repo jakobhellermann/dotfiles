@@ -8,7 +8,7 @@ layer-rule {
     match namespace="^launcher$"
 }
 window-rule {
-    match app-id="^foot$"
+    match app-id="^foot"
     match app-id="^dev.zed.Zed$"
 
     background-effect {
