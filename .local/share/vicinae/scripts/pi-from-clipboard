@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# @vicinae.schemaVersion 1
+# @vicinae.title Pi from Clipboard
+# @vicinae.mode silent
+
+# Mod+P: Skill-Auswahl -> Anfrage (Clipboard / getippter Text / none) -> pi-Session im Terminal.
+# Skills mit `vicinae-discoverable: true` im SKILL.md-Frontmatter erscheinen in der Auswahl.
+# In beiden dmenus: freier Text + Shift+Enter wird direkt als Anfrage übernommen.
+set -euo pipefail
+
+WORKDIR="$HOME"
+SKILLS_DIR="$HOME/.config/ai-shared/skills"
+
+first_line=""
+clipboard="$(wl-paste --no-newline 2>/dev/null || true)"
+test -z "$clipboard" || first_line="$(head -n1 <<<"$clipboard" | cut -c1-60)"
+
+names=("Kein Skill")
+for skill_dir in "$SKILLS_DIR"/*/; do
+	skill_file="$skill_dir/SKILL.md"
+	test -f "$skill_file" || continue
+	frontmatter="$(sed -n '2,/^---$/p' "$skill_file")"
+	grep -q '^vicinae-discoverable: *true' <<<"$frontmatter" || continue
+	name="$(sed -n 's/^name:[[:space:]]*//p' <<<"$frontmatter" | head -1)"
+	test -n "$name" || name="$(basename "$skill_dir")"
+	names+=("$name")
+done
+
+# Escape schließt das Fenster, der vicinae-Prozess haengt dann aber: timeout raeumt auf.
+DMENU="timeout 120 vicinae dmenu"
+
+selection="$(printf '%s\n' "${names[@]}" | $DMENU -f data --placeholder "Skill wählen (oder Text tippen + Shift+Enter)")" || exit 0
+
+prompt=""
+if printf '%s\n' "${names[@]}" | grep -Fxq "$selection"; then
+	skill="$selection"
+	if test -n "$clipboard"; then
+		choice="$(printf 'None\n%s\n' "$first_line" | $DMENU -f data --placeholder "Anfrage übernehmen? (oder eigene tippen + Shift+Enter)")" || exit 0
+		if test "$choice" = "None"; then
+			prompt=""
+		elif test "$choice" != "$first_line"; then
+			prompt="$choice"
+		else
+			prompt="$clipboard"
+		fi
+	fi
+else
+	prompt="$selection"
+fi
+
+message="$prompt"
+test "${skill:-}" != "Kein Skill" && test -n "${skill:-}" && message="/skill:$skill $message"
+
+name="$(head -n1 <<<"$prompt" | cut -c1-60)"
+if test -n "${skill:-}" && test "$skill" != "Kein Skill"; then
+	test -n "$name" || name="$skill"
+fi
+
+pi_args=(pi)
+test -n "$name" && pi_args+=(-n "$name")
+test -n "$message" && pi_args+=(-- "$message")
+
+exec foot -D "$WORKDIR" -e "${pi_args[@]}"
