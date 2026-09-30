@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# sgimp <masterSipId> [webuser-email]
+# sgimp <webuser-email>
+# sgimp --list <search-string>
+# Opens a fresh firefox instance logged into app.dev.sipgate.com as a webuser
+# of the given dev test account, via keycloak impersonation magic-link
+# (same mechanism as the helpdesk "Login" button, but without its realm logout).
+
+set -euo pipefail
+
+KC_IDENTITY="https://identity.dev.sipgate.net"
+KC_HOST="login.dev.sipgate.com"
+KC_USER="helpdesk"
+KC_PASS="pTRDTQGGfoN1GAbqOFuhi32TnN5u3znJ"
+
+usage() {
+	echo "usage: $(basename "$0") <masterSipId> [webuser-email]" >&2
+	echo "       $(basename "$0") <webuser-email>" >&2
+	echo "       $(basename "$0") --list <search-string>" >&2
+	exit 1
+}
+
+kc_curl() {
+	curl -sS -f -H "Host: $KC_HOST" "$@"
+}
+
+kc_search() {
+	kc_curl -G "$KC_IDENTITY/auth/admin/realms/sipgate-apps/users?max=100" \
+		-H "Authorization: Bearer $token" \
+		--data-urlencode "search=$1"
+}
+
+[[ $# -ge 1 ]] || usage
+
+token=$(kc_curl "$KC_IDENTITY/auth/realms/master/protocol/openid-connect/token" \
+	--data-urlencode "client_id=admin-cli" \
+	--data-urlencode "username=$KC_USER" \
+	--data-urlencode "password=$KC_PASS" \
+	--data-urlencode "grant_type=password" \
+	| jq -er '.access_token') || { echo "keycloak token request failed" >&2; exit 1; }
+
+if [[ "$1" == "--list" ]]; then
+	[[ $# -eq 2 ]] || usage
+	kc_search "$2" | jq -r \
+		'sort_by((.attributes.webuserId[0] // "") | sub(".*w"; "") | (tonumber? // 9999999))
+		| [.[].email] | unique[]'
+	exit 0
+fi
+
+if [[ "$1" == *@* ]]; then
+	email="$1"
+	users_json=$(kc_search "$email")
+else
+	mastersipid="$1"
+	users_json=$(kc_search "$mastersipid")
+fi
+
+mapfile -t emails < <(jq -r '.[].email' <<<"$users_json")
+
+if [[ ${#emails[@]} -eq 0 ]]; then
+	echo "no webusers found for $1" >&2
+	exit 1
+fi
+
+if [[ -n "${mastersipid:-}" ]]; then
+	# default: account owner (lowest webuserId w-number)
+	email=$(jq -r \
+		'sort_by((.attributes.webuserId[0] // "") | sub(".*w"; "") | (tonumber? // 9999999))
+		| .[0].email' <<<"$users_json")
+
+	if [[ $# -ge 2 ]]; then
+		email="$2"
+		if ! printf '%s\n' "${emails[@]}" | grep -qxF "$email"; then
+			echo "webuser '$email' not found for $mastersipid. Available:" >&2
+			printf '  %s\n' "${emails[@]}" >&2
+			exit 1
+		fi
+	fi
+else
+	if ! printf '%s\n' "${emails[@]}" | grep -qxF "$email"; then
+		echo "webuser '$email' not found. Closest matches:" >&2
+		printf '  %s\n' "${emails[@]}" >&2
+		exit 1
+	fi
+fi
+[[ -n "$email" ]] || { echo "no webuser email found for $1" >&2; exit 1; }
+
+link=$(kc_curl "$KC_IDENTITY/auth/realms/sipgate-apps/magic-link" \
+	-H "Authorization: Bearer $token" \
+	-H "Content-Type: application/json" \
+	-H "Accept: application/json" \
+	-d '{
+		"email": "'"$email"'",
+		"client_id": "sipgate-app-web",
+		"redirect_uri": "https://app.dev.sipgate.com/openid-connect",
+		"expiration_seconds": 60,
+		"force_create": false,
+		"update_profile": false,
+		"send_email": false,
+		"base_url": "https://'"$KC_HOST"'/auth/",
+		"authentication_type": "IMPERSONATION"
+	}' | jq -er '.link')
+
+echo "impersonating $email"
+
+profile=$(mktemp -d "/tmp/sgimp-${email%%@*}.XXXXXX")
+# suppress firefox first-run welcome pages (opens mozilla.org/privacy otherwise)
+cat >"$profile/user.js" <<'EOF'
+user_pref("browser.startup.page", 0);
+user_pref("browser.startup.homepage", "about:blank");
+user_pref("browser.startup.homepage_welcome_url", "about:blank");
+user_pref("browser.startup.homepage_welcome_url.additional", "");
+user_pref("startup.homepage_override_url", "about:blank");
+user_pref("datareporting.policy.dataSubmissionPolicyBypassNotification", true);
+EOF
+echo "profile: $profile (removed on browser exit)"
+
+firefox --profile "$profile" --new-instance "$link" &
+ffpid=$!
+trap '' EXIT
+( wait "$ffpid" 2>/dev/null; rm -rf "$profile" ) &
+disown
