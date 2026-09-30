@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# @vicinae.schemaVersion 1
+# @vicinae.title sg login dev
+# @vicinae.mode silent
+
+# Eigene Testaccounts (hellermann+*@sipgate.de) im dmenu waehlen -> frisches
+# Firefox-Fenster, eingeloggt als der Webuser (Keycloak-Impersonation).
+# Freier Text + Shift+Enter geht als masterSipId oder Webuser-Email durch.
+
+set -euo pipefail
+
+DMENU="timeout 120 vicinae dmenu"
+SGIMP="$HOME/.local/bin/sgimp"
+
+emails="$("$SGIMP" --list 'hellermann+')" || exit 1
+
+selection="$(printf '%s\n' "$emails" | $DMENU -f data --placeholder "Account wählen (oder masterSipId/Email tippen + Shift+Enter)")" || exit 0
+
+exec "$SGIMP" "$selection"
