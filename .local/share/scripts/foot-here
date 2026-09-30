@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Open a new foot window in the focused foot window's working directory, by
+# triggering foot's spawn-terminal binding (uses the OSC-7-tracked cwd and
+# works in --server mode). Arguments (e.g. --app-id float-foot) are passed
+# through to footclient and only take effect when no foot window is focused,
+# in which case footclient is spawned directly in $HOME.
+
+app_id=$(niri msg --json focused-window 2>/dev/null \
+	| jq -r '.app_id // empty' 2>/dev/null)
+
+case "$app_id" in
+	foot | footclient | float-foot)
+		exec wtype -M ctrl -M shift n
+		;;
+	*)
+		exec footclient "$@" -D "$HOME"
+		;;
+esac
