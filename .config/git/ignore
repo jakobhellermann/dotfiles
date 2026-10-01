@@ -46,3 +46,8 @@ profile.json.gz
 /.claude/scheduled_tasks.lock
 /.claude/settings.local.json
 /.pi
+/.codex
+
+# direnv
+/.direnv
+/.envrc
