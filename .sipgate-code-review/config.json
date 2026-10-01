@@ -1,0 +1,15 @@
+{
+    "provider": "sipgate",
+    "custom_providers": {
+        "sipgate": {
+            "api_key_cmd": "secret-tool lookup service sipgate-code-review/coding.sipgate.ai",
+            "url": "https://coding.sipgate.ai/v1/chat/completions",
+            "protocol": "openai",
+            "model": "sipgate-coding-pro",
+            "models": [
+                "sipgate-coding-pro"
+            ]
+        }
+    },
+    "llm": {}
+}
