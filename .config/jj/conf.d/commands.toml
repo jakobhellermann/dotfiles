@@ -7,6 +7,15 @@ ab-- = ['abandon', '-r', '@--']
 fixme = ['fix', '-s@']
 
 # commands
+search-log = ['util', 'exec', 'sh', '--', '-c', '''
+if test $# -eq 0; then
+  echo "Usage: jj search-log <text> [args...]" >&2
+  exit 1
+fi
+pat="$1"
+shift
+exec jj log -r "diff_lines(\"*$pat*\")" "$@"
+''', '']
 # tug = ['bookmark', 'move', '--from', 'heads(::@- & bookmarks() ~ private)', '--to', '@-']
 swap = ['rebase', '-r', '@', '-B', '@-']
 swap- = ['rebase', '-r', '@-', '-B', '@--']
