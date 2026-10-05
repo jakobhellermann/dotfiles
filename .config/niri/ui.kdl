@@ -55,7 +55,7 @@ recent-windows {
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-    global-workspace-indices;
+    // global-workspace-indices;
 
     // Set gaps around windows in logical pixels.
     // gaps 16
