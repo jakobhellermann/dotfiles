@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-sudo pacman -S --needed git neovim curl zsh which \
+sudo pacman -S --needed git neovim curl zsh which quota \
 	ripgrep bat dust fd sd jq skim htop eza ripgrep fzf github-cli rsync pkgfile \
 	graphviz imagemagick unzip \
 	base-devel mold clang shellcheck rustup bacon inotify-tools
