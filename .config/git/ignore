@@ -9,7 +9,8 @@ todo.md
 
 # IDE
 *.sln.DotSettings.user
-/.idea
+/.idea/*
+!/.idea/dataSources.xml
 Test Results*.xml
 /.zed
 /.vscode
