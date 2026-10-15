@@ -9,6 +9,6 @@ set history filename ~/.gdb_history
 
 set auto-load local-gdbinit on
 set auto-load safe-path /
-add-auto-load-safe-path /home/jakob/dev/contrib/libTAS-cmake/.gdbinit
+add-auto-load-safe-path /nix
 
 set debuginfod enabled on
