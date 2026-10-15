@@ -30,7 +30,7 @@ bookmark-advance-to = 'heads(@- | (@ ~description(exact:"")))'
 
 [revset-aliases]
 # utilities
-dev = 'coalesce(bookmarks("dev"), description(exact:"dev\n"))'
+dev = 'coalesce(bookmarks("dev"), mutable() & description(exact:"dev\n"))'
 empty = 'mutable() & empty() & description("") ~@'
 firstconflict = "latest(roots(conflicts()))"
 'siblings(x)' = "x-+ ~x"
