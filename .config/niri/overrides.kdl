@@ -1,5 +1,11 @@
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
+// Hide from capture
+window-rule {
+    match app-id="Bitwarden"
+    block-out-from "screen-capture"
+}
+
 // Floating
 window-rule {
     match app-id="firefox$" title="^Picture-in-Picture$"
@@ -21,50 +27,25 @@ window-rule {
 
     open-floating true
 }
-
+// Non-floating
 window-rule {
-    match title="[vV]kcube"
+    match app-id="^libTAS$" title="Input Editor"
+
+    open-floating false
+}
+
+// Floating unfocused
+window-rule {
+	// steam popups
+    match title="^notificationtoasts_"
+
     open-floating true
     open-focused false
-    default-column-width { fixed 400; }
-    default-window-height { fixed 400; }
 }
 
-
+// Default sizes
 window-rule {
-    match app-id="^hollow_knight.x86_64$"
-    match app-id="^Hollow Knight Silksong$"
-    open-fullscreen false
-
-    // open-floating true
-    open-focused false
-    open-on-output "HDMI-A-1"
-    default-column-width { proportion 1.0; }
-    default-window-height { proportion 1.0; }
-}
-window-rule {
-    match app-id="^Hollow Knight Silksong$"
-    open-focused false
-}
-
-
-window-rule {
-    match app-id="^livesplit-one-druid$"
-    match title="^LiveSplit One"
-    open-floating true
-    open-focused false
-    open-on-output "HDMI-A-1"
-}
-
-// Hide from capture
-window-rule {
-    match app-id="Bitwarden"
-
-    block-out-from "screen-capture"
-}
-
-// Default to full-width
-window-rule {
+	// default full width
     match app-id="^Spotify$"
     match app-id="^zen$"
     match app-id="^discord$"
@@ -73,22 +54,63 @@ window-rule {
 
     default-column-width { proportion 1.0; }
 }
-
-// Default to full-screen
 window-rule {
+	// Default to full-screen
     match app-id="^Celeste$"
     match app-id="^Hollow Knight Silksong$"
     match app-id="^steam_app_"
 
     open-fullscreen true
 }
-
 window-rule {
-    match app-id="^CelesteStudio.GTK$"
-    default-column-width { fixed 200; }
+    match app-id="^CelesteStudio"
+    default-column-width { fixed 600; }
 }
 
+// Special apps
+window-rule {
+    match title="[vV]kcube"
+    open-floating true
+    open-focused false
+    default-column-width { fixed 400; }
+    default-window-height { fixed 400; }
+}
+window-rule {
+    match app-id="^livesplit-one-druid$"
+    match title="^LiveSplit One"
+    open-floating true
+    open-focused false
+    open-on-output "HDMI-A-1"
+}
 window-rule {
     match app-id="^factorio$"
     disable-mod-mouse-actions true
+}
+window-rule {
+    match title="^Restart$" app-id="CelesteStudio.GTK"
+    open-floating true
+    default-column-width { fixed 800; }
+    default-window-height { fixed 100; }
+}
+window-rule {
+    match app-id="valo-test"
+    open-floating true
+    open-focused false
+    default-column-width { fixed 20; }
+    default-window-height { fixed 20; }
+}
+
+// Game dev
+window-rule {
+    match title="^Hollow Knight$" // 1221
+    match app-id="^Hollow Knight$" // heroic
+    match app-id="^hollow_knight.x86_64$"
+    match app-id="^Hollow Knight Silksong$"
+
+    open-fullscreen false
+    open-focused false
+
+    open-on-output "HDMI-A-1"
+    default-column-width { proportion 1.0; }
+    default-window-height { proportion 1.0; }
 }
