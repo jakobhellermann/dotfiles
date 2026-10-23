@@ -11,6 +11,8 @@ todo.md
 *.sln.DotSettings.user
 /.idea
 Test Results*.xml
+/.zed
+/.vscode
 
 # os
 .DS_Store
@@ -47,6 +49,7 @@ profile.json.gz
 /.claude/settings.local.json
 /.pi
 /.codex
+/agent-docs
 
 # direnv
 /.direnv
