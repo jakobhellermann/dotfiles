@@ -12,3 +12,5 @@ set auto-load safe-path /
 add-auto-load-safe-path /nix
 
 set debuginfod enabled on
+
+source ~/.config/gdb/ntfile_solibs.py
