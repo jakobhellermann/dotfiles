@@ -175,8 +175,8 @@ wo-add = [
 ]
 wo-delete = ['util', 'exec', '--', 'sh', '-c', '''
   set -eu
-  ws_dir=$(jj workspace root --name "$0")
-  cd $ws_dir
+  ws_dir=$(jj workspace root --name "$1")
+  cd "$ws_dir"
   jj workspace forget
-  rm -rf $ws_dir
+  rm -rf "$ws_dir"
   ''', '']
