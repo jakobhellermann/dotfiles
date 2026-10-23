@@ -18,6 +18,10 @@ patterns = [
 ]
 enabled = false
 
+[fix.tools.clang-format]
+command = ["clang-format", "--assume-filename=$path"]
+patterns = ["glob:**/*.cc", "glob:**/*.h", "glob:**/*.cpp", "glob:**/*.hpp"]
+
 [fix.tools.csharpier]
 command = ["dotnet", "csharpier", "--write-stdout"]
 patterns = ["root-glob:'**/*.cs'"]
