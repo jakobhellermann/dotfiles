@@ -13,4 +13,7 @@ add-auto-load-safe-path /nix
 
 set debuginfod enabled on
 
+# fix symbols in unshare
+set sysroot /
+
 source ~/.config/gdb/ntfile_solibs.py
