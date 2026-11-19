@@ -1,0 +1,3 @@
+# Stable keyboard path for OBS input-overlay: prefers keyd's virtual keyboard, falls back to the physical MX Keys
+SUBSYSTEM=="input", KERNEL=="event*", ATTRS{name}=="keyd virtual keyboard", SYMLINK+="input/obs-keyboard", OPTIONS+="link_priority=10"
+SUBSYSTEM=="input", KERNEL=="event*", ATTRS{name}=="Logitech MX Keys", SYMLINK+="input/obs-keyboard", OPTIONS+="link_priority=0"
