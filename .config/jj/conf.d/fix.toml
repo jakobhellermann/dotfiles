@@ -115,6 +115,10 @@ command = ["sed", "s/\t/    /g"]
 patterns = ["glob:'**/*.kdl'"]
 enabled = true
 
+[fix.tools.trailing-whitespace]
+command = ["sed", "s/[[:space:]]*$//"]
+patterns = ["glob:'**/*.cs'"]
+
 [fix.tools.jq-json]
 command = ["jq"]
 patterns = [

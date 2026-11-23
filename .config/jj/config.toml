@@ -6,6 +6,7 @@ email = "jakob.hellermann@protonmail.com"
 
 [snapshot]
 max-new-file-size = "10MiB"
+auto-update-stale = true
 
 [ui]
 default-command = "log"

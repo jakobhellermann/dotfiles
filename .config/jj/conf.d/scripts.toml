@@ -58,3 +58,21 @@ upstream_slug=$(echo "$origin" | sed -r 's|https://github.com/||; s|git@github.c
 gh repo set-default "$upstream_slug"
 ''',
 ]
+
+replace-run = ['util', 'exec', 'bash', '--', '-c', '''
+	set -euo pipefail
+
+	rev=@
+	if test "${1:-}" = -r; then
+		rev=$2
+		shift 2
+	fi
+	if test $# -ne 2; then
+		echo 'Usage: jj replace-run [-r <revset>] <regex> <replacement>' >&2
+		exit 1
+	fi
+
+	# jj run's working copy has no .git, so rg must be told to honor .gitignore anyway
+	jj run --restore-descendants -r "$rev" -- \
+		bash -c 'rg -l -0 --no-require-git -- "$1" | xargs -0 -r sd -- "$1" "$2"' _ "$1" "$2"
+''', '']

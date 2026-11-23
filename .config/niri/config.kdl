@@ -16,7 +16,8 @@ debug {
 
 spawn-at-startup "awww-daemon"
 spawn-at-startup "awww-daemon" "-n" "backdrop"
-spawn-at-startup "swayosd-server"
+// spawn-at-startup "swayosd-server"
+spawn-at-startup "noctalia"
 // spawn-at-startup "~/.local/share/scripts/launch-waybar"
 // ScreenCast backend for OBS (wlroots screencopy); D-Bus activation alone proved unreliable
 spawn-at-startup "systemctl" "--user" "start" "xdg-desktop-portal-wlr.service"
